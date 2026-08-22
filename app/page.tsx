@@ -25,6 +25,11 @@ export default function Home() {
   const [quizOpen, setQuizOpen] = useState(false);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
+  const [feet, setFeet] = useState("5");
+  const [inches, setInches] = useState("6");
+  const [weight, setWeight] = useState("200");
+  const heightInches = Math.max(1, Number(feet) * 12 + Number(inches));
+  const bmi = Number(weight) > 0 ? (Number(weight) / (heightInches * heightInches)) * 703 : 0;
   useEffect(() => { const timer = window.setTimeout(() => setQuizOpen(true), 12000); return () => window.clearTimeout(timer); }, []);
   const openQuiz = () => { setStep(0); setAnswers([]); setQuizOpen(true); };
   const choose = (answer: string) => { const next = [...answers]; next[step] = answer; setAnswers(next); setStep(Math.min(step + 1, 3)); };
@@ -48,10 +53,29 @@ export default function Home() {
       {[["✓","Licensed providers","Independent clinical review"],["⌁","100% online","From assessment to follow-up"],["◇","Clear next steps","No guesswork, no pressure"],["↗","Discreet delivery","If prescribed and fulfilled"]].map(([icon,title,copy]) => <div key={title}><span className="trust-icon">{icon}</span><p><strong>{title}</strong><br/>{copy}</p></div>)}
     </section>
 
+    <section className="bmi-section" aria-labelledby="bmi-title">
+      <div className="bmi-intro"><p className="eyebrow">A useful starting point</p><h2 id="bmi-title">Check your BMI.</h2><p>Enter your height and weight for a quick estimate. A licensed provider considers your full health history, not BMI alone.</p></div>
+      <div className="bmi-card">
+        <div className="bmi-fields">
+          <label>Height <span><input inputMode="numeric" value={feet} onChange={(e) => setFeet(e.target.value)} aria-label="Height in feet" /> ft</span><span><input inputMode="numeric" value={inches} onChange={(e) => setInches(e.target.value)} aria-label="Additional height in inches" /> in</span></label>
+          <label>Weight <span className="weight-field"><input inputMode="decimal" value={weight} onChange={(e) => setWeight(e.target.value)} aria-label="Weight in pounds" /> lb</span></label>
+        </div>
+        <div className="bmi-result"><span>Estimated BMI</span><strong>{bmi > 0 && Number.isFinite(bmi) ? bmi.toFixed(1) : "—"}</strong><small>This estimate is informational and is not a diagnosis.</small></div>
+        <button className="primary" onClick={openQuiz}>Continue to eligibility</button>
+      </div>
+    </section>
+
     <section className="section-shell" id="treatments">
       <div className="section-heading"><div><p className="eyebrow">Treatment options</p><h2>Find out which option may be right for you.</h2></div><p>A provider reviews your health history, preferences and goals before recommending treatment.</p></div>
       <div className="treatment-grid branded-grid">{treatments.map((item, index) => <article className={`treatment-card card-${index + 1}`} key={item.name}><div className="card-top"><span>{item.tag}</span><span>0{index + 1}</span></div><div className="product-stage"><img src={item.image} alt={`${item.name} product packaging`} /></div><div className="card-content"><p>{item.ingredient}</p><h3>{item.name}</h3><span>{item.format}</span><button onClick={openQuiz}>Check eligibility <b>→</b></button></div></article>)}</div>
       <p className="section-disclaimer">Prescription products require an online consultation with an independent licensed healthcare provider who determines whether a prescription is appropriate. Compounded medications are not FDA approved.</p>
+    </section>
+
+    <section className="included-section" aria-labelledby="included-title">
+      <div className="included-heading"><p className="eyebrow">The complete experience</p><h2 id="included-title">Support at every step.</h2><p>Rejuvonix keeps the process clear from your first questions through ongoing follow-up.</p></div>
+      <div className="included-grid">
+        {[["01","Online assessment","Share your health history, goals and treatment preferences securely."],["02","Provider review","Connect with an independent licensed provider who makes all clinical decisions."],["03","One place to follow care","View next steps, order progress, provider messages and check-in reminders."],["04","Delivery coordination","If prescribed, an independent licensed pharmacy prepares and ships your medication."]].map(([number,title,copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}
+      </div>
     </section>
 
     <section className="care-feature">
@@ -121,6 +145,12 @@ export default function Home() {
         <button className="primary" onClick={openQuiz}>Check my eligibility</button>
         <small>It takes a few minutes. A prescription is not guaranteed.</small>
       </div>
+    </section>
+
+    <section className="care-assurances" aria-label="Care experience standards">
+      <article><span>01</span><div><strong>Private online process</strong><p>Complete each step from home.</p></div></article>
+      <article><span>02</span><div><strong>Independent clinical review</strong><p>A licensed provider decides what is appropriate.</p></div></article>
+      <article><span>03</span><div><strong>Licensed pharmacy fulfillment</strong><p>Prescriptions are filled by independent pharmacy partners.</p></div></article>
     </section>
 
     <footer><div className="footer-main"><div><a className="brand" href="#top"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></a><p>Online access to prescription weight care.</p></div><div><strong>Explore</strong><a href="#treatments">Treatments</a><a href="#journey">How it works</a><a href="#program">The program</a></div><div><strong>Support</strong><a href="#faq">FAQ</a><a href="#safety">Safety</a><a href="#">Contact</a></div><div><strong>Legal</strong><a href="#medical-disclaimer">Medical disclaimer</a><a href="#">Terms</a><a href="#">Privacy</a></div></div><div className="medical-disclaimer" id="medical-disclaimer"><strong>Medical and platform disclaimer</strong><p>Rejuvonix is a technology and administrative-services platform and is not a healthcare provider, medical practice, pharmacy, laboratory, drug manufacturer or insurance company. Rejuvonix connects individuals with independent licensed healthcare providers who are solely responsible for clinical evaluations, diagnoses, treatment recommendations and prescribing decisions. If prescribed, medication is dispensed by an independent licensed pharmacy. Compounded medications are not FDA approved. Individual results vary.</p></div><div className="footer-bottom"><span>© 2026 Rejuvonix. All rights reserved.</span><span>Wegovy® is a registered trademark of Novo Nordisk A/S. Zepbound® is a registered trademark of Eli Lilly and Company. Rejuvonix is not affiliated with or endorsed by these companies.</span></div></footer>
