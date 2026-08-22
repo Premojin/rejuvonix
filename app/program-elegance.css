@@ -1,0 +1,13 @@
+.program-section{min-height:820px;background:#f6f8f8;overflow:hidden}
+.program-copy{position:relative;padding:120px 7vw;background:linear-gradient(150deg,#fbfdfd 0%,#edf5f4 100%)}
+.program-copy:before{content:"";position:absolute;width:420px;height:420px;left:-180px;bottom:-220px;border-radius:50%;background:radial-gradient(circle,#35b6b82b 0%,transparent 70%)}
+.program-copy h2{max-width:650px}
+.benefit-list>div{padding:11px 0;border-bottom:1px solid #d5dddd}
+.program-visual{position:relative;min-height:820px;overflow:hidden;background:linear-gradient(145deg,#273237 0%,#435055 48%,#228f93 100%)}
+.program-visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.88) contrast(1.03)}
+.program-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#17212512 0%,#17212542 58%,#1721259e 100%)}
+.program-glow{position:absolute;z-index:1;width:460px;height:460px;right:-110px;top:-100px;border-radius:50%;background:radial-gradient(circle,#a8e4e37a 0%,#879fe83b 40%,transparent 72%);filter:blur(12px)}
+.program-status{position:absolute;z-index:3;left:35px;display:flex;align-items:center;gap:13px;padding:13px 17px;border-radius:16px;color:#fff;background:#ffffff18;border:1px solid #ffffff42;backdrop-filter:blur(16px);box-shadow:0 18px 50px #1721252e}.program-status span{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:#ffffffde;color:#287f83;font-size:9px;font-weight:900}.program-status p{display:flex;flex-direction:column;margin:0;gap:3px}.program-status small{font-size:7px;letter-spacing:.14em;color:#cae5e5}.program-status strong{font-size:11px}.status-one{top:48px}.status-two{top:122px;left:72px}
+.program-portal{position:absolute;z-index:4;right:38px;bottom:38px;width:min(390px,calc(100% - 76px));border-radius:26px;background:#fffffff2;backdrop-filter:blur(18px);box-shadow:0 35px 90px #10191c61}.program-progress{height:7px;margin:29px 0 22px;background:#e7eded;border-radius:99px;overflow:hidden}.program-progress span{display:block;width:72%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#35b6b8,#79d2d0,#a9b8e8)}
+@media(max-width:1050px){.program-section{grid-template-columns:1fr;min-height:0}.program-visual{min-height:780px}.program-copy{padding:100px 8vw}}
+@media(max-width:680px){.program-copy{padding:80px 22px}.program-visual{min-height:680px}.program-status{left:20px}.status-two{left:42px}.program-portal{right:20px;bottom:20px;width:calc(100% - 40px)}}
