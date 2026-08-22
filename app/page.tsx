@@ -74,7 +74,16 @@ export default function Home() {
       <button className="primary aqua" onClick={openQuiz}>Start with a few questions</button>
     </section>
 
-    <section className="reviews-section" id="reviews"><div className="review-heading"><p className="eyebrow">Patient reviews</p><h2>Reviews will be added after launch.</h2><p>This section is reserved for feedback from verified Rejuvonix patients. Reviews will not be edited to promise a particular result.</p></div><div className="review-promise"><div><span>01</span><h3>Verified patients</h3><p>Only feedback from people who have used the platform will be published.</p></div><div><span>02</span><h3>Unfiltered experiences</h3><p>Reviews may be positive, neutral or critical.</p></div><div><span>03</span><h3>Results vary</h3><p>One person’s experience does not predict another person’s outcome.</p></div></div></section>
+    <section className="reviews-section" id="reviews">
+      <div className="review-heading"><p className="eyebrow">Patient reviews</p><h2>What patients are saying.</h2></div>
+      <div className="review-grid">
+        {[1,2,3,4,5,6].map((slot) => <article className="review-card" key={slot}>
+          <div className="review-card-top"><span className="review-stars">★★★★★</span><span>0{slot}</span></div>
+          <div className="review-copy"><h3>[Review headline]</h3><p>[Patient review]</p></div>
+          <div className="review-author"><div className="review-avatar">+</div><div><strong>[Patient name]</strong><span>[Treatment]</span></div><time>[Date]</time></div>
+        </article>)}
+      </div>
+    </section>
 
     <section className="program-section" id="program">
       <div className="program-copy"><p className="eyebrow">The Rejuvonix program</p><h2>Support continues after your first prescription.</h2><p>Use the platform for your assessment, order updates, progress check-ins and maintenance conversations.</p><div className="benefit-list">{["Secure online assessment","Access to independent licensed providers","Treatment and fulfillment status","Progress check-ins","Nutrition and movement guidance","Maintenance planning"].map(item => <div key={item}><span>✓</span>{item}</div>)}</div><button className="primary" onClick={openQuiz}>Review my options</button></div>
