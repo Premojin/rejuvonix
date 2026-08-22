@@ -1,5 +1,9 @@
+.branded-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.branded-grid .treatment-card{min-height:535px;padding:20px}
+.branded-grid .card-content h3{font-size:23px}
+.branded-grid .card-top{gap:8px;font-size:8px;line-height:1.35}
 .product-stage{
-  height:305px;
+  height:270px;
   overflow:hidden;
   border-radius:20px;
   background:radial-gradient(circle,#fff 0,#ffffffa8 44%,transparent 70%);
@@ -19,4 +23,5 @@
   background:linear-gradient(145deg,#fbfaf7 0%,#ece9e2 56%,#d9e5e4 100%);
 }
 .card-4 .card-content button,.card-5 .card-content button{color:var(--charcoal)}
-@media(max-width:680px){.product-stage{height:285px}}
+@media(max-width:1050px){.branded-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.branded-grid .treatment-card{min-height:550px}.product-stage{height:305px}}
+@media(max-width:680px){.branded-grid{grid-template-columns:1fr}.product-stage{height:285px}}
