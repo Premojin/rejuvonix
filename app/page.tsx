@@ -20,6 +20,13 @@ const journey = [
   ["07","Check in regularly","Use the platform to complete follow-ups and keep up with your next steps."],
 ];
 
+const completeExperience = [
+  {number:"01", title:"Online assessment", copy:"Share your health history, goals and treatment preferences securely.", image:"/complete-assessment.png", alt:"A patient completing an online health assessment at home"},
+  {number:"02", title:"Provider review", copy:"Connect with an independent licensed provider who makes all clinical decisions.", image:"/complete-provider-review.png", alt:"A clinician speaking with a patient during an online provider review"},
+  {number:"03", title:"One place to follow care", copy:"View next steps, order progress, provider messages and check-in reminders.", image:"/complete-follow-care.png", alt:"A patient following care updates on a phone and laptop"},
+  {number:"04", title:"Delivery coordination", copy:"If prescribed, an independent licensed pharmacy prepares and ships your medication.", image:"/complete-delivery.png", alt:"A pharmacy professional coordinating a discreet medication delivery"},
+];
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
@@ -74,7 +81,7 @@ export default function Home() {
     <section className="included-section" aria-labelledby="included-title">
       <div className="included-heading"><p className="eyebrow">The complete experience</p><h2 id="included-title">Support at every step.</h2><p>Rejuvonix keeps the process clear from your first questions through ongoing follow-up.</p></div>
       <div className="included-grid">
-        {[["01","Online assessment","Share your health history, goals and treatment preferences securely."],["02","Provider review","Connect with an independent licensed provider who makes all clinical decisions."],["03","One place to follow care","View next steps, order progress, provider messages and check-in reminders."],["04","Delivery coordination","If prescribed, an independent licensed pharmacy prepares and ships your medication."]].map(([number,title,copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}
+        {completeExperience.map(({number,title,copy,image,alt}) => <article key={number}><div className="included-image"><img src={image} alt={alt} /></div><div className="included-card-copy"><span>{number}</span><h3>{title}</h3><p>{copy}</p></div></article>)}
       </div>
     </section>
 
