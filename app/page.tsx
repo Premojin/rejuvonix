@@ -54,6 +54,11 @@ export default function Home() {
       <p className="section-disclaimer">Prescription products require an online consultation with an independent licensed healthcare provider who determines whether a prescription is appropriate. Compounded medications are not FDA approved.</p>
     </section>
 
+    <section className="care-feature">
+      <div className="care-feature-photo"><img src="/rejuvonix-member-phone.png" alt="A member using the Rejuvonix platform at home" /><div className="photo-caption"><span>ONLINE ACCESS</span><strong>Care from home</strong></div></div>
+      <div className="care-feature-copy"><p className="eyebrow">More than a prescription</p><h2>Keep your care close, even on busy days.</h2><p>Use Rejuvonix to complete your assessment, follow your order and stay current with provider check-ins.</p><div className="care-points"><div><span>01</span><strong>Start online</strong><p>Complete the health assessment when it works for you.</p></div><div><span>02</span><strong>Follow each step</strong><p>See provider review and pharmacy fulfillment updates.</p></div><div><span>03</span><strong>Stay connected</strong><p>Return for check-ins and ongoing treatment support.</p></div></div><button className="primary" onClick={openQuiz}>Check my eligibility</button></div>
+    </section>
+
     <section className="compounded-section" id="compounded">
       <div className="compounded-intro"><p className="eyebrow">Compounded medications</p><h2>Compare semaglutide and tirzepatide.</h2><p>An independent provider may prescribe a compounded medication when it is legally available and appropriate for the patient. Compounded medications are not generic versions of branded drugs, and they are not FDA approved.</p></div>
       <div className="glance-grid">
@@ -74,13 +79,18 @@ export default function Home() {
       <button className="primary aqua" onClick={openQuiz}>Start with a few questions</button>
     </section>
 
+    <section className="editorial-banner"><img src="/rejuvonix-couple-walk.png" alt="Couple enjoying a morning walk together" /><div className="editorial-panel"><p className="eyebrow">Built for daily life</p><h2>Health care should feel personal.</h2><p>Your treatment starts with your health history, your goals and a provider’s clinical review.</p><button className="primary" onClick={openQuiz}>Get started</button></div></section>
+
     <section className="reviews-section" id="reviews">
       <div className="review-heading"><p className="eyebrow">Patient reviews</p><h2>What patients are saying.</h2></div>
       <div className="review-grid">
         {[1,2,3,4,5,6].map((slot) => <article className="review-card" key={slot}>
-          <div className="review-card-top"><span className="review-stars">★★★★★</span><span>0{slot}</span></div>
-          <div className="review-copy"><h3>[Review headline]</h3><p>[Patient review]</p></div>
-          <div className="review-author"><div className="review-avatar">+</div><div><strong>[Patient name]</strong><span>[Treatment]</span></div><time>[Date]</time></div>
+          <div className="review-photo" role="img" aria-label="Patient photo placeholder"><span className="photo-mark">+</span><strong>[Patient photo]</strong><small>0{slot}</small></div>
+          <div className="review-content">
+            <div className="review-stars" aria-label="Five star rating">★★★★★</div>
+            <div className="review-copy"><h3>[Review headline]</h3><p>[Patient review]</p></div>
+            <div className="review-author"><div><strong>[Patient name]</strong><span>[Treatment]</span></div><time>[Date]</time></div>
+          </div>
         </article>)}
       </div>
     </section>
