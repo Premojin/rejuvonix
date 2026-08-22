@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 
 const treatments = [
-  {name:"Wegovy® Pill", ingredient:"Semaglutide", format:"Once-daily tablet", image:"https://www.findhonestcare.com/images/wegovy-pill.png", theme:"mint"},
-  {name:"Wegovy® Injection", ingredient:"Semaglutide", format:"Once-weekly injection", image:"https://cdn.euroclinix.net/images/en/product/2/wegovy-L-.jpg", theme:"silver"},
-  {name:"Zepbound® Injection", ingredient:"Tirzepatide", format:"Once-weekly injection", image:"https://www.lilly.com/lillydirect/ZEPBOUND_All_Standing-cropped.png", theme:"cream"},
+  {name:"GLP-1 Injections", ingredient:"Compounded prescription option", format:"One injection per week", image:"/glp1-injections.png", tag:"Compounded medication"},
+  {name:"GLP-1 Tablets", ingredient:"Compounded prescription option", format:"One dissolvable tablet per day", image:"/glp1-tablets.png", tag:"Compounded medication"},
+  {name:"Wegovy® Pill", ingredient:"Semaglutide", format:"One pill per day", image:"/wegovy-pill.png", tag:"FDA-approved branded medication"},
+  {name:"Wegovy® Injection", ingredient:"Semaglutide", format:"Once-weekly injection", image:"/wegovy-injection.png", tag:"FDA-approved branded medication"},
+  {name:"Zepbound® Injection", ingredient:"Tirzepatide", format:"Once-weekly injection", image:"/zepbound-injection.png", tag:"FDA-approved branded medication"},
 ];
 
 const journey = [
@@ -48,7 +50,7 @@ export default function Home() {
 
     <section className="section-shell" id="treatments">
       <div className="section-heading"><div><p className="eyebrow">Treatment options</p><h2>Find out which option may be right for you.</h2></div><p>A provider reviews your health history, preferences and goals before recommending treatment.</p></div>
-      <div className="treatment-grid branded-grid">{treatments.map((item, index) => <article className={`treatment-card card-${index + 1}`} key={item.name}><div className="card-top"><span>FDA-approved branded medication</span><span>0{index + 1}</span></div><div className="product-stage"><img src={item.image} alt={`${item.name} product packaging`} /></div><div className="card-content"><p>{item.ingredient}</p><h3>{item.name}</h3><span>{item.format}</span><button onClick={openQuiz}>See if I may qualify <b>→</b></button></div></article>)}</div>
+      <div className="treatment-grid branded-grid">{treatments.map((item, index) => <article className={`treatment-card card-${index + 1}`} key={item.name}><div className="card-top"><span>{item.tag}</span><span>0{index + 1}</span></div><div className="product-stage"><img src={item.image} alt={`${item.name} product packaging`} /></div><div className="card-content"><p>{item.ingredient}</p><h3>{item.name}</h3><span>{item.format}</span><button onClick={openQuiz}>Check eligibility <b>→</b></button></div></article>)}</div>
       <p className="section-disclaimer">Prescription products require an online consultation with an independent licensed healthcare provider who determines whether a prescription is appropriate. Compounded medications are not FDA approved.</p>
     </section>
 
