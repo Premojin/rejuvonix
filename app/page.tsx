@@ -112,7 +112,16 @@ export default function Home() {
       <details><summary>Is Rejuvonix a healthcare provider or pharmacy?<span>+</span></summary><p>Rejuvonix is a technology and administrative-services platform. Medical care is provided by independent licensed healthcare professionals, and medication is dispensed by independent licensed pharmacies.</p></details>
     </div></section>
 
-    <section className="closing-cta"><p className="eyebrow">Get started</p><h2>Answer a few questions to check your eligibility.</h2><button className="primary" onClick={openQuiz}>Check my eligibility</button><small>It takes a few minutes. A prescription is not guaranteed.</small></section>
+    <section className="closing-cta closing-people" aria-labelledby="closing-title">
+      <img src="/rejuvonix-get-started-group.png" alt="A diverse group of adults smiling together with confidence" />
+      <div className="closing-people-panel">
+        <p className="eyebrow">Get started</p>
+        <h2 id="closing-title">Take the first step toward care that fits your life.</h2>
+        <p className="closing-copy">Tell us about your health, goals and preferences. We will help connect you with a licensed provider who can review your information.</p>
+        <button className="primary" onClick={openQuiz}>Check my eligibility</button>
+        <small>It takes a few minutes. A prescription is not guaranteed.</small>
+      </div>
+    </section>
 
     <footer><div className="footer-main"><div><a className="brand" href="#top"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></a><p>Online access to prescription weight care.</p></div><div><strong>Explore</strong><a href="#treatments">Treatments</a><a href="#journey">How it works</a><a href="#program">The program</a></div><div><strong>Support</strong><a href="#faq">FAQ</a><a href="#safety">Safety</a><a href="#">Contact</a></div><div><strong>Legal</strong><a href="#medical-disclaimer">Medical disclaimer</a><a href="#">Terms</a><a href="#">Privacy</a></div></div><div className="medical-disclaimer" id="medical-disclaimer"><strong>Medical and platform disclaimer</strong><p>Rejuvonix is a technology and administrative-services platform and is not a healthcare provider, medical practice, pharmacy, laboratory, drug manufacturer or insurance company. Rejuvonix connects individuals with independent licensed healthcare providers who are solely responsible for clinical evaluations, diagnoses, treatment recommendations and prescribing decisions. If prescribed, medication is dispensed by an independent licensed pharmacy. Compounded medications are not FDA approved. Individual results vary.</p></div><div className="footer-bottom"><span>© 2026 Rejuvonix. All rights reserved.</span><span>Wegovy® is a registered trademark of Novo Nordisk A/S. Zepbound® is a registered trademark of Eli Lilly and Company. Rejuvonix is not affiliated with or endorsed by these companies.</span></div></footer>
 

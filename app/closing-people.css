@@ -1,0 +1,96 @@
+.closing-cta.closing-people {
+  position: relative;
+  min-height: 760px;
+  margin: 24px;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  text-align: left;
+  background: #dff4f2;
+  border: 1px solid #bdc3c3;
+  border-radius: 34px;
+  isolation: isolate;
+}
+
+.closing-people::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(244, 250, 249, .94) 0%, rgba(244, 250, 249, .72) 31%, rgba(244, 250, 249, .08) 58%, transparent 78%);
+}
+
+.closing-people > img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.closing-people-panel {
+  width: min(560px, 48%);
+  padding: clamp(28px, 4vw, 54px);
+  background: rgba(255, 255, 255, .88);
+  border: 1px solid rgba(255, 255, 255, .96);
+  border-radius: 28px;
+  box-shadow: 0 28px 80px rgba(35, 62, 63, .16);
+  backdrop-filter: blur(18px);
+}
+
+.closing-people .eyebrow { margin-bottom: 18px; }
+
+.closing-people h2 {
+  max-width: 520px;
+  margin: 0 0 24px;
+  font-size: clamp(40px, 4.5vw, 66px);
+  line-height: .98;
+}
+
+.closing-copy {
+  max-width: 470px;
+  margin: 0 0 30px;
+  color: #5d696b;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.closing-people small {
+  margin-top: 16px;
+  color: #667274;
+  line-height: 1.5;
+}
+
+@media (max-width: 860px) {
+  .closing-cta.closing-people {
+    min-height: 820px;
+    margin: 14px;
+    align-items: flex-end;
+    padding: 20px;
+  }
+
+  .closing-people::after {
+    background: linear-gradient(0deg, rgba(244, 250, 249, .92) 0%, rgba(244, 250, 249, .48) 48%, transparent 72%);
+  }
+
+  .closing-people > img { object-position: 62% center; }
+  .closing-people-panel { width: 100%; }
+}
+
+@media (max-width: 560px) {
+  .closing-cta.closing-people {
+    min-height: 760px;
+    border-radius: 26px;
+  }
+
+  .closing-people-panel {
+    padding: 28px 24px;
+    border-radius: 22px;
+  }
+
+  .closing-people h2 { font-size: 40px; }
+}
