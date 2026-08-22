@@ -23,5 +23,18 @@
   background:linear-gradient(145deg,#fbfaf7 0%,#ece9e2 56%,#d9e5e4 100%);
 }
 .card-4 .card-content button,.card-5 .card-content button{color:var(--charcoal)}
-@media(max-width:1050px){.branded-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.branded-grid .treatment-card{min-height:550px}.product-stage{height:305px}}
-@media(max-width:680px){.branded-grid{grid-template-columns:1fr}.product-stage{height:285px}}
+@media(max-width:1050px){.branded-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.branded-grid .treatment-card{min-height:460px}.product-stage{height:205px}}
+@media(max-width:760px){.branded-grid{display:grid;grid-auto-flow:column;grid-auto-columns:235px;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px}.branded-grid .treatment-card{scroll-snap-align:start;min-height:500px}.product-stage{height:235px}}
+
+#treatments{padding:88px 2.5vw}
+#treatments .section-heading{max-width:1560px;margin-bottom:35px}
+#treatments .branded-grid{max-width:1560px}
+.branded-grid .treatment-card{min-height:485px;padding:17px}
+.branded-grid .product-stage{height:225px;margin:20px -5px 10px}
+.branded-grid .card-content h3{font-size:20px;margin-bottom:7px}
+.branded-grid .card-content p{font-size:8px;margin-bottom:5px}
+.branded-grid .card-content>span{font-size:10px}
+.branded-grid .card-content button{font-size:11px;margin-top:17px}
+.branded-grid .card-top{font-size:7px}
+@media(max-width:1050px){#treatments{padding-left:18px;padding-right:18px}.branded-grid .treatment-card{min-height:445px;padding:13px}.branded-grid .product-stage{height:190px;margin-top:15px}.branded-grid .card-content h3{font-size:17px}.branded-grid .card-content button{font-size:9px}}
+@media(max-width:760px){#treatments{padding:72px 20px}.branded-grid .treatment-card{min-height:500px;padding:18px}.branded-grid .product-stage{height:235px}.branded-grid .card-content h3{font-size:21px}.branded-grid .card-content button{font-size:11px}}
