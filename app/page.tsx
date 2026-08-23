@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const treatments = [
   {name:"GLP-1 Injections", ingredient:"Compounded prescription option", format:"One injection per week", image:"/glp1-injections.png", tag:"Compounded medication"},
@@ -27,6 +27,15 @@ const completeExperience = [
   {number:"04", title:"Delivery coordination", copy:"If prescribed, an independent licensed pharmacy prepares and ships your medication.", image:"/complete-delivery.png", alt:"A pharmacy professional coordinating a discreet medication delivery"},
 ];
 
+const sampleReviews = [
+  {headline:"Simple from the start", review:"The assessment was easy to follow, and I always knew what the next step was.", name:"Danielle M.", treatment:"Wegovy® Injection", date:"Sample review", image:"/wegovy-member-outdoors.jpg", alt:"Smiling woman outdoors"},
+  {headline:"Everything stayed organized", review:"I liked being able to check messages, order progress and follow-up details in one place.", name:"Alicia R.", treatment:"GLP-1 program", date:"Sample review", image:"/wegovy-member-platform.jpg", alt:"Woman checking her phone at home"},
+  {headline:"Clear and comfortable", review:"The provider review felt private and straightforward. The instructions were easy to understand.", name:"Evelyn T.", treatment:"Semaglutide program", date:"Sample review", image:"/wegovy-followup-member.jpg", alt:"Mature woman using her phone at home"},
+  {headline:"Care that fit my routine", review:"The online process worked around my schedule, which made it much easier to stay consistent.", name:"Monique S.", treatment:"Tirzepatide program", date:"Sample review", image:"/wegovy-movement-member.jpg", alt:"Woman holding a yoga mat"},
+  {headline:"Support without the confusion", review:"Each step was explained clearly, from the assessment through delivery coordination.", name:"Carlos D.", treatment:"GLP-1 program", date:"Sample review", image:"/rejuvonix-member-phone.png", alt:"Man reviewing care information on a phone"},
+  {headline:"A more personal experience", review:"I appreciated having a clear place to return for updates, questions and ongoing follow-up.", name:"Jordan K.", treatment:"Wegovy® program", date:"Sample review", image:"/rejuvonix-couple-walk.png", alt:"Couple enjoying a walk outdoors"},
+];
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
@@ -35,11 +44,13 @@ export default function Home() {
   const [feet, setFeet] = useState("5");
   const [inches, setInches] = useState("6");
   const [weight, setWeight] = useState("200");
+  const reviewRailRef = useRef<HTMLDivElement>(null);
   const heightInches = Math.max(1, Number(feet) * 12 + Number(inches));
   const bmi = Number(weight) > 0 ? (Number(weight) / (heightInches * heightInches)) * 703 : 0;
   useEffect(() => { const timer = window.setTimeout(() => setQuizOpen(true), 12000); return () => window.clearTimeout(timer); }, []);
   const openQuiz = () => { setStep(0); setAnswers([]); setQuizOpen(true); };
   const choose = (answer: string) => { const next = [...answers]; next[step] = answer; setAnswers(next); setStep(Math.min(step + 1, 3)); };
+  const scrollReviews = (direction: number) => reviewRailRef.current?.scrollBy({left: direction * 390, behavior:"smooth"});
 
   return <main>
     <div className="announcement"><span>Online access to prescription weight care</span><button onClick={openQuiz}>Check eligibility <b>→</b></button></div>
@@ -113,14 +124,14 @@ export default function Home() {
     <section className="editorial-banner"><img src="/rejuvonix-couple-walk.png" alt="Couple enjoying a morning walk together" /><div className="editorial-panel"><p className="eyebrow">Built for daily life</p><h2>Health care should feel personal.</h2><p>Your treatment starts with your health history, your goals and a provider’s clinical review.</p><button className="primary" onClick={openQuiz}>Get started</button></div></section>
 
     <section className="reviews-section" id="reviews">
-      <div className="review-heading"><p className="eyebrow">Patient reviews</p><h2>What patients are saying.</h2></div>
-      <div className="review-grid">
-        {[1,2,3,4,5,6].map((slot) => <article className="review-card" key={slot}>
-          <div className="review-photo" role="img" aria-label="Patient photo placeholder"><span className="photo-mark">+</span><strong>[Patient photo]</strong><small>0{slot}</small></div>
+      <div className="review-topline"><div className="review-heading"><p className="eyebrow">Patient reviews</p><h2>What patients are saying.</h2><p>Sample content shown for layout review.</p></div><div className="review-controls"><button onClick={() => scrollReviews(-1)} aria-label="Previous reviews">←</button><button onClick={() => scrollReviews(1)} aria-label="Next reviews">→</button></div></div>
+      <div className="review-grid" ref={reviewRailRef}>
+        {sampleReviews.map((review, index) => <article className="review-card" key={review.name}>
+          <div className="review-photo"><img src={review.image} alt={review.alt}/><small>0{index + 1}</small></div>
           <div className="review-content">
             <div className="review-stars" aria-label="Five star rating">★★★★★</div>
-            <div className="review-copy"><h3>[Review headline]</h3><p>[Patient review]</p></div>
-            <div className="review-author"><div><strong>[Patient name]</strong><span>[Treatment]</span></div><time>[Date]</time></div>
+            <div className="review-copy"><h3>{review.headline}</h3><p>{review.review}</p></div>
+            <div className="review-author"><div><strong>{review.name}</strong><span>{review.treatment}</span></div><time>{review.date}</time></div>
           </div>
         </article>)}
       </div>
