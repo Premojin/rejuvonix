@@ -54,11 +54,11 @@ production database connection in the repository.
 |---|---|
 | `npm ci --ignore-scripts` | Pass |
 | lint | Pass, 11 `no-img-element` warnings |
-| TypeScript | Fail: missing `cloudflare:workers`, `Fetcher`, and `D1Database` types |
+| TypeScript | Pass on the P0/AWS staging branch |
 | direct Vinext build | Pass |
-| rendered HTML test | Fail: expected development-preview metadata is absent |
-| production dependency audit | 4 high findings; see security gap analysis |
-| repository test suite | 1 test, 0 passing, 1 failing |
+| rendered HTML test | Pass: public metadata and non-sensitive health response |
+| dependency audit | No high/critical findings; 5 low/moderate tooling findings remain |
+| repository test suite | 2 tests, 2 passing |
 
 ## Assessment conclusion
 

@@ -6,13 +6,8 @@ terraform {
       version = "~> 5.0"
     }
   }
-  # Configure an encrypted, restricted S3 backend after the staging account
-  # and state bucket are approved. Never commit credentials or tfstate.
 }
 
 provider "aws" {
   region = var.aws_region
-  default_tags {
-    tags = var.tags
-  }
 }

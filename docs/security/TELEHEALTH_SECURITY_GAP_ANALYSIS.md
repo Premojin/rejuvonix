@@ -21,13 +21,13 @@ organizational controls, including applicable BAAs.
 | Non-production data | Requires Organizational Decision | Use generated/de-identified fixtures and automated production-data deny controls. |
 | Input validation / CSRF / rate limits | Missing | Add server-side schemas, origin/CSRF protection, abuse controls, and alerting before write APIs. |
 | Security headers / CSP / CORS | Missing | Define strict headers and an explicit same-origin CORS policy at the edge/app. |
-| Dependency security | Missing | Audit reports 4 high production findings, including Next 16.2.6 and its transitive chain. |
+| Dependency security | Partially Implemented | High/critical production findings were remediated. Five low/moderate findings remain in development/tooling dependency paths and require follow-up before using those tools in a privileged production workflow. |
 
 ## Severity summary
 
 - Critical: no confirmed critical secret/PHI finding in tracked source scan.
-- High: current dependency audit; no clinical authorization/audit boundary; no
-  secrets or environment guardrails for a future data-bearing deployment.
+- High: no clinical authorization/audit boundary; no secrets or environment
+  guardrails for a future data-bearing deployment.
 - Medium: missing headers/CSP/CSRF/rate limiting, missing type baseline, and
   stale failing smoke test.
 - Low/Informational: fixed Sites URL metadata, image lint warnings, and

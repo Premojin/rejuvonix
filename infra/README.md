@@ -26,3 +26,8 @@ RDS, S3, WAF, and GitHub OIDC modules. CloudTrail, Config, GuardDuty, Security
 Hub, Inspector, Backup, DNS/ACM, alarms, and central log archival require
 account/ownership choices documented in [SECURITY_SERVICES.md](SECURITY_SERVICES.md)
 before wiring and applying them.
+
+Startup operating defaults are documented in
+`docs/deployment/AWS_STAGING_COST_AND_OPERATIONS.md`. The current AWS account
+is shared with unrelated workloads; an isolated staging account is the safer
+deployment boundary and remains an owner decision.

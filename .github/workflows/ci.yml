@@ -43,6 +43,7 @@ jobs:
         with:
           scan-type: config
           scan-ref: infra
+          trivyignores: .trivyignore
           severity: HIGH,CRITICAL
           exit-code: 1
       - name: Build container
@@ -55,6 +56,28 @@ jobs:
           severity: HIGH,CRITICAL
           ignore-unfixed: true
           exit-code: 1
+
+  terraform:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.15.8
+      - name: Validate bootstrap Terraform
+        working-directory: infra/bootstrap
+        run: |
+          terraform fmt -check -recursive ..
+          terraform init -backend=false
+          terraform validate
+      - name: Validate staging Terraform
+        working-directory: infra/environments/staging
+        run: |
+          terraform fmt -check -recursive ../..
+          terraform init -backend=false
+          terraform validate
 
   codeql:
     runs-on: ubuntu-latest
