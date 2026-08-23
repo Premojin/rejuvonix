@@ -20,3 +20,9 @@ possible, a two-AZ VPC, public ALB only, private ECS tasks, private RDS
 PostgreSQL, encrypted S3, KMS, Secrets Manager, CloudWatch, CloudTrail, WAF,
 ECR, AWS Backup, and VPC endpoints. Production must use separate state,
 accounts/resources, secrets, buckets, and keys.
+
+The current staging skeleton includes network, security/KMS, ALB, ECS/ECR,
+RDS, S3, WAF, and GitHub OIDC modules. CloudTrail, Config, GuardDuty, Security
+Hub, Inspector, Backup, DNS/ACM, alarms, and central log archival require
+account/ownership choices documented in [SECURITY_SERVICES.md](SECURITY_SERVICES.md)
+before wiring and applying them.

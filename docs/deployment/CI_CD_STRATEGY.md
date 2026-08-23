@@ -12,6 +12,11 @@ application tests, reproducible build, secret scanning, dependency scanning,
 SAST, container scan, and Terraform/IaC scan. Deploy images to ECR using the
 commit SHA; do not use `latest` as the release identifier.
 
+The CI workflow contains no AWS credentials. The prepared OIDC module scopes a
+future staging role to the repository and `staging` branch; attach only the
+minimum ECR/ECS/Terraform permissions after review. Production must use a
+separate role, branch/environment condition, and manual approval.
+
 GitHub controls: protect `main` with PRs, required CI, approvals, resolved
 conversations, no direct pushes, and no force pushes. Protect `staging` with
 PRs for normal work, required CI, and no force pushes. Use separate protected
