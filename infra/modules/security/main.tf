@@ -42,6 +42,16 @@ resource "aws_security_group" "app" {
   tags = merge(local.common_tags, { Name = "${var.name}-app-sg" })
 }
 
+resource "aws_security_group_rule" "alb_to_app" {
+  type                     = "egress"
+  from_port                = var.app_port
+  to_port                  = var.app_port
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.alb.id
+  source_security_group_id = aws_security_group.app.id
+  description              = "Allow ALB health checks and application traffic to private ECS tasks"
+}
+
 resource "aws_security_group" "db" {
   name        = "${var.name}-db"
   description = "Private PostgreSQL access from ECS only"
