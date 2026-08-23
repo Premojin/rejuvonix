@@ -18,10 +18,14 @@
   transform:translate(-50%,-50%);
 }
 .glance-card.semaglutide .glance-silhouette{
-  opacity:.38;
-  filter:saturate(.95) brightness(1.12) contrast(1.02);
+  width:48.5%;
+  transform:translate(-50%,-50%) scaleX(.98);
+  opacity:.42;
+  filter:saturate(.95) brightness(1.22) contrast(1.02);
+  mix-blend-mode:normal;
 }
 .glance-card.tirzepatide .glance-silhouette{
   opacity:.42;
-  filter:saturate(.95) brightness(1.3) contrast(1.02);
+  filter:saturate(.95) brightness(1.22) contrast(1.02);
+  mix-blend-mode:normal;
 }
