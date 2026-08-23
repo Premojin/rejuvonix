@@ -44,10 +44,12 @@ export default function Home() {
   const [feet, setFeet] = useState("5");
   const [inches, setInches] = useState("6");
   const [weight, setWeight] = useState("200");
+  const [experienceActive, setExperienceActive] = useState(0);
   const reviewRailRef = useRef<HTMLDivElement>(null);
   const heightInches = Math.max(1, Number(feet) * 12 + Number(inches));
   const bmi = Number(weight) > 0 ? (Number(weight) / (heightInches * heightInches)) * 703 : 0;
   useEffect(() => { const timer = window.setTimeout(() => setQuizOpen(true), 12000); return () => window.clearTimeout(timer); }, []);
+  useEffect(() => { const timer = window.setInterval(() => setExperienceActive((current) => (current + 1) % completeExperience.length), 7000); return () => window.clearInterval(timer); }, []);
   const openQuiz = () => { setStep(0); setAnswers([]); setQuizOpen(true); };
   const choose = (answer: string) => { const next = [...answers]; next[step] = answer; setAnswers(next); setStep(Math.min(step + 1, 3)); };
   const scrollReviews = (direction: number) => reviewRailRef.current?.scrollBy({left: direction * 390, behavior:"smooth"});
@@ -89,11 +91,20 @@ export default function Home() {
       <p className="section-disclaimer">Prescription products require an online consultation with an independent licensed healthcare provider who determines whether a prescription is appropriate. Compounded medications are not FDA approved.</p>
     </section>
 
-    <section className="included-section" aria-labelledby="included-title">
-      <div className="included-heading"><p className="eyebrow">The complete experience</p><h2 id="included-title">Support at every step.</h2><p>Rejuvonix keeps the process clear from your first questions through ongoing follow-up.</p></div>
-      <div className="included-grid">
-        {completeExperience.map(({number,title,copy,image,alt}) => <article key={number}><div className="included-image"><img src={image} alt={alt} /></div><div className="included-card-copy"><span>{number}</span><h3>{title}</h3><p>{copy}</p></div></article>)}
+    <section className="experience-section" aria-labelledby="experience-title">
+      <div className="experience-intro"><p className="eyebrow">The Rejuvonix experience</p><h2 id="experience-title">Care should feel this connected.</h2><p>Step inside a clear, personal experience built around your questions, your provider and your next step.</p></div>
+      <div className="experience-stage" aria-live="polite">
+        <div className="experience-visuals">{completeExperience.map((item,index)=><img key={item.number} className={experienceActive===index?"active":""} src={item.image} alt={experienceActive===index?item.alt:""} aria-hidden={experienceActive!==index}/>)}</div>
+        <div className={`experience-panel panel-${experienceActive + 1}`} key={experienceActive}>
+          <div className="experience-count"><span>{completeExperience[experienceActive].number}</span><small>OF 04</small></div>
+          <p className="experience-label">YOUR CARE, STEP BY STEP</p>
+          <h3>{completeExperience[experienceActive].title}</h3>
+          <p>{completeExperience[experienceActive].copy}</p>
+          <div className="experience-reassurance"><span>✓</span><strong>{["Private and secure","Independent clinical review","Clear updates in one place","Coordinated fulfillment"][experienceActive]}</strong></div>
+        </div>
+        <div className="experience-arrows"><button onClick={()=>setExperienceActive((experienceActive + 3) % 4)} aria-label="Previous experience">←</button><button onClick={()=>setExperienceActive((experienceActive + 1) % 4)} aria-label="Next experience">→</button></div>
       </div>
+      <div className="experience-navigation" role="tablist" aria-label="Rejuvonix experience steps">{completeExperience.map((item,index)=><button key={item.number} className={experienceActive===index?"active":""} onClick={()=>setExperienceActive(index)} role="tab" aria-selected={experienceActive===index}><span>{item.number}</span><strong>{item.title}</strong><i><b></b></i></button>)}</div>
     </section>
 
     <section className="care-feature">
