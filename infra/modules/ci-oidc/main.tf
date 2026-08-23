@@ -18,8 +18,8 @@ data "aws_iam_policy_document" "github_assume" {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
       values = [
-        "repo:${var.github_repository}:ref:refs/heads/${var.branch}",
-        "repo:${var.github_repository}:environment:${var.github_environment}",
+        "repo:${var.github_repository_subject}:ref:refs/heads/${var.branch}",
+        "repo:${var.github_repository_subject}:environment:${var.github_environment}",
       ]
     }
   }

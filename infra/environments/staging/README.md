@@ -10,6 +10,9 @@ endpoint. The owner must add the CNAME at the authoritative external DNS
 provider, then provide the issued ARN through an uncommitted tfvars file as
 `certificate_arn`.
 
+The GitHub OIDC subject uses the repository's immutable GitHub organization and
+repository IDs observed in CloudTrail, rather than only the display name.
+
 The first staging shape is deliberately small: one ECS task, a maximum of two
 tasks, a single NAT gateway, and a Single-AZ small RDS instance inside a
 two-AZ network. The NAT and database choices reduce startup cost and are not
