@@ -181,3 +181,117 @@ resource "aws_wafv2_web_acl_association" "staging" {
   resource_arn = module.alb.load_balancer_arn
   web_acl_arn  = aws_wafv2_web_acl.staging.arn
 }
+
+locals {
+  alb_dimension = regex("loadbalancer/(.*)", module.alb.load_balancer_arn)[0]
+  tg_dimension  = regex("targetgroup/(.*)", module.alb.target_group_arn)[0]
+}
+
+resource "aws_cloudwatch_metric_alarm" "ecs_running_tasks_low" {
+  count               = var.create_service ? 1 : 0
+  alarm_name          = "${var.name}-ecs-running-tasks-low"
+  alarm_description   = "Staging ECS running tasks below desired capacity"
+  namespace           = "ECS/ContainerInsights"
+  metric_name         = "RunningTaskCount"
+  statistic           = "Minimum"
+  period              = 60
+  evaluation_periods  = 2
+  comparison_operator = "LessThanThreshold"
+  threshold           = var.create_service ? 1 : 0
+  treat_missing_data  = "breaching"
+  dimensions = {
+    ClusterName = module.ecs.cluster_name
+    ServiceName = module.ecs.service_name
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "alb_unhealthy_targets" {
+  count               = var.create_service ? 1 : 0
+  alarm_name          = "${var.name}-alb-unhealthy-targets"
+  alarm_description   = "Staging ALB has unhealthy targets"
+  namespace           = "AWS/ApplicationELB"
+  metric_name         = "UnHealthyHostCount"
+  statistic           = "Maximum"
+  period              = 60
+  evaluation_periods  = 2
+  comparison_operator = "GreaterThanThreshold"
+  threshold           = 0
+  treat_missing_data  = "breaching"
+  dimensions = {
+    LoadBalancer = local.alb_dimension
+    TargetGroup  = local.tg_dimension
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "alb_5xx" {
+  count               = var.create_service ? 1 : 0
+  alarm_name          = "${var.name}-alb-5xx"
+  alarm_description   = "Staging ALB is returning elevated 5xx responses"
+  namespace           = "AWS/ApplicationELB"
+  metric_name         = "HTTPCode_ELB_5XX_Count"
+  statistic           = "Sum"
+  period              = 300
+  evaluation_periods  = 1
+  comparison_operator = "GreaterThanThreshold"
+  threshold           = 5
+  treat_missing_data  = "notBreaching"
+  dimensions          = { LoadBalancer = local.alb_dimension }
+}
+
+resource "aws_cloudwatch_metric_alarm" "ecs_cpu_high" {
+  count               = var.create_service ? 1 : 0
+  alarm_name          = "${var.name}-ecs-cpu-high"
+  alarm_description   = "Staging ECS service CPU is elevated"
+  namespace           = "AWS/ECS"
+  metric_name         = "CPUUtilization"
+  statistic           = "Average"
+  period              = 300
+  evaluation_periods  = 2
+  comparison_operator = "GreaterThanThreshold"
+  threshold           = 80
+  treat_missing_data  = "notBreaching"
+  dimensions          = { ClusterName = module.ecs.cluster_name, ServiceName = module.ecs.service_name }
+}
+
+resource "aws_cloudwatch_metric_alarm" "ecs_memory_high" {
+  count               = var.create_service ? 1 : 0
+  alarm_name          = "${var.name}-ecs-memory-high"
+  alarm_description   = "Staging ECS service memory is elevated"
+  namespace           = "AWS/ECS"
+  metric_name         = "MemoryUtilization"
+  statistic           = "Average"
+  period              = 300
+  evaluation_periods  = 2
+  comparison_operator = "GreaterThanThreshold"
+  threshold           = 80
+  treat_missing_data  = "notBreaching"
+  dimensions          = { ClusterName = module.ecs.cluster_name, ServiceName = module.ecs.service_name }
+}
+
+resource "aws_cloudwatch_metric_alarm" "rds_storage_low" {
+  alarm_name          = "${var.name}-rds-storage-low"
+  alarm_description   = "Staging RDS free storage is below 5 GiB"
+  namespace           = "AWS/RDS"
+  metric_name         = "FreeStorageSpace"
+  statistic           = "Minimum"
+  period              = 300
+  evaluation_periods  = 2
+  comparison_operator = "LessThanThreshold"
+  threshold           = 5368709120
+  treat_missing_data  = "breaching"
+  dimensions          = { DBInstanceIdentifier = module.database.identifier }
+}
+
+resource "aws_cloudwatch_metric_alarm" "rds_cpu_high" {
+  alarm_name          = "${var.name}-rds-cpu-high"
+  alarm_description   = "Staging RDS CPU is elevated"
+  namespace           = "AWS/RDS"
+  metric_name         = "CPUUtilization"
+  statistic           = "Average"
+  period              = 300
+  evaluation_periods  = 2
+  comparison_operator = "GreaterThanThreshold"
+  threshold           = 80
+  treat_missing_data  = "notBreaching"
+  dimensions          = { DBInstanceIdentifier = module.database.identifier }
+}

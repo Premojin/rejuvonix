@@ -69,3 +69,7 @@ jobs:
             --query 'service.serviceName' \
             --output text
           aws ecs wait services-stable --cluster "$CLUSTER" --services "$SERVICE"
+      - name: Run staging smoke test
+        env:
+          STAGING_BASE_URL: https://staging.rejuvonix.com
+        run: bash scripts/staging-smoke.sh
