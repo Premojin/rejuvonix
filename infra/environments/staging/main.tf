@@ -59,6 +59,7 @@ module "ecs" {
   security_group_id = module.security.app_security_group_id
   target_group_arn  = module.alb.target_group_arn
   create_service    = var.create_service
+  image_tag         = var.image_tag
   tags              = var.tags
 }
 
