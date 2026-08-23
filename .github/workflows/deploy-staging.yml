@@ -30,3 +30,42 @@ jobs:
           docker build --tag "$REGISTRY/rejuvonix-staging:$IMAGE_TAG" .
           docker push "$REGISTRY/rejuvonix-staging:$IMAGE_TAG"
           docker inspect --format='image={{index .RepoDigests 0}}' "$REGISTRY/rejuvonix-staging:$IMAGE_TAG" || true
+      - name: Deploy to ECS when staging service exists
+        env:
+          REGISTRY: ${{ vars.ECR_REGISTRY }}
+          IMAGE_TAG: ${{ github.sha }}
+          CLUSTER: rejuvonix-staging
+          SERVICE: rejuvonix-staging
+          TASK_FAMILY: rejuvonix-staging
+        run: |
+          STATUS=$(aws ecs describe-services \
+            --cluster "$CLUSTER" \
+            --services "$SERVICE" \
+            --query 'services[0].status' \
+            --output text 2>/dev/null || true)
+          if [ "$STATUS" != "ACTIVE" ]; then
+            echo "ECS service is not active; image published and infrastructure activation remains gated."
+            exit 0
+          fi
+
+          aws ecs describe-task-definition \
+            --task-definition "$TASK_FAMILY" \
+            --query taskDefinition \
+            > task-definition.json
+          jq --arg image "$REGISTRY/rejuvonix-staging:$IMAGE_TAG" \
+            '.containerDefinitions[0].image = $image
+             | del(.taskDefinitionArn, .revision, .status, .requiresAttributes,
+                   .compatibilities, .registeredAt, .registeredBy)' \
+            task-definition.json > task-definition-next.json
+          REVISION=$(aws ecs register-task-definition \
+            --cli-input-json file://task-definition-next.json \
+            --query 'taskDefinition.taskDefinitionArn' \
+            --output text)
+          aws ecs update-service \
+            --cluster "$CLUSTER" \
+            --service "$SERVICE" \
+            --task-definition "$REVISION" \
+            --force-new-deployment \
+            --query 'service.serviceName' \
+            --output text
+          aws ecs wait services-stable --cluster "$CLUSTER" --services "$SERVICE"
