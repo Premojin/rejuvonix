@@ -11,7 +11,8 @@ FROM node:22-bookworm-slim AS runtime
 ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=build --chown=node:node /app/package*.json ./
-COPY --from=build --chown=node:node /app/node_modules ./node_modules
+RUN npm ci --omit=dev --ignore-scripts \
+  && rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
 COPY --from=build --chown=node:node /app/dist ./dist
 COPY --from=build --chown=node:node /app/public ./public
 USER node
