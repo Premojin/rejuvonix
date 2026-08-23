@@ -1,0 +1,31 @@
+name: Deploy staging application
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/rejuvonix-staging-github-deploy
+      - uses: aws-actions/amazon-ecr-login@v2
+      - name: Build and push immutable image
+        env:
+          REGISTRY: ${{ vars.ECR_REGISTRY }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          test -n "$REGISTRY"
+          docker build --tag "$REGISTRY/rejuvonix-staging:$IMAGE_TAG" .
+          docker push "$REGISTRY/rejuvonix-staging:$IMAGE_TAG"
+          docker inspect --format='image={{index .RepoDigests 0}}' "$REGISTRY/rejuvonix-staging:$IMAGE_TAG" || true

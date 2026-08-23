@@ -103,6 +103,8 @@ resource "aws_ecs_task_definition" "app" {
 data "aws_region" "current" {}
 
 resource "aws_ecs_service" "app" {
+  count = var.create_service ? 1 : 0
+
   name                   = var.name
   cluster                = aws_ecs_cluster.this.id
   task_definition        = aws_ecs_task_definition.app.arn
@@ -124,19 +126,21 @@ resource "aws_ecs_service" "app" {
 }
 
 resource "aws_appautoscaling_target" "ecs" {
+  count              = var.create_service ? 1 : 0
   max_capacity       = var.max_tasks
   min_capacity       = var.desired_count
-  resource_id        = "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.app.name}"
+  resource_id        = "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.app[0].name}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 }
 
 resource "aws_appautoscaling_policy" "cpu" {
+  count              = var.create_service ? 1 : 0
   name               = "${var.name}-cpu-target"
   policy_type        = "TargetTrackingScaling"
-  resource_id        = aws_appautoscaling_target.ecs.resource_id
-  scalable_dimension = aws_appautoscaling_target.ecs.scalable_dimension
-  service_namespace  = aws_appautoscaling_target.ecs.service_namespace
+  resource_id        = aws_appautoscaling_target.ecs[0].resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs[0].scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs[0].service_namespace
   target_tracking_scaling_policy_configuration {
     target_value = 60
     predefined_metric_specification {

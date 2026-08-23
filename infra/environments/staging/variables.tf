@@ -49,3 +49,13 @@ variable "certificate_arn" {
   nullable = true
   default  = null
 }
+
+variable "staging_domain" {
+  type    = string
+  default = "staging.rejuvonix.com"
+}
+
+variable "create_service" {
+  type    = bool
+  default = false
+}

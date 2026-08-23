@@ -1,3 +1,12 @@
+resource "aws_acm_certificate" "staging" {
+  domain_name       = var.staging_domain
+  validation_method = "DNS"
+  lifecycle {
+    create_before_destroy = true
+  }
+  tags = merge(var.tags, { Name = var.staging_domain })
+}
+
 module "network" {
   source              = "../../modules/network"
   name                = var.name
@@ -49,6 +58,7 @@ module "ecs" {
   subnet_ids        = module.network.app_subnet_ids
   security_group_id = module.security.app_security_group_id
   target_group_arn  = module.alb.target_group_arn
+  create_service    = var.create_service
   tags              = var.tags
 }
 
@@ -81,7 +91,7 @@ data "aws_iam_policy_document" "github_deploy" {
   statement {
     sid       = "EcsReadClusterAndService"
     actions   = ["ecs:DescribeClusters", "ecs:DescribeServices", "ecs:UpdateService"]
-    resources = [module.ecs.cluster_arn, module.ecs.service_arn]
+    resources = var.create_service ? [module.ecs.cluster_arn, module.ecs.service_arn] : [module.ecs.cluster_arn]
   }
 
   statement {

@@ -23,6 +23,11 @@ variable "desired_count" {
   default = 1
 }
 
+variable "create_service" {
+  type    = bool
+  default = false
+}
+
 variable "max_tasks" {
   type    = number
   default = 2
