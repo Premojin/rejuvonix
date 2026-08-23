@@ -59,3 +59,8 @@ variable "create_service" {
   type    = bool
   default = false
 }
+
+variable "image_tag" {
+  type    = string
+  default = "bootstrap"
+}
