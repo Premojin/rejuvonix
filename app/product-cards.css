@@ -35,7 +35,7 @@
 .branded-grid .card-content h3{font-size:20px;margin-bottom:7px}
 .branded-grid .card-content p{font-size:8px;margin-bottom:5px}
 .branded-grid .card-content>span{font-size:10px}
-.branded-grid .card-content button{font-size:11px;margin-top:17px}
+.branded-grid .card-content button,.branded-grid .card-content>a{font-size:11px;margin-top:17px;padding:0 0 7px;border:0;border-bottom:1px solid #839092;background:transparent;font-weight:800;color:var(--charcoal);display:inline-flex;align-items:center;align-self:flex-start}
 .branded-grid .card-top{font-size:7px}
-@media(max-width:1050px){#treatments{padding-left:18px;padding-right:18px}.branded-grid .treatment-card{min-height:445px;padding:13px}.branded-grid .product-stage{height:190px;margin-top:15px}.branded-grid .card-content h3{font-size:17px}.branded-grid .card-content button{font-size:9px}}
-@media(max-width:760px){#treatments{padding:72px 20px}.branded-grid .treatment-card{min-height:500px;padding:18px}.branded-grid .product-stage{height:235px}.branded-grid .card-content h3{font-size:21px}.branded-grid .card-content button{font-size:11px}}
+@media(max-width:1050px){#treatments{padding-left:18px;padding-right:18px}.branded-grid .treatment-card{min-height:445px;padding:13px}.branded-grid .product-stage{height:190px;margin-top:15px}.branded-grid .card-content h3{font-size:17px}.branded-grid .card-content button,.branded-grid .card-content>a{font-size:9px}}
+@media(max-width:760px){#treatments{padding:72px 20px}.branded-grid .treatment-card{min-height:500px;padding:18px}.branded-grid .product-stage{height:235px}.branded-grid .card-content h3{font-size:21px}.branded-grid .card-content button,.branded-grid .card-content>a{font-size:11px}}

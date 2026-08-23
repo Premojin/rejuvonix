@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const treatments = [
   {name:"GLP-1 Injections", ingredient:"Compounded prescription option", format:"One injection per week", image:"/glp1-injections.png", tag:"Compounded medication"},
@@ -20,6 +20,22 @@ const journey = [
   ["07","Check in regularly","Use the platform to complete follow-ups and keep up with your next steps."],
 ];
 
+const completeExperience = [
+  {number:"01", title:"Online assessment", copy:"Share your health history, goals and treatment preferences securely.", image:"/complete-assessment.png", alt:"A patient completing an online health assessment at home"},
+  {number:"02", title:"Provider review", copy:"Connect with an independent licensed provider who makes all clinical decisions.", image:"/complete-provider-review.png", alt:"A clinician speaking with a patient during an online provider review"},
+  {number:"03", title:"One place to follow care", copy:"View next steps, order progress, provider messages and check-in reminders.", image:"/complete-follow-care.png", alt:"A patient following care updates on a phone and laptop"},
+  {number:"04", title:"Delivery coordination", copy:"If prescribed, an independent licensed pharmacy prepares and ships your medication.", image:"/complete-delivery.png", alt:"A pharmacy professional coordinating a discreet medication delivery"},
+];
+
+const sampleReviews = [
+  {headline:"Simple from the start", review:"The assessment was easy to follow, and I always knew what the next step was.", name:"Danielle M.", treatment:"Wegovy® Injection", date:"Sample review", image:"/wegovy-member-outdoors.jpg", alt:"Smiling woman outdoors"},
+  {headline:"Everything stayed organized", review:"I liked being able to check messages, order progress and follow-up details in one place.", name:"Alicia R.", treatment:"GLP-1 program", date:"Sample review", image:"/wegovy-member-platform.jpg", alt:"Woman checking her phone at home"},
+  {headline:"Clear and comfortable", review:"The provider review felt private and straightforward. The instructions were easy to understand.", name:"Evelyn T.", treatment:"Semaglutide program", date:"Sample review", image:"/wegovy-followup-member.jpg", alt:"Mature woman using her phone at home"},
+  {headline:"Care that fit my routine", review:"The online process worked around my schedule, which made it much easier to stay consistent.", name:"Monique S.", treatment:"Tirzepatide program", date:"Sample review", image:"/wegovy-movement-member.jpg", alt:"Woman holding a yoga mat"},
+  {headline:"Support without the confusion", review:"Each step was explained clearly, from the assessment through delivery coordination.", name:"Carlos D.", treatment:"GLP-1 program", date:"Sample review", image:"/rejuvonix-member-phone.png", alt:"Man reviewing care information on a phone"},
+  {headline:"A more personal experience", review:"I appreciated having a clear place to return for updates, questions and ongoing follow-up.", name:"Jordan K.", treatment:"Wegovy® program", date:"Sample review", image:"/rejuvonix-couple-walk.png", alt:"Couple enjoying a walk outdoors"},
+];
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
@@ -28,20 +44,22 @@ export default function Home() {
   const [feet, setFeet] = useState("5");
   const [inches, setInches] = useState("6");
   const [weight, setWeight] = useState("200");
+  const reviewRailRef = useRef<HTMLDivElement>(null);
   const heightInches = Math.max(1, Number(feet) * 12 + Number(inches));
   const bmi = Number(weight) > 0 ? (Number(weight) / (heightInches * heightInches)) * 703 : 0;
   useEffect(() => { const timer = window.setTimeout(() => setQuizOpen(true), 12000); return () => window.clearTimeout(timer); }, []);
   const openQuiz = () => { setStep(0); setAnswers([]); setQuizOpen(true); };
   const choose = (answer: string) => { const next = [...answers]; next[step] = answer; setAnswers(next); setStep(Math.min(step + 1, 3)); };
+  const scrollReviews = (direction: number) => reviewRailRef.current?.scrollBy({left: direction * 390, behavior:"smooth"});
 
   return <main>
     <div className="announcement"><span>Online access to prescription weight care</span><button onClick={openQuiz}>Check eligibility <b>→</b></button></div>
     <header className="site-header">
       <a className="brand" href="#top" aria-label="Rejuvonix home"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></a>
       <nav className={`nav-links ${menuOpen ? "open" : ""}`} aria-label="Primary navigation">
-        <a href="#treatments">Treatments</a><a href="#compounded">Compounded</a><a href="#journey">How it works</a><a href="#program">Support</a>
+        <a href="/treatments">Treatments</a><a href="/compounded">Compounded</a><a href="/how-it-works">How it works</a><a href="/support">Support</a>
       </nav>
-      <div className="header-actions"><button className="text-button">Sign in</button><button className="primary small" onClick={openQuiz}>Get started</button><button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle menu"><span></span><span></span></button></div>
+      <div className="header-actions"><a className="text-button" href="/sign-in">Sign in</a><a className="primary small" href="/get-started">Get started</a><button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle menu"><span></span><span></span></button></div>
     </header>
 
     <section className="hero" id="top">
@@ -67,14 +85,14 @@ export default function Home() {
 
     <section className="section-shell" id="treatments">
       <div className="section-heading"><div><p className="eyebrow">Treatment options</p><h2>Find out which option may be right for you.</h2></div><p>A provider reviews your health history, preferences and goals before recommending treatment.</p></div>
-      <div className="treatment-grid branded-grid">{treatments.map((item, index) => <article className={`treatment-card card-${index + 1}`} key={item.name}><div className="card-top"><span>{item.tag}</span><span>0{index + 1}</span></div><div className="product-stage"><img src={item.image} alt={`${item.name} product packaging`} /></div><div className="card-content"><p>{item.ingredient}</p><h3>{item.name}</h3><span>{item.format}</span><button onClick={openQuiz}>Check eligibility <b>→</b></button></div></article>)}</div>
+      <div className="treatment-grid branded-grid">{treatments.map((item, index) => { const slugs=["glp-1-injections","glp-1-tablets","wegovy-pill","wegovy-injection","zepbound-injection"]; return <article className={`treatment-card card-${index + 1}`} key={item.name}><div className="card-top"><span>{item.tag}</span><span>0{index + 1}</span></div><div className="product-stage"><img src={item.image} alt={`${item.name} product packaging`} /></div><div className="card-content"><p>{item.ingredient}</p><h3>{item.name}</h3><span>{item.format}</span><a href={`/treatments/${slugs[index]}`}>View treatment <b>→</b></a></div></article>})}</div>
       <p className="section-disclaimer">Prescription products require an online consultation with an independent licensed healthcare provider who determines whether a prescription is appropriate. Compounded medications are not FDA approved.</p>
     </section>
 
     <section className="included-section" aria-labelledby="included-title">
       <div className="included-heading"><p className="eyebrow">The complete experience</p><h2 id="included-title">Support at every step.</h2><p>Rejuvonix keeps the process clear from your first questions through ongoing follow-up.</p></div>
       <div className="included-grid">
-        {[["01","Online assessment","Share your health history, goals and treatment preferences securely."],["02","Provider review","Connect with an independent licensed provider who makes all clinical decisions."],["03","One place to follow care","View next steps, order progress, provider messages and check-in reminders."],["04","Delivery coordination","If prescribed, an independent licensed pharmacy prepares and ships your medication."]].map(([number,title,copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}
+        {completeExperience.map(({number,title,copy,image,alt}) => <article key={number}><div className="included-image"><img src={image} alt={alt} /></div><div className="included-card-copy"><span>{number}</span><h3>{title}</h3><p>{copy}</p></div></article>)}
       </div>
     </section>
 
@@ -86,8 +104,8 @@ export default function Home() {
     <section className="compounded-section" id="compounded">
       <div className="compounded-intro"><p className="eyebrow">Compounded medications</p><h2>Compare semaglutide and tirzepatide.</h2><p>An independent provider may prescribe a compounded medication when it is legally available and appropriate for the patient. Compounded medications are not generic versions of branded drugs, and they are not FDA approved.</p></div>
       <div className="glance-grid">
-        <article className="glance-card semaglutide"><div className="glance-number">01</div><p className="pill-label">Compounded option</p><h3>Semaglutide</h3><p className="glance-sub">Acts on the GLP-1 receptor.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></article>
-        <article className="glance-card tirzepatide"><div className="glance-number">02</div><p className="pill-label">Compounded option</p><h3>Tirzepatide</h3><p className="glance-sub">Acts on the GIP and GLP-1 receptors.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></article>
+        <article className="glance-card semaglutide"><img className="glance-silhouette" src="/peptide-vial-transparent.png" alt="" aria-hidden="true" /><div className="glance-content"><div className="glance-number">01</div><p className="pill-label">Compounded option</p><h3>Semaglutide</h3><p className="glance-sub">Acts on the GLP-1 receptor.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></div></article>
+        <article className="glance-card tirzepatide"><img className="glance-silhouette" src="/tirzepatide-vial-clean.png" alt="" aria-hidden="true" /><div className="glance-content"><div className="glance-number">02</div><p className="pill-label">Compounded option</p><h3>Tirzepatide</h3><p className="glance-sub">Acts on the GIP and GLP-1 receptors.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></div></article>
       </div><p className="compounded-note">*Form, ingredients, concentration and availability vary by prescription and dispensing pharmacy. Compounded medications are prepared for an identified patient and are not reviewed by FDA for safety, effectiveness or quality before marketing.</p>
     </section>
 
@@ -106,14 +124,14 @@ export default function Home() {
     <section className="editorial-banner"><img src="/rejuvonix-couple-walk.png" alt="Couple enjoying a morning walk together" /><div className="editorial-panel"><p className="eyebrow">Built for daily life</p><h2>Health care should feel personal.</h2><p>Your treatment starts with your health history, your goals and a provider’s clinical review.</p><button className="primary" onClick={openQuiz}>Get started</button></div></section>
 
     <section className="reviews-section" id="reviews">
-      <div className="review-heading"><p className="eyebrow">Patient reviews</p><h2>What patients are saying.</h2></div>
-      <div className="review-grid">
-        {[1,2,3,4,5,6].map((slot) => <article className="review-card" key={slot}>
-          <div className="review-photo" role="img" aria-label="Patient photo placeholder"><span className="photo-mark">+</span><strong>[Patient photo]</strong><small>0{slot}</small></div>
+      <div className="review-topline"><div className="review-heading"><p className="eyebrow">Patient reviews</p><h2>What patients are saying.</h2><p>Sample content shown for layout review.</p></div><div className="review-controls"><button onClick={() => scrollReviews(-1)} aria-label="Previous reviews">←</button><button onClick={() => scrollReviews(1)} aria-label="Next reviews">→</button></div></div>
+      <div className="review-grid" ref={reviewRailRef}>
+        {sampleReviews.map((review, index) => <article className="review-card" key={review.name}>
+          <div className="review-photo"><img src={review.image} alt={review.alt}/><small>0{index + 1}</small></div>
           <div className="review-content">
             <div className="review-stars" aria-label="Five star rating">★★★★★</div>
-            <div className="review-copy"><h3>[Review headline]</h3><p>[Patient review]</p></div>
-            <div className="review-author"><div><strong>[Patient name]</strong><span>[Treatment]</span></div><time>[Date]</time></div>
+            <div className="review-copy"><h3>{review.headline}</h3><p>{review.review}</p></div>
+            <div className="review-author"><div><strong>{review.name}</strong><span>{review.treatment}</span></div><time>{review.date}</time></div>
           </div>
         </article>)}
       </div>
@@ -126,7 +144,7 @@ export default function Home() {
 
     <section className="clinical-section" id="safety">
       <div><p className="eyebrow">Independent clinical care</p><h2>A licensed provider reviews every assessment.</h2></div>
-      <div className="clinical-copy"><p>Rejuvonix connects you with independent licensed healthcare providers. The provider reviews your health information and decides whether a prescription is appropriate.</p><a href="#faq">Read common questions <span>→</span></a></div>
+      <div className="clinical-copy"><p>Rejuvonix connects you with independent licensed healthcare providers. The provider reviews your health information and decides whether a prescription is appropriate.</p><a href="/faq">Read common questions <span>→</span></a></div>
     </section>
 
     <section className="faq-section" id="faq"><div className="faq-intro"><p className="eyebrow">Frequently asked questions</p><h2>What to know before you begin.</h2></div><div className="faq-list">
@@ -153,7 +171,7 @@ export default function Home() {
       <article><span>03</span><div><strong>Licensed pharmacy fulfillment</strong><p>Prescriptions are filled by independent pharmacy partners.</p></div></article>
     </section>
 
-    <footer><div className="footer-main"><div><a className="brand" href="#top"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></a><p>Online access to prescription weight care.</p></div><div><strong>Explore</strong><a href="#treatments">Treatments</a><a href="#journey">How it works</a><a href="#program">The program</a></div><div><strong>Support</strong><a href="#faq">FAQ</a><a href="#safety">Safety</a><a href="#">Contact</a></div><div><strong>Legal</strong><a href="#medical-disclaimer">Medical disclaimer</a><a href="#">Terms</a><a href="#">Privacy</a></div></div><div className="medical-disclaimer" id="medical-disclaimer"><strong>Medical and platform disclaimer</strong><p>Rejuvonix is a technology and administrative-services platform and is not a healthcare provider, medical practice, pharmacy, laboratory, drug manufacturer or insurance company. Rejuvonix connects individuals with independent licensed healthcare providers who are solely responsible for clinical evaluations, diagnoses, treatment recommendations and prescribing decisions. If prescribed, medication is dispensed by an independent licensed pharmacy. Compounded medications are not FDA approved. Individual results vary.</p></div><div className="footer-bottom"><span>© 2026 Rejuvonix. All rights reserved.</span><span>Wegovy® is a registered trademark of Novo Nordisk A/S. Zepbound® is a registered trademark of Eli Lilly and Company. Rejuvonix is not affiliated with or endorsed by these companies.</span></div></footer>
+    <footer><div className="footer-main"><div><a className="brand" href="/"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></a><p>Online access to prescription weight care.</p></div><div><strong>Explore</strong><a href="/treatments">Treatments</a><a href="/how-it-works">How it works</a><a href="/support">The program</a></div><div><strong>Support</strong><a href="/faq">FAQ</a><a href="/safety">Safety</a><a href="/support#contact">Contact</a></div><div><strong>Account</strong><a href="/sign-in">Sign in</a><a href="/get-started">Get started</a><a href="/compounded">Compounded care</a></div></div><div className="medical-disclaimer" id="medical-disclaimer"><strong>Medical and platform disclaimer</strong><p>Rejuvonix is a technology and administrative-services platform and is not a healthcare provider, medical practice, pharmacy, laboratory, drug manufacturer or insurance company. Rejuvonix connects individuals with independent licensed healthcare providers who are solely responsible for clinical evaluations, diagnoses, treatment recommendations and prescribing decisions. If prescribed, medication is dispensed by an independent licensed pharmacy. Compounded medications are not FDA approved. Individual results vary.</p></div><div className="footer-bottom"><span>© 2026 Rejuvonix. All rights reserved.</span><span>Wegovy® is a registered trademark of Novo Nordisk A/S. Zepbound® is a registered trademark of Eli Lilly and Company. Rejuvonix is not affiliated with or endorsed by these companies.</span></div></footer>
 
     {quizOpen && <div className="modal-backdrop" onMouseDown={(e) => e.target === e.currentTarget && setQuizOpen(false)}><section className="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="quiz-title"><button className="modal-close" onClick={() => setQuizOpen(false)} aria-label="Close">×</button><div className="quiz-brand"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></div>
       {step < 3 ? <><div className="progress"><span style={{width:`${(step + 1) * 33.33}%`}}></span></div><p className="quiz-step">Question {step + 1} of 3</p><h2 id="quiz-title">{["What would you most like help achieving?","How would you prefer to receive treatment?","Do you plan to use insurance?"][step]}</h2><div className="quiz-options">{[["Lose weight","Control my appetite","Improve metabolic health","Maintain my progress"],["Weekly injection","Daily pill","I’m open to either","Let a provider help me decide"],["Yes","No","I’m not sure"]][step].map(option => <button key={option} onClick={() => choose(option)}>{option}<span>→</span></button>)}</div>{step > 0 && <button className="back-button" onClick={() => setStep(step - 1)}>← Back</button>}</>
