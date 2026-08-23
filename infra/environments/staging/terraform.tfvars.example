@@ -1,0 +1,4 @@
+aws_region = "us-east-1"
+name = "rejuvonix-staging"
+vpc_cidr = "10.42.0.0/16"
+azs = ["us-east-1a", "us-east-1b"]
