@@ -39,7 +39,7 @@ jobs:
           path: ./
           extra_args: --only-verified
       - name: IaC scan
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: config
           scan-ref: infra
@@ -48,7 +48,7 @@ jobs:
       - name: Build container
         run: docker build --tag rejuvonix:${{ github.sha }} .
       - name: Container scan
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: rejuvonix:${{ github.sha }}
           scan-type: image
