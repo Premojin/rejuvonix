@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const treatments = [
   {name:"GLP-1 Injections", ingredient:"Compounded prescription option", format:"One injection per week", image:"/glp1-injections.png", tag:"Compounded medication"},
@@ -46,8 +46,16 @@ export default function Home() {
   const [weight, setWeight] = useState("200");
   const [experienceActive, setExperienceActive] = useState(0);
   const reviewRailRef = useRef<HTMLDivElement>(null);
-  const heightInches = Math.max(1, Number(feet) * 12 + Number(inches));
-  const bmi = Number(weight) > 0 ? (Number(weight) / (heightInches * heightInches)) * 703 : 0;
+  const bmiResult = useMemo(() => {
+    const feetValue = Number.parseFloat(feet);
+    const inchesValue = Number.parseFloat(inches);
+    const weightValue = Number.parseFloat(weight);
+    const heightInches = (Number.isFinite(feetValue) ? feetValue : 0) * 12 + (Number.isFinite(inchesValue) ? inchesValue : 0);
+    if (heightInches <= 0 || !Number.isFinite(weightValue) || weightValue <= 0) return { value: 0, marker: 0, category: "Enter your measurements" };
+    const value = (weightValue / (heightInches * heightInches)) * 703;
+    const category = value < 18.5 ? "Below standard range" : value < 25 ? "Standard range" : value < 30 ? "Above standard range" : "Higher range";
+    return { value, marker: Math.min(100, Math.max(0, ((value - 15) / 25) * 100)), category };
+  }, [feet, inches, weight]);
   useEffect(() => { const timer = window.setTimeout(() => setQuizOpen(true), 12000); return () => window.clearTimeout(timer); }, []);
   useEffect(() => { const timer = window.setInterval(() => setExperienceActive((current) => (current + 1) % completeExperience.length), 7000); return () => window.clearInterval(timer); }, []);
   const openQuiz = () => { setStep(0); setAnswers([]); setQuizOpen(true); };
@@ -77,10 +85,10 @@ export default function Home() {
       <div className="bmi-intro"><p className="eyebrow">A useful starting point</p><h2 id="bmi-title">Check your BMI.</h2><p>Enter your height and weight for a quick estimate. A licensed provider considers your full health history, not BMI alone.</p></div>
       <div className="bmi-card">
         <div className="bmi-fields">
-          <label>Height <span><input inputMode="numeric" value={feet} onChange={(e) => setFeet(e.target.value)} aria-label="Height in feet" /> ft</span><span><input inputMode="numeric" value={inches} onChange={(e) => setInches(e.target.value)} aria-label="Additional height in inches" /> in</span></label>
-          <label>Weight <span className="weight-field"><input inputMode="decimal" value={weight} onChange={(e) => setWeight(e.target.value)} aria-label="Weight in pounds" /> lb</span></label>
+          <label>Height <span><input type="number" inputMode="numeric" min="1" max="8" step="1" value={feet} onInput={(e) => setFeet(e.currentTarget.value)} aria-label="Height in feet" /> ft</span><span><input type="number" inputMode="numeric" min="0" max="11" step="1" value={inches} onInput={(e) => setInches(e.currentTarget.value)} aria-label="Additional height in inches" /> in</span></label>
+          <label>Weight <span className="weight-field"><input type="number" inputMode="decimal" min="1" max="1000" step="0.1" value={weight} onInput={(e) => setWeight(e.currentTarget.value)} aria-label="Weight in pounds" /> lb</span></label>
         </div>
-        <div className="bmi-result digital-bmi"><div className="digital-readout"><span>Estimated BMI</span><strong>{bmi > 0 && Number.isFinite(bmi) ? bmi.toFixed(1) : "—"}</strong><em>LIVE ESTIMATE</em></div><div className="bmi-meter" aria-hidden="true"><div className="bmi-track"><span className="bmi-marker" style={{left:`${Math.min(100,Math.max(0,((bmi-15)/25)*100))}%`}}></span></div><div className="bmi-labels"><span>15</span><span>20</span><span>25</span><span>30</span><span>35</span><span>40+</span></div></div><small>This estimate is informational and is not a diagnosis.</small></div>
+        <div className="bmi-result digital-bmi" aria-live="polite"><div className="digital-readout"><span>Estimated BMI</span><strong>{bmiResult.value > 0 ? bmiResult.value.toFixed(1) : "—"}</strong><em>{bmiResult.category}</em></div><div className="bmi-meter" aria-hidden="true"><div className="bmi-track"><span className="bmi-marker" style={{left:`${bmiResult.marker}%`}}></span></div><div className="bmi-labels"><span>15</span><span>20</span><span>25</span><span>30</span><span>35</span><span>40+</span></div></div><small>This estimate updates as you type. It is informational and is not a diagnosis.</small></div>
         <button className="primary" onClick={openQuiz}>Continue to eligibility</button>
       </div>
     </section>
