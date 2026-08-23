@@ -6,6 +6,11 @@ variable "branch" {
   default = "staging"
 }
 
+variable "github_environment" {
+  type    = string
+  default = "staging"
+}
+
 variable "tags" {
   type    = map(string)
   default = {}

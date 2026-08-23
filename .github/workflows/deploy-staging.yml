@@ -19,6 +19,7 @@ jobs:
         with:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/rejuvonix-staging-github-deploy
+          role-skip-session-tagging: true
       - uses: aws-actions/amazon-ecr-login@v2
       - name: Build and push immutable image
         env:

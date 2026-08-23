@@ -63,10 +63,11 @@ module "ecs" {
 }
 
 module "github_oidc" {
-  source            = "../../modules/ci-oidc"
-  name              = "${var.name}-github-deploy"
-  github_repository = var.github_repository
-  tags              = var.tags
+  source             = "../../modules/ci-oidc"
+  name               = "${var.name}-github-deploy"
+  github_repository  = var.github_repository
+  github_environment = "staging"
+  tags               = var.tags
 }
 
 data "aws_iam_policy_document" "github_deploy" {
