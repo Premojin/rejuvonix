@@ -3,14 +3,22 @@
 The selected planning region is `us-east-1`. The intended hostname is
 `staging.rejuvonix.com`, but no authoritative `rejuvonix.com` Route 53 zone was
 discoverable in the current account, so this configuration does not create DNS
-records or an ACM certificate. The application listener is intentionally not
-created until an approved ACM certificate ARN is supplied; an ALB DNS name
-alone is not treated as a secure staging endpoint.
+records. Terraform requests the ACM certificate and outputs its DNS validation
+CNAME. The application listener is intentionally not created until the
+certificate is issued; an ALB DNS name alone is not treated as a secure staging
+endpoint. The owner must add the CNAME at the authoritative external DNS
+provider, then provide the issued ARN through an uncommitted tfvars file as
+`certificate_arn`.
 
 The first staging shape is deliberately small: one ECS task, a maximum of two
 tasks, a single NAT gateway, and a Single-AZ small RDS instance inside a
 two-AZ network. The NAT and database choices reduce startup cost and are not
 production resilience decisions.
+
+The ECS service is intentionally disabled until both prerequisites exist: an
+issued ACM certificate ARN (so the target group has a TLS listener) and an
+immutable ECR image tag. Enable it with `create_service = true` only after the
+image has been pushed and the certificate is issued.
 
 The staging budget default is USD 250/month. Notification delivery is disabled
 until an owner-approved notification address is supplied through an uncommitted
