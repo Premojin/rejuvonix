@@ -1,7 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 
 export function SiteHeader() {
-  return <><div className="detail-announcement">Online access to provider-led prescription weight care</div><header className="detail-header"><Link className="brand" href="/"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></Link><nav aria-label="Primary navigation"><Link href="/treatments">Treatments</Link><Link href="/compounded">Compounded</Link><Link href="/how-it-works">How it works</Link><Link href="/support">Support</Link></nav><div><Link className="detail-signin" href="/sign-in">Sign in</Link><Link className="detail-start" href="/get-started">Get started</Link></div></header></>;
+  const [menuOpen, setMenuOpen] = useState(false);
+  return <><div className="detail-announcement">Online access to provider-led prescription weight care</div><header className="detail-header"><Link className="brand" href="/" onClick={() => setMenuOpen(false)}><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></Link><nav className={menuOpen ? "open" : ""} aria-label="Primary navigation"><Link href="/treatments" onClick={() => setMenuOpen(false)}>Treatments</Link><Link href="/compounded" onClick={() => setMenuOpen(false)}>Compounded</Link><Link href="/how-it-works" onClick={() => setMenuOpen(false)}>How it works</Link><Link href="/support" onClick={() => setMenuOpen(false)}>Support</Link></nav><div><Link className="detail-signin" href="/sign-in">Sign in</Link><Link className="detail-start" href="/get-started">Get started</Link></div><button className="detail-menu-button" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle navigation">Menu</button></header></>;
 }
 
 export function SiteFooter() {

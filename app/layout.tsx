@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./detail-nav.css";
 export const metadata: Metadata = { title: "Rejuvonix | Online Weight Care", description: "Review GLP-1 treatment options and connect with an independent licensed healthcare provider through Rejuvonix.", icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" }, openGraph: { title: "Rejuvonix | Online Weight Care", description: "Prescription weight care online.", url: "https://rejuvonix.otrayoe.chatgpt.site", siteName: "Rejuvonix", images: [{url:"https://rejuvonix.otrayoe.chatgpt.site/og.png",width:1200,height:630,alt:"Rejuvonix online weight care"}], type:"website" }, twitter: { card:"summary_large_image", title:"Rejuvonix | Online Weight Care", description:"Prescription weight care online.", images:["https://rejuvonix.otrayoe.chatgpt.site/og.png"] } };
 export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) { return <html lang="en"><body>{children}</body></html>; }
