@@ -13,6 +13,7 @@
     "test": "npm run build && node --test tests/rendered-html.test.mjs tests/staging-contracts.test.mjs tests/route-links.test.mjs && node --experimental-strip-types --test tests/authorization.test.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "bash scripts/sites-env.sh -- eslint . --ignore-pattern dist --ignore-pattern .next",
+    "governance:validate": "node scripts/validate-governance.mjs",
     "smoke:staging": "bash scripts/staging-smoke.sh",
     "db:generate": "bash scripts/sites-env.sh -- drizzle-kit generate",
     "db:generate:postgres": "drizzle-kit generate --config drizzle.postgres.config.ts",
