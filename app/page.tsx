@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 
 const treatments = [
@@ -45,10 +45,20 @@ export default function Home() {
   const [feet, setFeet] = useState("5");
   const [inches, setInches] = useState("6");
   const [weight, setWeight] = useState("200");
+  const [experienceActive, setExperienceActive] = useState(0);
   const reviewRailRef = useRef<HTMLDivElement>(null);
-  const heightInches = Math.max(1, Number(feet) * 12 + Number(inches));
-  const bmi = Number(weight) > 0 ? (Number(weight) / (heightInches * heightInches)) * 703 : 0;
+  const bmiResult = useMemo(() => {
+    const feetValue = Number.parseFloat(feet);
+    const inchesValue = Number.parseFloat(inches);
+    const weightValue = Number.parseFloat(weight);
+    const heightInches = (Number.isFinite(feetValue) ? feetValue : 0) * 12 + (Number.isFinite(inchesValue) ? inchesValue : 0);
+    if (heightInches <= 0 || !Number.isFinite(weightValue) || weightValue <= 0) return { value: 0, marker: 0, category: "Enter your measurements" };
+    const value = (weightValue / (heightInches * heightInches)) * 703;
+    const category = value < 18.5 ? "Below standard range" : value < 25 ? "Standard range" : value < 30 ? "Above standard range" : "Higher range";
+    return { value, marker: Math.min(100, Math.max(0, ((value - 15) / 25) * 100)), category };
+  }, [feet, inches, weight]);
   useEffect(() => { const timer = window.setTimeout(() => setQuizOpen(true), 12000); return () => window.clearTimeout(timer); }, []);
+  useEffect(() => { const timer = window.setInterval(() => setExperienceActive((current) => (current + 1) % completeExperience.length), 7000); return () => window.clearInterval(timer); }, []);
   const openQuiz = () => { setStep(0); setAnswers([]); setQuizOpen(true); };
   const choose = (answer: string) => { const next = [...answers]; next[step] = answer; setAnswers(next); setStep(Math.min(step + 1, 3)); };
   const scrollReviews = (direction: number) => reviewRailRef.current?.scrollBy({left: direction * 390, behavior:"smooth"});
@@ -76,10 +86,10 @@ export default function Home() {
       <div className="bmi-intro"><p className="eyebrow">A useful starting point</p><h2 id="bmi-title">Check your BMI.</h2><p>Enter your height and weight for a quick estimate. A licensed provider considers your full health history, not BMI alone.</p></div>
       <div className="bmi-card">
         <div className="bmi-fields">
-          <label>Height <span><input inputMode="numeric" value={feet} onChange={(e) => setFeet(e.target.value)} aria-label="Height in feet" /> ft</span><span><input inputMode="numeric" value={inches} onChange={(e) => setInches(e.target.value)} aria-label="Additional height in inches" /> in</span></label>
-          <label>Weight <span className="weight-field"><input inputMode="decimal" value={weight} onChange={(e) => setWeight(e.target.value)} aria-label="Weight in pounds" /> lb</span></label>
+          <label>Height <span><input type="number" inputMode="numeric" min="1" max="8" step="1" value={feet} onInput={(e) => setFeet(e.currentTarget.value)} aria-label="Height in feet" /> ft</span><span><input type="number" inputMode="numeric" min="0" max="11" step="1" value={inches} onInput={(e) => setInches(e.currentTarget.value)} aria-label="Additional height in inches" /> in</span></label>
+          <label>Weight <span className="weight-field"><input type="number" inputMode="decimal" min="1" max="1000" step="0.1" value={weight} onInput={(e) => setWeight(e.currentTarget.value)} aria-label="Weight in pounds" /> lb</span></label>
         </div>
-        <div className="bmi-result digital-bmi"><div className="digital-readout"><span>Estimated BMI</span><strong>{bmi > 0 && Number.isFinite(bmi) ? bmi.toFixed(1) : "—"}</strong><em>LIVE ESTIMATE</em></div><div className="bmi-meter" aria-hidden="true"><div className="bmi-track"><span className="bmi-marker" style={{left:`${Math.min(100,Math.max(0,((bmi-15)/25)*100))}%`}}></span></div><div className="bmi-labels"><span>15</span><span>20</span><span>25</span><span>30</span><span>35</span><span>40+</span></div></div><small>This estimate is informational and is not a diagnosis.</small></div>
+        <div className="bmi-result digital-bmi" aria-live="polite"><div className="digital-readout"><span>Estimated BMI</span><strong>{bmiResult.value > 0 ? bmiResult.value.toFixed(1) : "—"}</strong><em>{bmiResult.category}</em></div><div className="bmi-meter" aria-hidden="true"><div className="bmi-track"><span className="bmi-marker" style={{left:`${bmiResult.marker}%`}}></span></div><div className="bmi-labels"><span>15</span><span>20</span><span>25</span><span>30</span><span>35</span><span>40+</span></div></div><small>This estimate updates as you type. It is informational and is not a diagnosis.</small></div>
         <button className="primary" onClick={openQuiz}>Continue to eligibility</button>
       </div>
     </section>
@@ -90,11 +100,20 @@ export default function Home() {
       <p className="section-disclaimer">Prescription products require an online consultation with an independent licensed healthcare provider who determines whether a prescription is appropriate. Compounded medications are not FDA approved.</p>
     </section>
 
-    <section className="included-section" aria-labelledby="included-title">
-      <div className="included-heading"><p className="eyebrow">The complete experience</p><h2 id="included-title">Support at every step.</h2><p>Rejuvonix keeps the process clear from your first questions through ongoing follow-up.</p></div>
-      <div className="included-grid">
-        {completeExperience.map(({number,title,copy,image,alt}) => <article key={number}><div className="included-image"><img src={image} alt={alt} /></div><div className="included-card-copy"><span>{number}</span><h3>{title}</h3><p>{copy}</p></div></article>)}
+    <section className="experience-section" aria-labelledby="experience-title">
+      <div className="experience-intro"><p className="eyebrow">The Rejuvonix experience</p><h2 id="experience-title">Care should feel this connected.</h2><p>Step inside a clear, personal experience built around your questions, your provider and your next step.</p></div>
+      <div className="experience-stage" aria-live="polite">
+        <div className="experience-visuals">{completeExperience.map((item,index)=><img key={item.number} className={experienceActive===index?"active":""} src={item.image} alt={experienceActive===index?item.alt:""} aria-hidden={experienceActive!==index}/>)}</div>
+        <div className={`experience-panel panel-${experienceActive + 1}`} key={experienceActive}>
+          <div className="experience-count"><span>{completeExperience[experienceActive].number}</span><small>OF 04</small></div>
+          <p className="experience-label">YOUR CARE, STEP BY STEP</p>
+          <h3>{completeExperience[experienceActive].title}</h3>
+          <p>{completeExperience[experienceActive].copy}</p>
+          <div className="experience-reassurance"><span>✓</span><strong>{["Private and secure","Independent clinical review","Clear updates in one place","Coordinated fulfillment"][experienceActive]}</strong></div>
+        </div>
+        <div className="experience-arrows"><button onClick={()=>setExperienceActive((experienceActive + 3) % 4)} aria-label="Previous experience">←</button><button onClick={()=>setExperienceActive((experienceActive + 1) % 4)} aria-label="Next experience">→</button></div>
       </div>
+      <div className="experience-navigation" role="tablist" aria-label="Rejuvonix experience steps">{completeExperience.map((item,index)=><button key={item.number} className={experienceActive===index?"active":""} onClick={()=>setExperienceActive(index)} role="tab" aria-selected={experienceActive===index}><span>{item.number}</span><strong>{item.title}</strong><i><b></b></i></button>)}</div>
     </section>
 
     <section className="care-feature">
@@ -105,8 +124,8 @@ export default function Home() {
     <section className="compounded-section" id="compounded">
       <div className="compounded-intro"><p className="eyebrow">Compounded medications</p><h2>Compare semaglutide and tirzepatide.</h2><p>An independent provider may prescribe a compounded medication when it is legally available and appropriate for the patient. Compounded medications are not generic versions of branded drugs, and they are not FDA approved.</p></div>
       <div className="glance-grid">
-        <article className="glance-card semaglutide"><img className="glance-silhouette" src="/peptide-vial-transparent.png" alt="" aria-hidden="true" /><div className="glance-content"><div className="glance-number">01</div><p className="pill-label">Compounded option</p><h3>Semaglutide</h3><p className="glance-sub">Acts on the GLP-1 receptor.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></div></article>
-        <article className="glance-card tirzepatide"><img className="glance-silhouette" src="/tirzepatide-vial-clean.png" alt="" aria-hidden="true" /><div className="glance-content"><div className="glance-number">02</div><p className="pill-label">Compounded option</p><h3>Tirzepatide</h3><p className="glance-sub">Acts on the GIP and GLP-1 receptors.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></div></article>
+        <article className="glance-card semaglutide"><img className="glance-silhouette" src="/compounded-semaglutide-transparent.png" alt="" aria-hidden="true" /><div className="glance-content"><div className="glance-number">01</div><p className="pill-label">Compounded option</p><h3>Semaglutide</h3><p className="glance-sub">Acts on the GLP-1 receptor.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></div></article>
+        <article className="glance-card tirzepatide"><img className="glance-silhouette" src="/compounded-tirzepatide-transparent.png" alt="" aria-hidden="true" /><div className="glance-content"><div className="glance-number">02</div><p className="pill-label">Compounded option</p><h3>Tirzepatide</h3><p className="glance-sub">Acts on the GIP and GLP-1 receptors.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></div></article>
       </div><p className="compounded-note">*Form, ingredients, concentration and availability vary by prescription and dispensing pharmacy. Compounded medications are prepared for an identified patient and are not reviewed by FDA for safety, effectiveness or quality before marketing.</p>
     </section>
 
