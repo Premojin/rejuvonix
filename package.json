@@ -10,7 +10,7 @@
     "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vite",
     "build": "bash scripts/build-verified.sh",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs tests/staging-contracts.test.mjs && node --experimental-strip-types --test tests/authorization.test.mjs",
+    "test": "npm run build && node --test tests/rendered-html.test.mjs tests/staging-contracts.test.mjs tests/route-links.test.mjs && node --experimental-strip-types --test tests/authorization.test.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "bash scripts/sites-env.sh -- eslint . --ignore-pattern dist --ignore-pattern .next",
     "smoke:staging": "bash scripts/staging-smoke.sh",
