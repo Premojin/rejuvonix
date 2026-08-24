@@ -101,7 +101,7 @@ export default function Home() {
     </section>
 
     <section className="experience-section" aria-labelledby="experience-title">
-      <div className="experience-intro"><p className="eyebrow">The Rejuvonix experience</p><h2 id="experience-title">Care should feel this connected.</h2><p>Step inside a clear, personal experience built around your questions, your provider and your next step.</p></div>
+      <div className="experience-intro"><p className="eyebrow">The Rejuvonix experience</p><h2 id="experience-title">Care should feel this connected.</h2><p>Support at every step. Step inside a clear, personal experience built around your questions, your provider and your next step.</p></div>
       <div className="experience-stage" aria-live="polite">
         <div className="experience-visuals">{completeExperience.map((item,index)=><img key={item.number} className={experienceActive===index?"active":""} src={item.image} alt={experienceActive===index?item.alt:""} aria-hidden={experienceActive!==index}/>)}</div>
         <div className={`experience-panel panel-${experienceActive + 1}`} key={experienceActive}>
