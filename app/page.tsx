@@ -66,7 +66,7 @@ export default function Home() {
   return <main>
     <div className="announcement"><span>Online access to prescription weight care</span><button onClick={openQuiz}>Check eligibility <b>→</b></button></div>
     <header className="site-header">
-      <a className="brand" href="#top" aria-label="Rejuvonix home"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></a>
+      <Link className="brand" href="/" aria-label="Rejuvonix home"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></Link>
       <nav className={`nav-links ${menuOpen ? "open" : ""}`} aria-label="Primary navigation">
         <Link href="/treatments">Treatments</Link><Link href="/compounded">Compounded</Link><Link href="/how-it-works">How it works</Link><Link href="/support">Support</Link>
       </nav>
@@ -195,7 +195,7 @@ export default function Home() {
 
     {quizOpen && <div className="modal-backdrop" onMouseDown={(e) => e.target === e.currentTarget && setQuizOpen(false)}><section className="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="quiz-title"><button className="modal-close" onClick={() => setQuizOpen(false)} aria-label="Close">×</button><div className="quiz-brand"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></div>
       {step < 3 ? <><div className="progress"><span style={{width:`${(step + 1) * 33.33}%`}}></span></div><p className="quiz-step">Question {step + 1} of 3</p><h2 id="quiz-title">{["What would you most like help achieving?","How would you prefer to receive treatment?","Do you plan to use insurance?"][step]}</h2><div className="quiz-options">{[["Lose weight","Control my appetite","Improve metabolic health","Maintain my progress"],["Weekly injection","Daily pill","I’m open to either","Let a provider help me decide"],["Yes","No","I’m not sure"]][step].map(option => <button key={option} onClick={() => choose(option)}>{option}<span>→</span></button>)}</div>{step > 0 && <button className="back-button" onClick={() => setStep(step - 1)}>← Back</button>}</>
-      : <div className="quiz-result"><span className="result-mark">✓</span><p className="eyebrow">Your next step</p><h2 id="quiz-title">You may have more than one treatment option.</h2><p>Complete a secure health assessment and connect with a licensed provider to discuss what may be appropriate for you.</p><button className="primary" onClick={() => setQuizOpen(false)}>Continue to assessment</button><button className="secondary" onClick={() => {setQuizOpen(false); document.getElementById("treatments")?.scrollIntoView({behavior:"smooth"});}}>Compare treatments first</button><small>Completing an assessment does not guarantee a prescription.</small></div>}
+      : <div className="quiz-result"><span className="result-mark">✓</span><p className="eyebrow">Your next step</p><h2 id="quiz-title">You may have more than one treatment option.</h2><p>Review the detailed questions next. Patient authentication and clinical intake are not connected in this preview.</p><Link className="primary" href="/get-started">Continue to detailed questions</Link><button className="secondary" onClick={() => {setQuizOpen(false); document.getElementById("treatments")?.scrollIntoView({behavior:"smooth"});}}>Compare treatments first</button><small>Completing an assessment does not guarantee a prescription.</small></div>}
     </section></div>}
   </main>;
 }
