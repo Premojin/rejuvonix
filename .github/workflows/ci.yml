@@ -19,11 +19,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm run governance:validate
       - run: npm run lint
-      - run: ./node_modules/.bin/tsc --noEmit
+      - run: npm run typecheck
       - run: npm audit --audit-level=high
-      - run: npm run build
-      - run: node --test tests/rendered-html.test.mjs
+      - run: npm test
 
   security:
     runs-on: ubuntu-latest
@@ -34,7 +34,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Secret scan
-        uses: trufflesecurity/trufflehog@main
+        uses: trufflesecurity/trufflehog@v3.90.8
         with:
           path: ./
           extra_args: --only-verified
