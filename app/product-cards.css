@@ -39,3 +39,26 @@
 .branded-grid .card-top{font-size:7px}
 @media(max-width:1050px){#treatments{padding-left:18px;padding-right:18px}.branded-grid .treatment-card{min-height:445px;padding:13px}.branded-grid .product-stage{height:190px;margin-top:15px}.branded-grid .card-content h3{font-size:17px}.branded-grid .card-content button,.branded-grid .card-content>a{font-size:9px}}
 @media(max-width:760px){#treatments{padding:72px 20px}.branded-grid .treatment-card{min-height:500px;padding:18px}.branded-grid .product-stage{height:235px}.branded-grid .card-content h3{font-size:21px}.branded-grid .card-content button,.branded-grid .card-content>a{font-size:11px}}
+
+@media(min-width:761px){
+  #treatments .treatment-grid.branded-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+  #treatments .branded-grid .treatment-card{min-width:0;min-height:445px;padding:15px}
+  #treatments .branded-grid .product-stage{height:205px;margin:17px -4px 9px}
+  #treatments .branded-grid .card-content h3{font-size:clamp(16px,1.35vw,20px);line-height:1.08}
+  #treatments .branded-grid .card-content p{font-size:8px;line-height:1.35}
+  #treatments .branded-grid .card-content>span{font-size:10px;line-height:1.35}
+}
+.branded-grid .card-content{display:flex;flex-direction:column;min-width:0}
+.branded-grid .card-content>a{align-self:flex-end;margin-left:auto;justify-content:flex-end;gap:9px;white-space:nowrap}
+.branded-grid .card-4 .card-content>a{color:#fff;border-bottom-color:#ffffffa6}
+.branded-grid .card-4 .card-content>a b{color:#fff}
+
+/* Homepage treatment cards: denser footprint with product art using the stage. */
+#treatments .branded-grid .treatment-card{min-height:370px;padding:13px}
+#treatments .branded-grid .product-stage{height:190px;margin:10px -4px 6px}
+#treatments .branded-grid .product-stage img{width:94%;height:94%;transform:none}
+#treatments .branded-grid .card-content p{margin-bottom:3px}
+#treatments .branded-grid .card-content h3{margin-bottom:5px}
+#treatments .branded-grid .card-content>a{margin-top:10px;padding-bottom:5px}
+@media(max-width:1050px) and (min-width:761px){#treatments .branded-grid .treatment-card{min-height:355px;padding:11px}#treatments .branded-grid .product-stage{height:175px;margin-top:8px}#treatments .branded-grid .product-stage img{width:96%;height:96%}}
+@media(max-width:760px){#treatments .branded-grid .treatment-card{min-height:420px;padding:15px}#treatments .branded-grid .product-stage{height:220px;margin:9px -3px 6px}#treatments .branded-grid .product-stage img{width:96%;height:96%}#treatments .branded-grid .card-content>a{margin-top:11px}}

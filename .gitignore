@@ -27,10 +27,8 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (never commit environment-specific values)
-.env
-.env.*
-!.env.example
+# env files (can opt-in for committing if needed)
+.env*
 
 # vercel
 .vercel
@@ -40,16 +38,5 @@ next-env.d.ts
 /dist/
 /.wrangler/
 /.sites-runtime/
-**/.sites-runtime/
 /outputs/
 /work/
-
-# container and local tooling
-.terraform/
-*.tfstate
-*.tfstate.*
-*.tfplan
-crash.log
-*.tfvars
-*.tfvars.json
-*.tsbuildinfo

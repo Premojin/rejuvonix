@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function fetchWorker(path, init = {}) {
@@ -27,6 +28,31 @@ test("homepage includes review carousel controls and responsive navigation marku
   assert.match(html, /aria-label="Previous reviews"/);
   assert.match(html, /aria-label="Next reviews"/);
   assert.match(html, /aria-label="Toggle menu"/);
+});
+
+test("homepage eligibility dialog retains its accessibility safeguards", async () => {
+  const [pageSource, globalStyles] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.doesNotMatch(pageSource, /setTimeout\(\(\) => setQuizOpen\(true\)/);
+  assert.match(pageSource, /role="dialog"/);
+  assert.match(pageSource, /aria-modal="true"/);
+  assert.match(pageSource, /aria-labelledby="quiz-title"/);
+  assert.match(pageSource, /aria-describedby=/);
+  assert.match(pageSource, /event\.key === "Escape"/);
+  assert.match(pageSource, /event\.key !== "Tab"/);
+  assert.match(pageSource, /quizOpenerRef\.current\?\.focus\(\)/);
+  assert.match(pageSource, /setAttribute\("inert", ""\)/);
+  assert.match(pageSource, /document\.body\.style\.overflow = "hidden"/);
+  assert.match(pageSource, /quizWasOpenRef\.current \? questionHeadingRef\.current : modalCloseRef\.current/);
+  assert.match(pageSource, /aria-label=\{`Question \$\{step \+ 1\} of 3:/);
+  assert.match(pageSource, /aria-pressed=\{answers\[step\] === option\}/);
+  assert.match(globalStyles, /height:100dvh/);
+  assert.match(globalStyles, /overflow-y:auto/);
+  assert.match(globalStyles, /safe-area-inset-top/);
+  assert.match(globalStyles, /prefers-reduced-motion:reduce/);
 });
 
 test("unknown public route returns a not-found response", async () => {

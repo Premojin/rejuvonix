@@ -1,0 +1,10 @@
+/* Distinct, content-led artwork for the Wegovy Pill benefit cards. */
+.pill-benefit-orb{position:relative;height:270px;margin:14px -8px 8px;isolation:isolate}
+.pill-benefit-orb:before{width:242px;height:242px;border-color:rgb(16 116 116 / 18%);box-shadow:0 0 0 28px rgb(255 255 255 / 9%)}
+.pill-benefit-orb:after{width:190px;height:190px;background:rgb(255 255 255 / 48%);box-shadow:inset 0 0 48px rgb(255 255 255 / 72%),0 25px 50px rgb(20 75 74 / 13%)}
+.pill-benefit-orb img{position:relative;z-index:3;width:205px;height:205px;border-radius:50%;object-fit:cover;filter:drop-shadow(0 20px 25px rgb(24 72 72 / 16%));transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .4s ease}
+.pill-benefits article:hover .pill-benefit-orb img{transform:scale(1.065) rotate(1.5deg);filter:drop-shadow(0 28px 32px rgb(24 72 72 / 22%))}
+.pill-benefits article:nth-child(2) .pill-benefit-orb:before{border-color:rgb(116 226 219 / 28%)}
+.pill-benefits article:nth-child(2) .pill-benefit-orb:after{background:rgb(255 255 255 / 13%);box-shadow:inset 0 0 44px rgb(255 255 255 / 11%),0 25px 55px rgb(3 27 25 / 26%)}
+.pill-benefit-orb i{display:none}
+@media(max-width:650px){.pill-benefit-orb{height:235px}.pill-benefit-orb img{width:180px;height:180px}.pill-benefit-orb:before{width:215px;height:215px}.pill-benefit-orb:after{width:168px;height:168px}}
