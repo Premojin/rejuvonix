@@ -1,0 +1,16 @@
+# Rejuvonix ownership baseline.
+# @Premojin is the repository owner/primary integration authority currently
+# visible in GitHub. Update this file when formal Dev1/Dev2 account mapping is
+# approved; do not substitute personal accounts without owner confirmation.
+
+/.github/workflows/ @Premojin
+/infra/ @Premojin
+/drizzle/ @Premojin
+/db/ @Premojin
+/docs/security/ @Premojin
+/docs/architecture/ @Premojin
+/app/api/ @Premojin
+/app/clinical/ @Premojin
+/package.json @Premojin
+/package-lock.json @Premojin
+/AGENTS.md @Premojin

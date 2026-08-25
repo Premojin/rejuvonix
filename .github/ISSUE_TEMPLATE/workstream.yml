@@ -1,0 +1,56 @@
+name: Workstream request
+description: Track an assigned Rejuvonix workstream and its integration boundaries.
+title: "[Workstream] "
+labels:
+  - needs-owner-review
+body:
+  - type: input
+    id: owner
+    attributes:
+      label: Owner / developer
+      description: DEV1, DEV2, or another explicitly assigned owner.
+    validations:
+      required: true
+  - type: input
+    id: branch
+    attributes:
+      label: Proposed branch
+      description: Use dev1/*, dev2/*, ops/*, or hotfix/* for new work.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and out of scope
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies and shared contracts
+  - type: dropdown
+    id: database
+    attributes:
+      label: Database impact
+      options:
+        - None
+        - Schema only
+        - Migration
+        - Data operation
+    validations:
+      required: true
+  - type: dropdown
+    id: aws
+    attributes:
+      label: AWS impact
+      options:
+        - None
+        - Documentation/request only
+        - Owner/Dev1 implementation required
+    validations:
+      required: true
+  - type: textarea
+    id: deployment
+    attributes:
+      label: Deployment authority and handoff
+      description: Dev2 does not deploy AWS; identify the owner/Dev1 handoff.

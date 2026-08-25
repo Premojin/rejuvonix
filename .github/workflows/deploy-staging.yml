@@ -9,8 +9,16 @@ permissions:
   contents: read
   id-token: write
 
+concurrency:
+  group: staging-deployment
+  cancel-in-progress: false
+
 jobs:
   image:
+    # A manual run selected on a feature branch must not deploy. Pull requests
+    # do not trigger this workflow; only staging pushes and staging dispatches
+    # are valid deployment events.
+    if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
     environment: staging
     steps:
