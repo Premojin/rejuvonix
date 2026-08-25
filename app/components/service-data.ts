@@ -1,6 +1,12 @@
 export type ServiceItem = { slug: string; name: string; note: string };
 export type GoalGroup = { slug: string; name: string; intro: string; services: ServiceItem[] };
 
+export const approvedGoals = [
+  { slug: "weight-loss", name: "Weight Loss", href: "/goals/weight-loss" },
+  { slug: "longevity-skin", name: "Longevity & Skin", href: "/goals/longevity-skin" },
+  { slug: "rejuvonix-care", name: "Rejuvonix Care", href: "/treatments" },
+] as const;
+
 export const goalGroups: GoalGroup[] = [
   { slug:"weight-loss", name:"Weight Loss", intro:"Provider-guided pathways for sustainable weight care and metabolic health.", services:[
     {slug:"glp-1-injections",name:"GLP-1 Injections",note:"Explore patient-specific compounded injectable options with provider review."},
