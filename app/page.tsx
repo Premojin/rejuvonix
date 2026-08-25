@@ -49,7 +49,7 @@ const heroPrograms: HeroProgram[] = [
   { title:"Sexual Health", href:"/eligibility/sexual-health", image:"/program-sexual-health-silhouette.webp", kind:"person women sexual" },
   { title:"Hair Restoration", href:"/eligibility/hair-restoration", image:"/program-hair-restoration-silhouette.webp", kind:"person hair" },
   { title:"Skin Restoration", href:"/eligibility/skin-restoration", image:"/program-skin-rejuvenation-silhouette.webp", kind:"person skin" },
-  { title:"Compounded care", subtitle:"Patient-specific options", href:"/compounded", image:"/compounded-semaglutide-transparent.png", kind:"product semaglutide" },
+  { title:"Compounded care", subtitle:"Patient-specific options", price:"$199", href:"/compounded", image:"/compounded-semaglutide-transparent.png", kind:"product semaglutide" },
 ];
 
 export default function Home() {
