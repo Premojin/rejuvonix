@@ -40,3 +40,8 @@ next-env.d.ts
 /.sites-runtime/
 /outputs/
 /work/
+
+# local document rendering/tooling artifacts
+/.docx-build/
+/.docx-tooling/
+*.tsbuildinfo
