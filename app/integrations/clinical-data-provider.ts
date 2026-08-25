@@ -15,7 +15,7 @@ export type ClinicalWorkflowRequest = {
 export type ClinicalWorkflowReference = {
   provider: string;
   externalReference: string;
-  workflowStatus: "awaiting-provider-configuration" | "handoff-ready";
+  workflowStatus: "awaiting-provider-configuration" | "handoff-ready" | "integration-not-configured";
   continueUrl: string | null;
 };
 
@@ -61,4 +61,23 @@ export class MockClinicalProvider implements ClinicalDataProvider {
   }
 }
 
-export const clinicalDataProvider: ClinicalDataProvider = new MockClinicalProvider();
+class UnavailableClinicalProvider implements ClinicalDataProvider {
+  readonly name = "clinical-provider-not-configured";
+  readonly mode = "external" as const;
+
+  async beginClinicalIntake(): Promise<ClinicalWorkflowReference> {
+    return {provider: this.name, externalReference: "", workflowStatus: "integration-not-configured", continueUrl: null};
+  }
+
+  async getClinicalWorkflowStatus(): Promise<ClinicalWorkflowReference> {
+    return {provider: this.name, externalReference: "", workflowStatus: "integration-not-configured", continueUrl: null};
+  }
+}
+
+const localRuntime = process.env.APP_ENV === "local"
+  || process.env.NODE_ENV === "development"
+  || import.meta.env?.DEV === true;
+
+export const clinicalDataProvider: ClinicalDataProvider = localRuntime
+  ? new MockClinicalProvider()
+  : new UnavailableClinicalProvider();

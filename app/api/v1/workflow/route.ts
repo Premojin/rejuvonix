@@ -6,10 +6,10 @@ export const dynamic = "force-dynamic";
 function localOnly(): Response | null {
   const localRuntime = process.env.APP_ENV === "local"
     || process.env.NODE_ENV === "development"
-    || !process.env.NODE_ENV;
+    || import.meta.env?.DEV === true;
   return localRuntime
     ? null
-    : Response.json({error: {code: "NOT_AVAILABLE", message: "Clinical workflow integration is not configured."}}, {status: 404});
+    : Response.json({error: {code: "INTEGRATION_NOT_CONFIGURED", message: "Clinical workflow integration is not configured."}}, {status: 503});
 }
 
 export async function POST(request: Request): Promise<Response> {

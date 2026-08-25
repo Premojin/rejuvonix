@@ -21,3 +21,10 @@ test("clinical workflow status accepts only local opaque references", async () =
   const provider = new MockClinicalProvider();
   await assert.rejects(() => provider.getClinicalWorkflowStatus("real-provider-reference"));
 });
+
+test("non-local runtime does not select the mock provider", async () => {
+  const source = await (await import("node:fs/promises")).readFile(new URL("../app/integrations/clinical-data-provider.ts", import.meta.url), "utf8");
+  assert.match(source, /const localRuntime =/);
+  assert.match(source, /new UnavailableClinicalProvider\(\)/);
+  assert.match(source, /integration-not-configured/);
+});
