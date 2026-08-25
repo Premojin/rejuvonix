@@ -3,13 +3,13 @@
 @media(max-width:760px){.program-header{height:72px;padding:0 20px}.program-header .account-button{min-width:106px;min-height:44px;font-size:14px}.program-header .nav-links{top:72px}.program-hero{min-height:0;padding:54px 20px 72px;display:block}.program-hero-copy h1{font-size:50px}.program-hero-copy>p:not(.eyebrow){font-size:16px}.program-card-grid{margin-top:48px;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:0 2px 18px;scrollbar-width:none}.program-card-grid::-webkit-scrollbar{display:none}.program-card{flex:0 0 min(82vw,330px);height:330px;scroll-snap-align:start}.program-card-copy strong{font-size:25px}}
 
 /* Shared contrast treatment keeps card copy readable without obscuring imagery. */
-.program-card::before{content:"";position:absolute;z-index:2;inset:0;background:linear-gradient(180deg,rgba(248,247,242,.94) 0%,rgba(248,247,242,.72) 27%,rgba(248,247,242,0) 62%,rgba(16,47,73,.14) 100%);pointer-events:none}
-.program-card.product::before{background:linear-gradient(180deg,rgba(18,65,58,.9) 0%,rgba(18,65,58,.62) 29%,rgba(18,65,58,0) 66%,rgba(18,65,58,.24) 100%)}
-.program-card.semaglutide::before{background:linear-gradient(180deg,rgba(217,240,239,.96) 0%,rgba(217,240,239,.74) 29%,rgba(217,240,239,0) 66%,rgba(16,47,73,.12) 100%)}
-.program-card-copy{left:18px;top:19px;width:58%;padding:10px 12px 12px;border-radius:14px;background:rgba(255,255,255,.48);backdrop-filter:blur(4px)}
-.program-card.product .program-card-copy{background:rgba(18,65,58,.56);color:#fff}
-.program-card-link{left:18px;bottom:17px;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.72);color:#102f49}
-.program-card.product .program-card-link{background:rgba(18,65,58,.78);color:#fff}
+.program-card::before{content:"";position:absolute;z-index:2;inset:0;background:linear-gradient(180deg,rgba(248,247,242,.72) 0%,rgba(248,247,242,.34) 22%,rgba(248,247,242,0) 48%,rgba(16,47,73,.05) 100%);pointer-events:none}
+.program-card.product::before{background:linear-gradient(180deg,rgba(18,65,58,.7) 0%,rgba(18,65,58,.34) 23%,rgba(18,65,58,0) 50%,rgba(18,65,58,.08) 100%)}
+.program-card.semaglutide::before{background:linear-gradient(180deg,rgba(217,240,239,.76) 0%,rgba(217,240,239,.38) 23%,rgba(217,240,239,0) 50%,rgba(16,47,73,.04) 100%)}
+.program-card-copy{left:18px;top:19px;width:58%;padding:10px 12px 12px;border-radius:14px;background:rgba(255,255,255,.24)}
+.program-card.product .program-card-copy{background:rgba(18,65,58,.34);color:#fff}
+.program-card-link{left:18px;bottom:17px;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.56);color:#102f49}
+.program-card.product .program-card-link{background:rgba(18,65,58,.58);color:#fff}
 @media(prefers-reduced-motion:reduce){.program-card.product .motion-orbit{animation:none}}
 .program-card.sexual .program-card-copy strong{white-space:nowrap}
 
