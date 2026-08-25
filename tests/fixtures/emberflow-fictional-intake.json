@@ -1,0 +1,23 @@
+{
+  "fixture": true,
+  "schemaVersion": 1,
+  "program": "weight-loss",
+  "patient": {
+    "externalReference": "fictional-patient-001",
+    "firstName": "Sample",
+    "lastName": "Patient",
+    "email": "sample.patient@example.com",
+    "phone": "+15550101001"
+  },
+  "assessment": {
+    "answers": {
+      "activity": "Moderately active",
+      "prior_glp1_use": "Never taken",
+      "current_medications": "No",
+      "ingredient_allergies": ["None known"]
+    },
+    "disposition": "provider-review-required"
+  },
+  "consents": [],
+  "uploads": []
+}

@@ -79,6 +79,8 @@ export const consents = pgTable("consents", {
   version: text("version").notNull(),
   status: text("status").notNull(),
   source: text("source").notNull(),
+  captureChannel: text("capture_channel").notNull().default("web"),
+  externalEvidenceReference: text("external_evidence_reference"),
   grantedAt: timestamp("granted_at", { withTimezone: true }).notNull(),
   revokedAt: timestamp("revoked_at", { withTimezone: true }),
   ...timestamps,
@@ -100,24 +102,26 @@ export const appointments = pgTable("appointments", {
   ...timestamps,
 }, (table) => [index("appointments_patient_idx").on(table.patientId, table.scheduledAt), index("appointments_clinician_idx").on(table.clinicianId, table.scheduledAt)]);
 
-export const encounters = pgTable("encounters", {
+/** Non-PHI workflow/reference state. Clinical records remain external. */
+export const patientWorkflowStates = pgTable("patient_workflow_states", {
   id: uuid("id").defaultRandom().primaryKey(),
   patientId: uuid("patient_id").notNull().references(() => patients.id),
-  clinicianId: uuid("clinician_id").notNull().references(() => clinicians.id),
-  appointmentId: uuid("appointment_id").references(() => appointments.id),
-  status: text("status").notNull().default("draft"),
-  summary: text("summary").notNull(),
+  workflowType: text("workflow_type").notNull(),
+  status: text("status").notNull().default("not-started"),
+  providerName: text("provider_name"),
+  externalReference: text("external_reference"),
   ...timestamps,
-}, (table) => [index("encounters_patient_idx").on(table.patientId, table.createdAt), index("encounters_clinician_idx").on(table.clinicianId, table.createdAt)]);
+}, (table) => [uniqueIndex("patient_workflow_states_patient_type_uq").on(table.patientId, table.workflowType), index("patient_workflow_states_external_idx").on(table.providerName, table.externalReference)]);
 
-export const treatmentPlans = pgTable("treatment_plans", {
+export const integrationReferences = pgTable("integration_references", {
   id: uuid("id").defaultRandom().primaryKey(),
-  patientId: uuid("patient_id").notNull().references(() => patients.id),
-  clinicianId: uuid("clinician_id").notNull().references(() => clinicians.id),
-  status: text("status").notNull().default("draft"),
-  summary: text("summary").notNull(),
+  providerName: text("provider_name").notNull(),
+  resourceType: text("resource_type").notNull(),
+  externalReference: text("external_reference").notNull(),
+  status: text("status").notNull(),
+  idempotencyKey: text("idempotency_key"),
   ...timestamps,
-}, (table) => [index("treatment_plans_patient_idx").on(table.patientId, table.createdAt)]);
+}, (table) => [uniqueIndex("integration_references_provider_resource_external_uq").on(table.providerName, table.resourceType, table.externalReference), uniqueIndex("integration_references_idempotency_uq").on(table.idempotencyKey)]);
 
 export const auditEvents = pgTable("audit_events", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -156,6 +160,6 @@ export const securityEvents = pgTable("security_events", {
 
 export const clinicalSchema = {
   users, roles, permissions, userRoles, rolePermissions, sessions,
-  patients, patientProfiles, consents, clinicians, appointments, encounters,
-  treatmentPlans, auditEvents, accessEvents, securityEvents,
+  patients, patientProfiles, consents, clinicians, appointments,
+  patientWorkflowStates, integrationReferences, auditEvents, accessEvents, securityEvents,
 };

@@ -21,6 +21,6 @@ if command -v timeout >/dev/null 2>&1; then
     "${SITES_BUILD_TIMEOUT:-3m}" \
     "${vinext}" build
 else
-  echo "GNU timeout unavailable; running an unbounded local build." >&2
+  echo "GNU timeout unavailable; running the portable unbounded local build." >&2
   "${vinext}" build
 fi

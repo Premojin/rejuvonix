@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function fetchWorker(path, init = {}) {
@@ -16,7 +17,7 @@ test("homepage exposes critical navigation and experience sections", async () =>
   const response = await fetchWorker("/");
   assert.equal(response.status, 200);
   const html = await response.text();
-  for (const marker of ["Treatments", "How it works", "Support at every step.", "What patients are saying.", "Check my eligibility"]) {
+  for (const marker of ["Treatments", "How it works", "Personalized care for how you want to live.", "The Rejuvonix program", "Check my eligibility"]) {
     assert.match(html, new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
 });
@@ -24,9 +25,32 @@ test("homepage exposes critical navigation and experience sections", async () =>
 test("homepage includes review carousel controls and responsive navigation markup", async () => {
   const response = await fetchWorker("/");
   const html = await response.text();
-  assert.match(html, /aria-label="Previous reviews"/);
-  assert.match(html, /aria-label="Next reviews"/);
+  assert.match(html, /aria-label="Previous experience"/);
+  assert.match(html, /aria-label="Next experience"/);
   assert.match(html, /aria-label="Toggle menu"/);
+});
+
+test("homepage eligibility dialog retains its accessibility safeguards", async () => {
+  const [pageSource, globalStyles] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.doesNotMatch(pageSource, /setTimeout\(\(\) => setQuizOpen\(true\)/);
+  assert.match(pageSource, /role="dialog"/);
+  assert.match(pageSource, /aria-modal="true"/);
+  assert.match(pageSource, /aria-labelledby="quiz-title"/);
+  assert.match(pageSource, /aria-describedby=/);
+  assert.match(pageSource, /event\.key === "Escape"/);
+  assert.match(pageSource, /event\.key !== "Tab"/);
+  assert.match(pageSource, /modalCloseRef\.current\?\.focus\(\)/);
+  assert.match(pageSource, /document\.body\.style\.overflow = "hidden"/);
+  assert.match(pageSource, /document\.body\.style\.overflow = ""/);
+  assert.match(pageSource, /Question \{step \+ 1\} of 3/);
+  assert.match(pageSource, /Do not enter real health information/);
+  assert.match(globalStyles, /\.quiz-modal\{min-height:100%/);
+  assert.match(globalStyles, /\.quiz-modal\{min-height:100%[^}]*overflow-y:auto/);
+  assert.match(globalStyles, /prefers-reduced-motion:reduce/);
 });
 
 test("unknown public route returns a not-found response", async () => {

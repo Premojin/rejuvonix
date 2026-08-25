@@ -20,8 +20,10 @@ export type ResourceType =
   | "patient-profile"
   | "consent"
   | "appointment"
-  | "encounter"
-  | "treatment-plan"
+  | "patient-workflow"
+  | "integration-reference"
+  | "encounter" // legacy type retained for deny-by-default compatibility
+  | "treatment-plan" // legacy type retained for deny-by-default compatibility
   | "audit-event"
   | "access-event"
   | "security-event"
@@ -29,8 +31,12 @@ export type ResourceType =
 
 export interface Principal {
   id: string;
+  identitySubject?: string;
   roles: readonly Role[];
+  permissions?: readonly string[];
+  scopes?: readonly Scope[];
   active: boolean;
+  correlationId?: string;
   tenantId?: string;
 }
 
@@ -59,8 +65,8 @@ const clinicalResources = new Set<ResourceType>([
   "patient-profile",
   "consent",
   "appointment",
-  "encounter",
-  "treatment-plan",
+  "patient-workflow",
+  "integration-reference",
 ]);
 
 export function authorize(

@@ -15,6 +15,7 @@ export type Product = {
   featureTitle: string;
   features: { title: string; copy: string }[];
   safety: string;
+  labelUrl?: string;
 };
 
 export const products: Product[] = [
@@ -47,6 +48,7 @@ export const products: Product[] = [
     featureTitle: "GLP-1 treatment in a daily pill.",
     features: [{title:"FDA approved",copy:"A branded prescription option reviewed by the FDA."},{title:"No injection",copy:"An oral format for eligible patients who prefer a pill."},{title:"Provider led",copy:"A licensed provider determines whether it fits your health needs."}],
     safety: "Wegovy® has a boxed warning about the risk of thyroid C-cell tumors. Do not use Wegovy® if you or a family member have had medullary thyroid carcinoma or if you have Multiple Endocrine Neoplasia syndrome type 2. Review the complete prescribing information with your provider."
+    ,labelUrl: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/215256s033lbl.pdf"
   },
   {
     slug: "wegovy-injection", name: "Wegovy® Injection", shortName: "Wegovy® Injection", ingredient: "Semaglutide", format: "Injection pen", cadence: "Once weekly", status: "FDA-approved branded medication", image: "/wegovy-injection.png", heroImage: "/rejuvonix-movement.png",
@@ -57,6 +59,7 @@ export const products: Product[] = [
     featureTitle: "Once-weekly GLP-1 care in a prefilled pen.",
     features: [{title:"FDA approved",copy:"A branded medicine approved for chronic weight management."},{title:"Weekly routine",copy:"A once-weekly format when prescribed."},{title:"Dose progression",copy:"Your provider manages dosing based on response and tolerability."}],
     safety: "Wegovy® has a boxed warning about the risk of thyroid C-cell tumors. Do not use Wegovy® if you or a family member have had medullary thyroid carcinoma or if you have Multiple Endocrine Neoplasia syndrome type 2. Review the complete prescribing information with your provider."
+    ,labelUrl: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/215256s033lbl.pdf"
   },
   {
     slug: "zepbound-injection", name: "Zepbound® Injection", shortName: "Zepbound® Injection", ingredient: "Tirzepatide", format: "Injection", cadence: "Once weekly", status: "FDA-approved branded medication", image: "/zepbound-injection.png", heroImage: "/rejuvonix-get-started-group.png",
@@ -67,6 +70,7 @@ export const products: Product[] = [
     featureTitle: "Dual-receptor treatment in a weekly injection.",
     features: [{title:"FDA approved",copy:"A branded option approved for chronic weight management."},{title:"Dual action",copy:"Targets both GIP and GLP-1 receptors."},{title:"Provider managed",copy:"Your provider reviews response before any dose change."}],
     safety: "Zepbound® has a boxed warning about the risk of thyroid C-cell tumors. Do not use Zepbound® if you or a family member have had medullary thyroid carcinoma or if you have Multiple Endocrine Neoplasia syndrome type 2. Review the complete prescribing information with your provider."
+    ,labelUrl: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/217806s042lbl.pdf"
   }
 ];
 

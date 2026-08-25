@@ -11,10 +11,10 @@ test("patient access is limited to the patient's own record", () => {
   assert.equal(authorize(patient, { action: "read", scope: "own", resource: { type: "patient-profile", id: "patient-2", ownerId: "patient-2" } }).allowed, false);
 });
 
-test("clinician access requires assignment and support cannot read encounters", () => {
+test("clinician access requires assignment and support cannot read clinical records", () => {
   const clinician = { id: "clinician-1", roles: ["Clinician"], active: true };
-  assert.equal(authorize(clinician, { action: "read", scope: "assigned-patient", resource: { type: "encounter", id: "enc-1", assignedClinicianIds: ["clinician-1"] } }).allowed, true);
-  assert.equal(authorize(clinician, { action: "read", scope: "assigned-patient", resource: { type: "encounter", id: "enc-2", assignedClinicianIds: ["clinician-2"] } }).allowed, false);
+  assert.equal(authorize(clinician, { action: "read", scope: "assigned-patient", resource: { type: "appointment", id: "appt-1", assignedClinicianIds: ["clinician-1"] } }).allowed, true);
+  assert.equal(authorize(clinician, { action: "read", scope: "assigned-patient", resource: { type: "appointment", id: "appt-2", assignedClinicianIds: ["clinician-2"] } }).allowed, false);
   const support = { id: "support-1", roles: ["Support"], active: true };
   assert.equal(authorize(support, { action: "read", scope: "support-limited", resource: { type: "encounter", id: "enc-1" } }).allowed, false);
 });

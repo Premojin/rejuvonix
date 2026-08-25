@@ -2,3 +2,15 @@
 @media(max-width:900px){.experience-intro{grid-template-columns:1fr;gap:22px}.experience-stage{height:780px}.experience-panel{left:28px;right:28px;bottom:28px;width:auto;min-height:0}.experience-arrows{top:26px;right:26px;bottom:auto}.experience-navigation{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.experience-section{padding:68px 18px}.experience-intro h2{font-size:47px}.experience-intro>p:last-child{font-size:15px}.experience-stage{height:710px;min-height:0;border-radius:30px}.experience-visuals img{object-position:center top}.experience-panel{left:14px;right:14px;bottom:14px;padding:27px 24px;border-radius:24px}.experience-count span{font-size:45px}.experience-label{margin-top:21px!important}.experience-panel h3{font-size:36px}.experience-panel>p:not(.experience-label){font-size:14px}.experience-arrows{top:15px;right:15px}.experience-arrows button{width:48px;height:48px}.experience-navigation{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:3px 2px 15px}.experience-navigation button{min-width:235px;scroll-snap-align:start}.experience-reassurance{margin-top:20px;padding-top:16px}}
 @media(prefers-reduced-motion:reduce){.experience-visuals img,.experience-panel,.experience-navigation button{animation:none!important;transition:none!important}.experience-navigation button.active i b{animation:none;width:100%}}
+.experience-visuals img{transition:opacity .9s ease,transform 9s ease}
+.experience-navigation button.active i b{animation-duration:9s}
+@keyframes experience-mobile-panel-cycle{
+  0%{opacity:0;transform:translateX(115%)}
+  9%{opacity:1;transform:translateX(0)}
+  63%{opacity:1;transform:translateX(0)}
+  76%{opacity:0;transform:translateX(-115%)}
+  100%{opacity:0;transform:translateX(-115%)}
+}
+@media(max-width:600px){
+  .experience-panel{animation:experience-mobile-panel-cycle 9s ease-in-out both}
+}
