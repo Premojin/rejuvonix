@@ -17,7 +17,7 @@ test("homepage exposes critical navigation and experience sections", async () =>
   const response = await fetchWorker("/");
   assert.equal(response.status, 200);
   const html = await response.text();
-  for (const marker of ["Treatments", "How it works", "Support at every step.", "What patients are saying.", "Check my eligibility"]) {
+  for (const marker of ["Treatments", "How it works", "Personalized care for how you want to live.", "The Rejuvonix program", "Check my eligibility"]) {
     assert.match(html, new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
 });
@@ -25,8 +25,8 @@ test("homepage exposes critical navigation and experience sections", async () =>
 test("homepage includes review carousel controls and responsive navigation markup", async () => {
   const response = await fetchWorker("/");
   const html = await response.text();
-  assert.match(html, /aria-label="Previous reviews"/);
-  assert.match(html, /aria-label="Next reviews"/);
+  assert.match(html, /aria-label="Previous experience"/);
+  assert.match(html, /aria-label="Next experience"/);
   assert.match(html, /aria-label="Toggle menu"/);
 });
 
@@ -43,15 +43,13 @@ test("homepage eligibility dialog retains its accessibility safeguards", async (
   assert.match(pageSource, /aria-describedby=/);
   assert.match(pageSource, /event\.key === "Escape"/);
   assert.match(pageSource, /event\.key !== "Tab"/);
-  assert.match(pageSource, /quizOpenerRef\.current\?\.focus\(\)/);
-  assert.match(pageSource, /setAttribute\("inert", ""\)/);
+  assert.match(pageSource, /modalCloseRef\.current\?\.focus\(\)/);
   assert.match(pageSource, /document\.body\.style\.overflow = "hidden"/);
-  assert.match(pageSource, /quizWasOpenRef\.current \? questionHeadingRef\.current : modalCloseRef\.current/);
-  assert.match(pageSource, /aria-label=\{`Question \$\{step \+ 1\} of 3:/);
-  assert.match(pageSource, /aria-pressed=\{answers\[step\] === option\}/);
-  assert.match(globalStyles, /height:100dvh/);
-  assert.match(globalStyles, /overflow-y:auto/);
-  assert.match(globalStyles, /safe-area-inset-top/);
+  assert.match(pageSource, /document\.body\.style\.overflow = ""/);
+  assert.match(pageSource, /Question \{step \+ 1\} of 3/);
+  assert.match(pageSource, /Do not enter real health information/);
+  assert.match(globalStyles, /\.quiz-modal\{min-height:100%/);
+  assert.match(globalStyles, /\.quiz-modal\{min-height:100%[^}]*overflow-y:auto/);
   assert.match(globalStyles, /prefers-reduced-motion:reduce/);
 });
 

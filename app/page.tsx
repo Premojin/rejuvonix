@@ -42,7 +42,8 @@ const wellnessPrograms = [
   {number:"05", name:"Skin rejuvenation", kicker:"Healthy-looking radiance", headline:"Reveal healthy-looking skin that still feels like you.", copy:"Personalized care focused on clarity, texture, tone and a naturally refreshed appearance.", image:"/program-skin-rejuvenation-silhouette.webp", alt:"A realistic middle-aged woman with clear radiant skin touching her face", position:"right center", visualClass:"silhouette skin-figure", moment:"Radiance", reassurance:"Thoughtful care for real, visible skin"},
 ];
 
-const heroPrograms = [
+type HeroProgram = {title:string; subtitle?:string; href:string; image:string; kind:string; price?:string; cadence?:string};
+const heroPrograms: HeroProgram[] = [
   { title:"Weight Loss", href:"/eligibility/weight-loss", image:"/program-weight-loss-concern.webp", kind:"person weight" },
   { title:"Performance", href:"/eligibility/performance", image:"/mens-hormone-runner-card.png", kind:"person men" },
   { title:"Sexual Health", href:"/eligibility/sexual-health", image:"/program-sexual-health-silhouette.webp", kind:"person women sexual" },
@@ -62,6 +63,7 @@ export default function Home() {
   const [experienceActive, setExperienceActive] = useState(0);
   const [programActive, setProgramActive] = useState(0);
   const programTouchStart = useRef<number | null>(null);
+  const modalCloseRef = useRef<HTMLButtonElement | null>(null);
   const bmiResult = useMemo(() => {
     const feetValue = Number.parseFloat(feet);
     const inchesValue = Number.parseFloat(inches);
@@ -74,6 +76,25 @@ export default function Home() {
   }, [feet, inches, weight]);
   useEffect(() => { const timer = window.setInterval(() => setExperienceActive((current) => (current + 1) % completeExperience.length), 9000); return () => window.clearInterval(timer); }, []);
   useEffect(() => { const timer = window.setInterval(() => setProgramActive((current) => (current + 1) % wellnessPrograms.length), 8500); return () => window.clearInterval(timer); }, []);
+  useEffect(() => {
+    if (!quizOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setQuizOpen(false); return; }
+      if (event.key !== "Tab") return;
+      const modal = document.querySelector<HTMLElement>(".quiz-modal");
+      if (!modal) return;
+      const focusable = [...modal.querySelectorAll<HTMLElement>("button, a, input, [tabindex]:not([tabindex=\"-1\"])")].filter((element) => !element.hasAttribute("disabled"));
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKeyDown);
+    modalCloseRef.current?.focus();
+    return () => { document.body.style.overflow = ""; document.removeEventListener("keydown", onKeyDown); };
+  }, [quizOpen]);
   const openQuiz = () => { window.location.href = "/eligibility"; };
   const choose = (answer: string) => { const next = [...answers]; next[step] = answer; setAnswers(next); setStep(Math.min(step + 1, 3)); };
 
@@ -225,7 +246,7 @@ export default function Home() {
 
     <footer><div className="footer-main"><div><a className="brand" href="/"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></a><p>Provider-guided wellness pathways online.</p></div><div><strong>Explore</strong><a href="/treatments">Treatments</a><a href="/how-it-works">How it works</a><a href="/support">The program</a></div><div><strong>Policies</strong><a href="/privacy">Privacy status</a><a href="/terms">Website terms</a><a href="/telehealth-consent">Telehealth consent</a><a href="/disclaimer">Disclaimer</a></div><div><strong>Support</strong><a href="/faq">FAQ</a><a href="/safety">Safety</a><a href="/accessibility">Accessibility</a><a href="/support#contact">Contact</a></div></div><div className="medical-disclaimer" id="medical-disclaimer"><strong>Medical and platform disclaimer</strong><p>Rejuvonix is a technology and administrative-services platform and is not a healthcare provider, medical practice, pharmacy, laboratory, drug manufacturer or insurance company. Rejuvonix connects individuals with independent licensed healthcare providers who are solely responsible for clinical evaluations, diagnoses, treatment recommendations and prescribing decisions. If prescribed, medication is dispensed by an independent licensed pharmacy. Compounded medications are not FDA approved. Individual results vary.</p></div><div className="footer-bottom"><span>© 2026 Rejuvonix. All rights reserved.</span><span>Wegovy® is a registered trademark of Novo Nordisk A/S. Zepbound® is a registered trademark of Eli Lilly and Company. Rejuvonix is not affiliated with or endorsed by these companies.</span></div></footer>
 
-    {quizOpen && <div className="modal-backdrop" onMouseDown={(e) => e.target === e.currentTarget && setQuizOpen(false)}><section className="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="quiz-title"><button className="modal-close" onClick={() => setQuizOpen(false)} aria-label="Close">×</button><div className="quiz-brand"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></div>
+        {quizOpen && <div className="modal-backdrop" onMouseDown={(e) => e.target === e.currentTarget && setQuizOpen(false)}><section className="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="quiz-title" aria-describedby="quiz-description"><button ref={modalCloseRef} className="modal-close" onClick={() => setQuizOpen(false)} aria-label="Close">×</button><div className="quiz-brand"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></div><p id="quiz-description" className="sr-only">This is a non-submitting eligibility preview. Do not enter real health information.</p>
       {step < 3 ? <><div className="progress"><span style={{width:`${(step + 1) * 33.33}%`}}></span></div><p className="quiz-step">Question {step + 1} of 3</p><h2 id="quiz-title">{["What would you most like help achieving?","How would you prefer to receive treatment?","Do you plan to use insurance?"][step]}</h2><div className="quiz-options">{[["Lose weight","Control my appetite","Improve metabolic health","Maintain my progress"],["Weekly injection","Daily pill","I’m open to either","Let a provider help me decide"],["Yes","No","I’m not sure"]][step].map(option => <button key={option} onClick={() => choose(option)}>{option}<span>→</span></button>)}</div>{step > 0 && <button className="back-button" onClick={() => setStep(step - 1)}>← Back</button>}</>
       : <div className="quiz-result"><span className="result-mark">✓</span><p className="eyebrow">Your next step</p><h2 id="quiz-title">You may have more than one treatment option.</h2><p>Continue to the non-submitting assessment preview. A licensed provider would determine what may be appropriate after the approved clinical intake is connected.</p><button className="primary" onClick={openQuiz}>Continue to assessment</button><button className="secondary" onClick={() => {setQuizOpen(false); document.getElementById("treatments")?.scrollIntoView({behavior:"smooth"});}}>Compare treatments first</button><small>Completing an assessment does not guarantee a prescription.</small></div>}
     </section></div>}

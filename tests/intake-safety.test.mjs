@@ -8,8 +8,11 @@ test("PHI persistence remains disabled",async()=>{
   assert.equal(hosting.r2,null);
 });
 
-test("no public intake API exists",async()=>{
+test("no raw public PHI intake API exists",async()=>{
   await assert.rejects(()=>readFile(new URL("../app/api/intake/route.ts",import.meta.url),"utf8"),error=>error?.code==="ENOENT");
+  const workflow=await readFile(new URL("../app/api/v1/workflow/route.ts",import.meta.url),"utf8");
+  assert.match(workflow,/APP_ENV === "local"/);
+  assert.doesNotMatch(workflow,/answers|medicalHistory|diagnosis|prescription/);
 });
 
 test("automated Weight Loss dispositions remain disabled",async()=>{
@@ -22,7 +25,7 @@ test("patient identity and clinical intake providers remain disabled",async()=>{
   const identity=await readFile(new URL("../app/lib/patient-identity-provider.ts",import.meta.url),"utf8");
   const intake=await readFile(new URL("../app/lib/clinical-intake-provider.ts",import.meta.url),"utf8");
   assert.match(identity,/readonly enabled=false/);
-  assert.match(intake,/readonly enabled=false/);
+  assert.match(intake,/enabled: false/);
 });
 
 test("readiness approvals default to false",async()=>{
@@ -35,9 +38,10 @@ test("readiness approvals default to false",async()=>{
 test("EmberFlow is selected but cannot transmit data",async()=>{
   const provider=await readFile(new URL("../app/lib/clinical-intake-provider.ts",import.meta.url),"utf8");
   const contract=await readFile(new URL("../app/lib/emberflow-connection-contract.ts",import.meta.url),"utf8");
-  assert.match(provider,/name="emberflow-clinic-accelerator"/);
-  assert.match(provider,/readonly enabled=false/);
-  assert.match(contract,/emberFlowConnectionEnabled=false/);
+  assert.match(provider,/clinicalDataProvider/);
+  assert.doesNotMatch(provider,/baseUrl|auth headers|fetch\s*\(/);
+  assert.match(contract,/emberFlowConnectionEnabled = false as const/);
+  assert.doesNotMatch(contract,/\b(baseUrl|authenticationMethod|webhookEventNames|payload):/);
 });
 
 test("EmberFlow fixture is fictional and provider-review only",async()=>{

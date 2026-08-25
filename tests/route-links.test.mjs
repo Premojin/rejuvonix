@@ -18,10 +18,10 @@ const publicRoutes = [
   "/treatments/zepbound-injection",
 ];
 
+let workerPromise;
 async function fetchWorker(path) {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("route-audit", `${process.pid}-${Date.now()}-${path}`);
-  const { default: worker } = await import(workerUrl.href);
+  workerPromise ??= import(new URL("../dist/server/index.js", import.meta.url).href);
+  const { default: worker } = await workerPromise;
   return worker.fetch(
     new Request(`http://localhost${path}`),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
