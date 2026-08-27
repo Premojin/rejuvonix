@@ -93,8 +93,8 @@ export default function Home() {
 
     <section className="program-hero" id="top">
       <div className="program-hero-copy">
-        <p className="eyebrow">Provider-guided care, built around you</p>
-        <h1>Weight care that fits into your life.</h1>
+        <p className="eyebrow">PROVIDER-GUIDED CARE, BUILT<br/>AROUND YOU</p>
+        <h1>Personalized<br/>care for<br/>how you<br/>want to live.</h1>
         <p>Explore online pathways for weight loss, performance, sexual health, hair restoration and skin regeneration, with licensed-provider review where clinical care is involved.</p>
         <a href="#programs">Explore programs <span>→</span></a>
       </div>

@@ -26,7 +26,9 @@ test("renders the public home page metadata and content", async () => {
   );
   const html = await response.text();
   assert.match(html, /<title>Rejuvonix \| Online Weight Care<\/title>/i);
-  assert.match(html, /Weight care that fits into your life\./i);
+  assert.match(html, /Personalized(?:<[^>]+>|\s)+care(?:<[^>]+>|\s)+for(?:<[^>]+>|\s)+how you(?:<[^>]+>|\s)+want to live\./i);
+  assert.match(html, /Explore online pathways for weight loss/i);
+  assert.doesNotMatch(html, /<span class="mega-column mega-existing">[\s\S]*Longevity &amp; Skin/i);
 });
 
 test("exposes a non-sensitive health response", async () => {

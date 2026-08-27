@@ -31,7 +31,7 @@ export const goalGroups: GoalGroup[] = [
 ];
 
 export const approvedGoalGroups = goalGroups.filter((group) =>
-  ["weight-loss", "longevity-skin"].includes(group.slug),
+  ["weight-loss"].includes(group.slug),
 );
 
 export const allServices = goalGroups.flatMap((group) => group.services.map((service) => ({...service, group})));
