@@ -15,7 +15,8 @@ The current rules enforce:
 - Service access only with explicit system scope.
 - Break-glass access only for a privileged role with a recorded reason.
 
-This is a policy primitive, not a substitute for a Cognito JWT verifier or
-database relationship query. Protected APIs must combine verified identity,
+This policy is called after a Cognito JWT verifier and local application
+principal mapping; it is not a substitute for a database relationship query.
+Protected APIs must combine verified identity,
 database assignment checks, and this decision layer before reading or writing
 objects. Cross-user denial tests are required for every clinical resource.

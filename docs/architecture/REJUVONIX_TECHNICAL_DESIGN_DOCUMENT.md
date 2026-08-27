@@ -96,9 +96,10 @@ storage, or AI-to-EmberFlow capability is part of this reconciliation.
 
 Official EmberFlow API/auth/webhook documentation, credentials, data-minimization
 rules, failure semantics, and authorization responsibilities remain open. The
-legacy clinical table shape requires owner-approved migration disposition before
-any staging schema action. The local preview account must be replaced or wired
-to Cognito before production identity use.
+fresh non-PHI database baseline is prepared and locally validated, but staging
+execution requires owner approval and the restore/recovery gate remains open.
+The local preview account must be replaced or wired to Cognito before production
+identity use.
 
 ## 15. Architectural Decisions
 

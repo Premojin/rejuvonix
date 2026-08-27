@@ -17,8 +17,10 @@ Run `npm test` for the built application contract suite and
 `STAGING_BASE_URL` to validate another non-production environment.
 
 The smoke script intentionally checks availability and the public health
-contract only. Protected clinical endpoints must be added with authenticated
-synthetic test credentials before they are included here.
+contract only. Authenticated clinical validation uses synthetic credentials
+provisioned outside source control and verifies patient own-resource access,
+clinician assignment access, support restriction, consent persistence,
+appointment request, and audit/access events.
 
 ## Rollback
 

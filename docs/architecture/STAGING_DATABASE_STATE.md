@@ -1,6 +1,6 @@
 # Staging Database State
 
-**Inspection date:** 2026-08-26
+**Inspection date:** 2026-08-27
 **Environment:** `rejuvonix-staging` / `us-east-1`
 **Classification:** C — CLINICAL/NON-PHI SCHEMA MIGRATION MISSING
 
@@ -54,4 +54,6 @@ notes, patient values, clinician values, or secrets. `encounters` and
 `treatment_plans` remain EmberFlow-owned legacy Rejuvonix schema and have no
 new PHI-write authorization.
 
-The database migration plan and execution remain separate owner-approved gates.
+The fresh non-PHI baseline is prepared locally at
+`drizzle/postgres-baseline/0000_rejuvonix_non_phi_baseline.sql`; it has not been
+applied to staging. Migration execution remains a separate owner-approved gate.

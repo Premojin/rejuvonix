@@ -1,7 +1,8 @@
 # Rejuvonix v152 Reconciliation Matrix
 
 Local assessment for bundle `5fd0cff536f56519566e50b0ffd96af16924ad24`.
-No remote integration is authorized by this document.
+Remote integration is limited to owner-reviewed pull-request preparation;
+deployment and staging mutation remain out of scope.
 
 | Area | Current local state | V152 state | Target state | Action | Rationale |
 |---|---|---|---|---|---|
@@ -45,7 +46,15 @@ The current branch now contains the v152 public/product UI, routes, components, 
 | PHI | Clinical payload keys rejected; no Rejuvonix clinical persistence | REBUILD/ENFORCE |
 | PostgreSQL | Drizzle + `pg` for identity, RBAC, profile, consent, references, and events | KEEP CURRENT |
 | Legacy clinical tables | `encounters`, `treatment_plans` retained for classification only | EMBERFLOW-OWNED / OWNER REVIEW |
-| Migrations | Historical baseline preserved; explicit confirmation guard; no execution | KEEP HISTORY; DEFER |
+| Migrations | Historical baseline superseded; fresh non-PHI baseline prepared and locally validated; no staging execution | KEEP HISTORY; OWNER MIGRATION GATE |
 | Runtime | Node 22 and Vinext production dependency remain required | KEEP CURRENT |
 | Tests | Built worker reused per file so suite exits reliably | MERGE |
 | AI | No implementation | KEEP PAUSED |
+
+## Integration readiness
+
+The branch is reviewable for GitHub PR preparation after local validation. The
+staging database migration remains unapplied and requires owner approval plus
+restore-test evidence or explicit acceptance of the untested-restore risk.
+Terraform/AWS reconciliation remains a separate non-apply gate. No real
+EmberFlow adapter or AI backend is included.
