@@ -30,3 +30,15 @@ test("Your Goals menu excludes Longevity & Skin while the route remains availabl
   const route = await worker.fetch(new Request("http://localhost/goals/longevity-skin"), { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } }, { waitUntil() {}, passThroughOnException() {} });
   assert.equal(route.status, 200);
 });
+
+test("treatment cards are single semantic links to their existing detail routes", async () => {
+  const response = await worker.fetch(new Request("http://localhost/treatments"), { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } }, { waitUntil() {}, passThroughOnException() {} });
+  const html = await response.text();
+  const cards = [...html.matchAll(/<a href="([^"]+)" class="treatment-card [^"]+"[\s\S]*?<\/a>/g)];
+  assert.ok(cards.length > 0, "treatment cards render");
+  for (const card of cards) {
+    assert.match(card[1], /^\/treatments\/[a-z0-9-]+$/);
+    assert.equal((card[0].match(/<a\b/g) ?? []).length, 1, `${card[1]} has no nested anchors`);
+    assert.match(card[0], /treatment-card-cta/);
+  }
+});

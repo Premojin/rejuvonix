@@ -52,6 +52,10 @@
 .branded-grid .card-content>a{align-self:flex-end;margin-left:auto;justify-content:flex-end;gap:9px;white-space:nowrap}
 .branded-grid .card-4 .card-content>a{color:#fff;border-bottom-color:#ffffffa6}
 .branded-grid .card-4 .card-content>a b{color:#fff}
+.treatment-card:focus-visible{outline:3px solid var(--aqua-dark);outline-offset:4px}
+.treatment-card-cta{align-self:flex-end;margin-top:17px;padding-bottom:7px;border-bottom:1px solid #839092;font-size:11px;font-weight:800;display:inline-flex;align-items:center;gap:9px}
+.card-4 .treatment-card-cta{color:#fff;border-bottom-color:#ffffffa6}
+.card-4 .treatment-card-cta b{color:#fff}
 
 /* Homepage treatment cards: denser footprint with product art using the stage. */
 #treatments .branded-grid .treatment-card{min-height:370px;padding:13px}
