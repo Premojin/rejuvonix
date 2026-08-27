@@ -10,12 +10,13 @@ const roleNames = new Set<Role>([
   "Service",
 ]);
 
-type CognitoClaims = {
-  sub: string;
+export interface CognitoIdentity {
+  subject: string;
+  email?: string;
   username?: string;
-  "cognito:groups"?: string[];
-  "custom:tenant_id"?: string;
-};
+  groups: readonly Role[];
+  tenantId: string;
+}
 
 let verifier: ReturnType<typeof CognitoJwtVerifier.create> | undefined;
 
@@ -33,18 +34,25 @@ function getVerifier() {
   return verifier;
 }
 
-export async function authenticateCognitoBearerToken(token: string): Promise<Principal> {
+export async function authenticateCognitoIdentity(token: string): Promise<CognitoIdentity> {
   if (!token || token.split(".").length !== 3) throw new Error("Invalid bearer token");
   const claims = await getVerifier().verify(token);
   const roles = (claims["cognito:groups"] ?? []).filter((group): group is Role => roleNames.has(group as Role));
   return {
-    id: claims.sub,
-    roles,
-    active: true,
+    subject: claims.sub,
+    email: typeof claims.email === "string" ? claims.email : undefined,
+    username: typeof claims.username === "string" ? claims.username : undefined,
+    groups: roles,
     tenantId: typeof claims["custom:tenant_id"] === "string"
       ? claims["custom:tenant_id"]
       : process.env.APP_ENV ?? "local",
   };
+}
+
+/** @deprecated Use identity verification followed by local principal mapping. */
+export async function authenticateCognitoBearerToken(token: string): Promise<Principal> {
+  const identity = await authenticateCognitoIdentity(token);
+  return { id: identity.subject, identitySubject: identity.subject, roles: identity.groups, active: true, tenantId: identity.tenantId };
 }
 
 export function readBearerToken(authorization: string | null): string | undefined {
