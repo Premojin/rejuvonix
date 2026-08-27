@@ -43,7 +43,7 @@ Expected role names (`Patient`, `Clinician`, `Administrator`, `Operations`,
 ## Recovery state
 
 - Automated backup retention: 7 days
-- Latest restorable time observed: `2026-08-27T03:42:45Z`
+- Latest restorable time observed: `2026-08-27T03:52:41Z`
 - Latest automated snapshot observed: available, `2026-08-26`
 - Database restore tested: NO
 
