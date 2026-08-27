@@ -48,15 +48,6 @@ export const rolePermissions = pgTable("role_permissions", {
   permissionId: uuid("permission_id").notNull().references(() => permissions.id),
 }, (table) => [primaryKey({ columns: [table.roleId, table.permissionId] })]);
 
-export const sessions = pgTable("sessions", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  userId: uuid("user_id").notNull().references(() => users.id),
-  tokenHash: text("token_hash").notNull(),
-  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
-  revokedAt: timestamp("revoked_at", { withTimezone: true }),
-  ...timestamps,
-}, (table) => [uniqueIndex("sessions_token_hash_uq").on(table.tokenHash), index("sessions_user_idx").on(table.userId)]);
-
 export const patients = pgTable("patients", {
   id: uuid("id").defaultRandom().primaryKey(),
   userId: uuid("user_id").notNull().references(() => users.id),
@@ -100,25 +91,6 @@ export const appointments = pgTable("appointments", {
   ...timestamps,
 }, (table) => [index("appointments_patient_idx").on(table.patientId, table.scheduledAt), index("appointments_clinician_idx").on(table.clinicianId, table.scheduledAt)]);
 
-export const encounters = pgTable("encounters", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  patientId: uuid("patient_id").notNull().references(() => patients.id),
-  clinicianId: uuid("clinician_id").notNull().references(() => clinicians.id),
-  appointmentId: uuid("appointment_id").references(() => appointments.id),
-  status: text("status").notNull().default("draft"),
-  summary: text("summary").notNull(),
-  ...timestamps,
-}, (table) => [index("encounters_patient_idx").on(table.patientId, table.createdAt), index("encounters_clinician_idx").on(table.clinicianId, table.createdAt)]);
-
-export const treatmentPlans = pgTable("treatment_plans", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  patientId: uuid("patient_id").notNull().references(() => patients.id),
-  clinicianId: uuid("clinician_id").notNull().references(() => clinicians.id),
-  status: text("status").notNull().default("draft"),
-  summary: text("summary").notNull(),
-  ...timestamps,
-}, (table) => [index("treatment_plans_patient_idx").on(table.patientId, table.createdAt)]);
-
 export const auditEvents = pgTable("audit_events", {
   id: uuid("id").defaultRandom().primaryKey(),
   actorId: uuid("actor_id").notNull().references(() => users.id),
@@ -155,7 +127,7 @@ export const securityEvents = pgTable("security_events", {
 }, (table) => [index("security_events_type_idx").on(table.eventType, table.createdAt)]);
 
 export const clinicalSchema = {
-  users, roles, permissions, userRoles, rolePermissions, sessions,
-  patients, patientProfiles, consents, clinicians, appointments, encounters,
-  treatmentPlans, auditEvents, accessEvents, securityEvents,
+  users, roles, permissions, userRoles, rolePermissions,
+  patients, patientProfiles, consents, clinicians, appointments,
+  auditEvents, accessEvents, securityEvents,
 };
