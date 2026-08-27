@@ -1,0 +1,24 @@
+/* Permanent image-rendering baseline. Keep raster photography smooth and undistorted. */
+img{
+  image-rendering:auto;
+  max-width:100%;
+}
+
+/* High-visibility homepage art must always fill its intended frame without stretching. */
+.program-card-visual img,
+.wellness-images img,
+.experience-visuals img,
+.care-feature-photo img,
+.editorial-banner>img,
+.journey-photo img{
+  image-rendering:auto!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .program-card-visual img,
+  .wellness-images img,
+  .experience-visuals img{
+    transition:none!important;
+    animation:none!important;
+  }
+}

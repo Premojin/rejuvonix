@@ -15,13 +15,14 @@ export type Product = {
   featureTitle: string;
   features: { title: string; copy: string }[];
   safety: string;
+  labelUrl?: string;
 };
 
 export const products: Product[] = [
   {
-    slug: "glp-1-injections", name: "GLP-1 Injections", shortName: "GLP-1 injections", ingredient: "Compounded prescription option", format: "Injection", cadence: "Usually once weekly", status: "Compounded medication", image: "/glp1-injections.png", heroImage: "/rejuvonix-couple-walk.png",
+    slug: "glp-1-injections", name: "GLP-1 Injections", shortName: "GLP-1 injections", ingredient: "Compounded prescription option", format: "Injection", cadence: "Usually once weekly", status: "Compounded medication", image: "/glp1-vial-neutral-v2.png", heroImage: "/testimonial-unique-2.jpg",
     intro: "A provider may consider a patient-specific compounded injectable when it is clinically appropriate, legally available and cannot be met by a commercially available product.",
-    highlights: ["Online health assessment", "Independent licensed provider review", "Dose and schedule selected by the prescriber"],
+    highlights: ["Online health assessment", "Independent licensed provider review", "Your prescriber chooses the dose and schedule"],
     ingredientPoints: ["The active ingredient and formulation depend on the provider’s prescription.", "Compounded medications are prepared for an individual patient by a licensed pharmacy.", "They are not generic versions of branded medications and are not FDA approved."],
     directions: ["Use only as prescribed by your provider", "Follow the pharmacy’s storage and injection instructions", "Complete provider check-ins before dose changes"],
     featureTitle: "Personalized injectable care, followed online.",
@@ -29,7 +30,7 @@ export const products: Product[] = [
     safety: "Compounded medications are not FDA approved. The FDA does not review compounded products for safety, effectiveness or quality before they are marketed. Availability depends on applicable law, clinical need and pharmacy access."
   },
   {
-    slug: "glp-1-tablets", name: "GLP-1 Tablets", shortName: "GLP-1 tablets", ingredient: "Compounded prescription option", format: "Dissolvable tablet", cadence: "Usually once daily", status: "Compounded medication", image: "/glp1-tablets.png", heroImage: "/rejuvonix-lifestyle.png",
+    slug: "glp-1-tablets", name: "GLP-1 Tablets", shortName: "GLP-1 tablets", ingredient: "Compounded prescription option", format: "Dissolvable tablet", cadence: "Usually once daily", status: "Compounded medication", image: "/glp1-tablets.png", heroImage: "/testimonial-unique-3.jpg",
     intro: "A provider may consider a patient-specific compounded oral option when it is medically appropriate and legally available.",
     highlights: ["Needle-free format", "Independent licensed provider review", "Simple daily routine when prescribed"],
     ingredientPoints: ["The exact ingredient and strength depend on the prescription.", "A licensed pharmacy prepares the patient-specific formulation.", "Compounded tablets are not FDA approved."],
@@ -47,6 +48,7 @@ export const products: Product[] = [
     featureTitle: "GLP-1 treatment in a daily pill.",
     features: [{title:"FDA approved",copy:"A branded prescription option reviewed by the FDA."},{title:"No injection",copy:"An oral format for eligible patients who prefer a pill."},{title:"Provider led",copy:"A licensed provider determines whether it fits your health needs."}],
     safety: "Wegovy® has a boxed warning about the risk of thyroid C-cell tumors. Do not use Wegovy® if you or a family member have had medullary thyroid carcinoma or if you have Multiple Endocrine Neoplasia syndrome type 2. Review the complete prescribing information with your provider."
+    ,labelUrl: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/215256s033lbl.pdf"
   },
   {
     slug: "wegovy-injection", name: "Wegovy® Injection", shortName: "Wegovy® Injection", ingredient: "Semaglutide", format: "Injection pen", cadence: "Once weekly", status: "FDA-approved branded medication", image: "/wegovy-injection.png", heroImage: "/rejuvonix-movement.png",
@@ -57,6 +59,7 @@ export const products: Product[] = [
     featureTitle: "Once-weekly GLP-1 care in a prefilled pen.",
     features: [{title:"FDA approved",copy:"A branded medicine approved for chronic weight management."},{title:"Weekly routine",copy:"A once-weekly format when prescribed."},{title:"Dose progression",copy:"Your provider manages dosing based on response and tolerability."}],
     safety: "Wegovy® has a boxed warning about the risk of thyroid C-cell tumors. Do not use Wegovy® if you or a family member have had medullary thyroid carcinoma or if you have Multiple Endocrine Neoplasia syndrome type 2. Review the complete prescribing information with your provider."
+    ,labelUrl: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/215256s033lbl.pdf"
   },
   {
     slug: "zepbound-injection", name: "Zepbound® Injection", shortName: "Zepbound® Injection", ingredient: "Tirzepatide", format: "Injection", cadence: "Once weekly", status: "FDA-approved branded medication", image: "/zepbound-injection.png", heroImage: "/rejuvonix-get-started-group.png",
@@ -67,6 +70,7 @@ export const products: Product[] = [
     featureTitle: "Dual-receptor treatment in a weekly injection.",
     features: [{title:"FDA approved",copy:"A branded option approved for chronic weight management."},{title:"Dual action",copy:"Targets both GIP and GLP-1 receptors."},{title:"Provider managed",copy:"Your provider reviews response before any dose change."}],
     safety: "Zepbound® has a boxed warning about the risk of thyroid C-cell tumors. Do not use Zepbound® if you or a family member have had medullary thyroid carcinoma or if you have Multiple Endocrine Neoplasia syndrome type 2. Review the complete prescribing information with your provider."
+    ,labelUrl: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/217806s042lbl.pdf"
   }
 ];
 

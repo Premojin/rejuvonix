@@ -1,0 +1,71 @@
+.product-experience{--px-accent:#35b6b8;--px-ink:#293638;--px-soft:#eaf8f6;color:var(--px-ink);scroll-behavior:smooth}
+.product-page-nav{position:sticky;top:0;z-index:45;min-height:44px;padding:0 6vw;display:flex;align-items:center;justify-content:center;gap:34px;background:rgb(255 255 255 / 82%);border-bottom:1px solid rgb(42 73 74 / 10%);backdrop-filter:blur(20px) saturate(150%)}
+.product-page-nav a{font-size:10px;font-weight:800;color:#536365;transition:color .2s}.product-page-nav a:hover{color:#11868b}
+.product-experience .product-hero-detail{min-height:760px;grid-template-columns:48% 52%;background:linear-gradient(130deg,#fcfdfc 0%,#edf9f7 50%,#d6f1ee 100%);overflow:hidden}
+.product-experience .product-hero-copy{padding:90px 4vw 90px 7vw}
+.product-experience .product-hero-copy h1{font-size:clamp(66px,7.3vw,116px);line-height:.82;letter-spacing:-.072em;max-width:760px;margin-bottom:24px}
+.product-experience .product-ingredient{font-size:18px;color:#526466}
+.product-experience .product-hero-copy ul{margin:27px 0 34px;display:grid;gap:11px}
+.product-experience .product-hero-product{min-height:760px;position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(circle at 50% 50%,#fff 0 16%,transparent 52%)}
+.product-experience .product-hero-product:has(>img[src$="glp1-vial-neutral-v2.png"]){background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.98) 0 18%,rgba(197,238,236,.96) 42%,rgba(104,194,193,.34) 68%,rgba(53,182,184,.1) 100%)}
+.product-experience .product-hero-product>img[src$="glp1-vial-neutral-v2.png"]{width:51.8%;height:427px}
+.product-experience.product-glp-1-tablets{--med-light:#fff;--med-mid:#dcebed;--med-deep:#9fb9be;--med-card:rgba(238,245,245,.83)}
+.product-experience.product-wegovy-pill{--med-light:#fff;--med-mid:#f0eadf;--med-deep:#c9d8d5;--med-card:rgba(247,243,235,.86)}
+.product-experience.product-wegovy-injection{--med-light:#faffff;--med-mid:#c8ebeb;--med-deep:#5f989d;--med-card:rgba(219,241,241,.84)}
+.product-experience.product-zepbound-injection{--med-light:#fff;--med-mid:#e7e0f1;--med-deep:#a8cccc;--med-card:rgba(239,234,247,.85)}
+.product-experience:is(.product-glp-1-tablets,.product-wegovy-pill,.product-wegovy-injection,.product-zepbound-injection) .product-hero-product{background:radial-gradient(circle at 50% 42%,var(--med-light) 0 18%,var(--med-mid) 45%,var(--med-deep) 100%)}
+.product-experience:is(.product-glp-1-tablets,.product-wegovy-pill,.product-wegovy-injection,.product-zepbound-injection) .product-hero-product .product-aura{width:68%;height:72%;border:1px solid rgba(255,255,255,.93);border-radius:34px;background:linear-gradient(155deg,rgba(255,255,255,.92),var(--med-card));filter:none;box-shadow:inset 0 1px 0 #fff,0 28px 70px rgba(39,82,84,.14)}
+.product-experience:is(.product-glp-1-tablets,.product-wegovy-pill,.product-wegovy-injection,.product-zepbound-injection) .product-hero-product>img{width:min(58%,520px);height:500px}
+.product-experience .power-image:has(img[src$="glp1-tablets.png"]),.product-experience .compare-grid article>div:has(img[src$="glp1-tablets.png"]){background:radial-gradient(circle,#fff,#dcebed 68%,#9fb9be)}
+.product-experience .power-image:has(img[src$="wegovy-pill.png"]),.product-experience .compare-grid article>div:has(img[src$="wegovy-pill.png"]){background:radial-gradient(circle,#fff,#f0eadf 68%,#c9d8d5)}
+.product-experience .power-image:has(img[src$="wegovy-injection.png"]),.product-experience .compare-grid article>div:has(img[src$="wegovy-injection.png"]){background:radial-gradient(circle,#faffff,#c8ebeb 68%,#5f989d)}
+.product-experience .power-image:has(img[src$="zepbound-injection.png"]),.product-experience .compare-grid article>div:has(img[src$="zepbound-injection.png"]){background:radial-gradient(circle,#fff,#e7e0f1 68%,#a8cccc)}
+.product-experience .power-image:has(img[src$="glp1-tablets.png"]),.product-experience .power-image:has(img[src$="wegovy-pill.png"]),.product-experience .power-image:has(img[src$="wegovy-injection.png"]),.product-experience .power-image:has(img[src$="zepbound-injection.png"]),.product-experience .compare-grid article>div:has(img[src$="glp1-tablets.png"]),.product-experience .compare-grid article>div:has(img[src$="wegovy-pill.png"]),.product-experience .compare-grid article>div:has(img[src$="wegovy-injection.png"]),.product-experience .compare-grid article>div:has(img[src$="zepbound-injection.png"]){border:1px solid rgba(255,255,255,.9);border-radius:20px;box-shadow:inset 0 1px 0 #fff,0 16px 38px rgba(39,82,84,.1)}
+.product-experience .product-hero-product:before,.product-experience .product-hero-product:after{content:"";position:absolute;border:1px solid rgb(53 182 184 / 25%);border-radius:50%;pointer-events:none}
+.product-experience .product-hero-product:before{width:72%;aspect-ratio:1;transform:rotate(-13deg)}
+.product-experience .product-hero-product:after{width:91%;aspect-ratio:1;transform:rotate(21deg);border-color:rgb(255 255 255 / 80%)}
+.product-experience .product-aura{width:58%;height:68%;background:rgb(82 204 196 / 22%);filter:blur(50px);box-shadow:none}
+.product-experience .product-hero-product>img{z-index:2;width:74%;height:610px;object-fit:contain;mix-blend-mode:normal;filter:drop-shadow(0 38px 36px rgb(30 70 71 / 20%));transition:opacity .32s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
+.product-experience .product-hero-product.stage-life>img,.product-experience .product-hero-product.stage-care>img{width:72%;height:535px;border-radius:46% 46% 22px 22px;object-fit:cover;filter:drop-shadow(0 32px 45px rgb(30 70 71 / 17%))}
+.product-experience .product-hero-product>span{z-index:4;right:6%;bottom:14%;padding:14px 18px;border-radius:16px;background:rgb(255 255 255 / 86%);border:1px solid #fff;backdrop-filter:blur(14px);box-shadow:0 17px 45px rgb(31 72 73 / 12%);font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.product-stage-number{position:absolute;z-index:0;left:4%;bottom:-3%;font-size:clamp(160px,19vw,310px);font-weight:900;line-height:.7;letter-spacing:-.09em;color:rgb(255 255 255 / 62%)}
+.product-view-switcher{position:absolute;z-index:6;right:5%;top:13%;display:grid;gap:10px;padding:12px;border-radius:999px;background:rgb(255 255 255 / 78%);border:1px solid #fff;backdrop-filter:blur(18px);box-shadow:0 20px 48px rgb(30 71 72 / 12%)}
+.product-view-switcher button{width:43px;height:43px;padding:0;border:0;border-radius:50%;background:transparent;display:grid;place-items:center;cursor:pointer;position:relative}
+.product-view-switcher button i{width:8px;height:8px;border-radius:50%;border:1px solid #789092;transition:.25s}.product-view-switcher button.active i{width:25px;height:25px;background:var(--px-accent);border-color:var(--px-accent);box-shadow:0 0 0 7px rgb(53 182 184 / 14%)}
+.product-view-switcher button small{position:absolute;right:52px;padding:7px 10px;border-radius:8px;background:#263638;color:#fff;font-size:8px;opacity:0;transform:translateX(5px);pointer-events:none;transition:.2s;white-space:nowrap}.product-view-switcher button:hover small,.product-view-switcher button:focus-visible small{opacity:1;transform:none}
+.product-marquee{min-height:62px;display:flex;align-items:center;justify-content:center;gap:34px;padding:12px 25px;overflow:hidden;background:#293638;color:#fff;text-transform:uppercase;font-size:10px;font-weight:900;letter-spacing:.14em}.product-marquee i{color:#46d1cf}
+.product-experience .product-meet{min-height:720px}.product-experience .product-meet-image{height:720px}.product-experience .product-meet-image img{height:100%;object-fit:cover}.product-experience .product-meet-copy{padding:80px 7vw;background:linear-gradient(145deg,#fff,#f2faf8)}
+.product-experience .product-meet-copy h2{font-size:clamp(49px,5vw,76px);line-height:.9;letter-spacing:-.065em}
+.product-experience .power-section{padding-top:110px;padding-bottom:115px;background:#f5f2eb}.product-experience .power-grid article{border-radius:30px;background:#fff;box-shadow:0 22px 60px rgb(42 61 62 / 8%);transition:transform .35s ease,box-shadow .35s ease}.product-experience .power-grid article:hover{transform:translateY(-8px);box-shadow:0 32px 70px rgb(42 61 62 / 14%)}
+.product-experience .power-image{border-radius:22px;overflow:hidden}.product-experience .power-image img{transition:transform .55s cubic-bezier(.2,.8,.2,1)}.product-experience .power-grid article:hover img{transform:scale(1.05)}
+.product-experience .detail-how{background:#293638;color:#fff}.product-experience .detail-how>div>p:last-child,.product-experience .detail-how li p{color:#c6d0d0}.product-experience .detail-how li{background:rgb(255 255 255 / 6%);border-color:rgb(255 255 255 / 14%);backdrop-filter:blur(12px)}
+.product-experience .membership-detail{background:linear-gradient(130deg,#def4f1,#fff)}
+.product-experience .compare-detail{padding-top:115px}.product-experience .compare-grid article{border-radius:30px;transition:transform .35s ease,box-shadow .35s ease}.product-experience .compare-grid article:hover{transform:translateY(-7px);box-shadow:0 28px 65px rgb(36 66 67 / 13%)}
+.product-experience .future-banner>div{background:linear-gradient(90deg,rgb(255 255 255 / 94%),rgb(255 255 255 / 78%) 72%,transparent);backdrop-filter:none}
+.product-experience .detail-closing{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 130%,#fff 0 20%,transparent 54%),linear-gradient(135deg,#d8f3ef,#f8fcfb)}
+.product-experience .detail-closing:before{content:"";position:absolute;width:520px;height:520px;border:1px solid rgb(53 182 184 / 24%);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-42%);pointer-events:none}
+.product-experience .detail-closing>*{position:relative;z-index:2}
+.product-experience .future-banner>div{color:#173f42}
+.product-experience .future-banner>div .detail-kicker{color:#0c7f86}
+.product-experience .product-hero-copy .safety-link{min-height:auto!important;margin-top:16px;padding:2px 0!important;border:0!important;border-bottom:1px solid rgba(48,56,59,.28)!important;border-radius:0!important;background:transparent!important;color:#647073!important;font-size:9px!important;font-weight:750!important;opacity:.72}
+.product-experience .product-hero-copy .safety-link:hover{background:transparent!important;color:#173f42!important;opacity:1}
+.compounded-program-journey{background:radial-gradient(circle at 85% 10%,rgba(53,182,184,.18),transparent 28%),linear-gradient(145deg,#f7fbfa,#edf6f3)}
+.compounded-program-journey .journey-page-heading{max-width:880px}
+.compounded-program-journey .journey-layout{max-width:1320px}
+.compounded-program-journey .journey-photo{box-shadow:0 30px 80px rgba(22,62,64,.16)}
+.compounded-program-journey .journey-steps{border-top-color:rgba(67,75,78,.22)}
+.compounded-program-journey .journey-steps article{border-bottom-color:rgba(67,75,78,.2)}
+.compounded-program-journey .journey-steps article>span{color:#0c8d91}
+.compounded-program-journey .journey-steps h3{color:#173f42}
+.compounded-program-journey .journey-steps p{color:#59696d}
+.compounded-closing{min-height:700px;padding-top:300px}
+.compounded-closing-graphic{position:absolute!important;z-index:1!important;left:50%;top:35px;width:min(620px,82vw);height:275px;transform:translateX(-50%);display:flex;justify-content:center;align-items:flex-end;gap:18px;pointer-events:none}
+.compounded-closing-graphic:before{content:"";position:absolute;left:50%;bottom:15px;width:75%;height:80px;transform:translateX(-50%);border-radius:50%;background:rgba(53,182,184,.22);filter:blur(25px)}
+.compounded-closing-graphic span{position:relative;width:190px;height:260px}
+.compounded-closing-graphic span:first-child{transform:translateY(8px) rotate(-12deg)}
+.compounded-closing-graphic span:last-child{transform:translateY(-3px) rotate(12deg)}
+.compounded-closing-graphic img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 24px 28px rgba(18,59,60,.2))}
+@media(max-width:680px){.compounded-closing{min-height:650px;padding-top:270px}.compounded-closing-graphic{height:235px}.compounded-closing-graphic span{width:145px;height:220px}}
+@media(max-width:1000px){.product-page-nav{gap:22px}.product-experience .product-hero-detail{grid-template-columns:1fr}.product-experience .product-hero-product{min-height:620px}.product-experience .product-hero-product>img{height:560px}.product-experience .product-meet-image{height:560px}}
+@media(max-width:680px){.product-page-nav{justify-content:flex-start;overflow-x:auto;padding:0 20px;gap:24px;scrollbar-width:none}.product-page-nav a{flex:none}.product-experience .product-hero-copy{padding:70px 22px}.product-experience .product-hero-copy h1{font-size:55px}.product-experience .product-hero-product{min-height:510px}.product-experience .product-hero-product>img{width:88%;height:455px}.product-experience .product-hero-product.stage-life>img,.product-experience .product-hero-product.stage-care>img{width:82%;height:405px}.product-view-switcher{right:13px;top:11%;padding:8px}.product-view-switcher button{width:36px;height:36px}.product-stage-number{font-size:145px}.product-marquee{justify-content:flex-start;overflow-x:auto;gap:24px}.product-marquee span,.product-marquee i{flex:none}.product-experience .product-meet-image{height:450px}.product-experience .product-meet-copy{padding:65px 22px}.product-experience .product-meet-copy h2{font-size:47px}}
+@media(max-width:680px){.product-experience .product-hero-product>img[src$="glp1-vial-neutral-v2.png"]{width:61.6%;height:318.5px}}

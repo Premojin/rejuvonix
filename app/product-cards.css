@@ -39,3 +39,80 @@
 .branded-grid .card-top{font-size:7px}
 @media(max-width:1050px){#treatments{padding-left:18px;padding-right:18px}.branded-grid .treatment-card{min-height:445px;padding:13px}.branded-grid .product-stage{height:190px;margin-top:15px}.branded-grid .card-content h3{font-size:17px}.branded-grid .card-content button,.branded-grid .card-content>a{font-size:9px}}
 @media(max-width:760px){#treatments{padding:72px 20px}.branded-grid .treatment-card{min-height:500px;padding:18px}.branded-grid .product-stage{height:235px}.branded-grid .card-content h3{font-size:21px}.branded-grid .card-content button,.branded-grid .card-content>a{font-size:11px}}
+
+@media(min-width:761px){
+  #treatments .treatment-grid.branded-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+  #treatments .branded-grid .treatment-card{min-width:0;min-height:445px;padding:15px}
+  #treatments .branded-grid .product-stage{height:205px;margin:17px -4px 9px}
+  #treatments .branded-grid .card-content h3{font-size:clamp(16px,1.35vw,20px);line-height:1.08}
+  #treatments .branded-grid .card-content p{font-size:8px;line-height:1.35}
+  #treatments .branded-grid .card-content>span{font-size:10px;line-height:1.35}
+}
+.branded-grid .card-content{display:flex;flex-direction:column;min-width:0}
+.branded-grid .card-content>a{align-self:flex-end;margin-left:auto;justify-content:flex-end;gap:9px;white-space:nowrap}
+.branded-grid .card-4 .card-content>a{color:#fff;border-bottom-color:#ffffffa6}
+.branded-grid .card-4 .card-content>a b{color:#fff}
+
+/* Homepage treatment cards: denser footprint with product art using the stage. */
+#treatments .branded-grid .treatment-card{min-height:370px;padding:13px}
+#treatments .branded-grid .product-stage{height:190px;margin:10px -4px 6px}
+#treatments .branded-grid .product-stage img{width:94%;height:94%;transform:none}
+#treatments .branded-grid .card-content p{margin-bottom:3px}
+#treatments .branded-grid .card-content h3{margin-bottom:5px}
+#treatments .branded-grid .card-content>a{margin-top:10px;padding-bottom:5px}
+@media(max-width:1050px) and (min-width:761px){#treatments .branded-grid .treatment-card{min-height:355px;padding:11px}#treatments .branded-grid .product-stage{height:175px;margin-top:8px}#treatments .branded-grid .product-stage img{width:96%;height:96%}}
+@media(max-width:760px){#treatments .branded-grid .treatment-card{min-height:420px;padding:15px}#treatments .branded-grid .product-stage{height:220px;margin:9px -3px 6px}#treatments .branded-grid .product-stage img{width:96%;height:96%}#treatments .branded-grid .card-content>a{margin-top:11px}}
+
+/* One consistent canvas for the approved neutral peptide vial. */
+.treatment-card:has(img[src$="glp1-vial-neutral-v2.png"]){background:linear-gradient(145deg,#f2fbfa 0%,#d8f0ef 58%,#bddfdf 100%)!important}
+.product-stage:has(img[src$="glp1-vial-neutral-v2.png"]){border:1px solid rgba(255,255,255,.78);background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.98) 0 18%,rgba(197,238,236,.96) 42%,rgba(104,194,193,.34) 68%,rgba(53,182,184,.1) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 18px 42px rgba(45,101,104,.11)}
+.product-stage:has(img[src$="glp1-vial-neutral-v2.png"]) img{width:65.8%!important;height:65.8%!important;mix-blend-mode:normal!important;filter:drop-shadow(0 22px 22px rgba(32,77,79,.18))}
+
+/* One measured product frame for all five GLP-1 cards. */
+#treatments .branded-grid .product-stage{
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.82);
+  background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.98) 0 18%,rgba(197,238,236,.94) 42%,rgba(104,194,193,.3) 68%,rgba(53,182,184,.08) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.96),0 15px 34px rgba(45,101,104,.09);
+}
+#treatments .branded-grid .product-stage img{
+  position:relative;
+  z-index:2;
+  width:78%!important;
+  height:78%!important;
+  margin:0;
+  transform:none!important;
+  object-fit:contain;
+  object-position:center;
+  mix-blend-mode:normal!important;
+  filter:drop-shadow(0 18px 18px rgba(32,77,79,.14));
+}
+#treatments .branded-grid .product-stage:before{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:10%;
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:18px;
+  background:linear-gradient(160deg,rgba(255,255,255,.88),rgba(224,242,240,.6));
+  box-shadow:0 14px 35px rgba(39,87,89,.1);
+}
+#treatments .branded-grid .product-stage:has(img[src$="glp1-tablets.png"]){background:radial-gradient(circle at 50% 42%,#fff 0 18%,#edf4f4 42%,#c9dcde 70%,#aebfc3 100%)}
+#treatments .branded-grid .product-stage:has(img[src$="glp1-tablets.png"]):before{background:linear-gradient(160deg,rgba(255,255,255,.94),rgba(225,235,236,.74));border-color:rgba(255,255,255,.94)}
+#treatments .branded-grid .product-stage:has(img[src$="wegovy-pill.png"]){background:radial-gradient(circle at 50% 42%,#fff 0 18%,#f7f3eb 42%,#e5ded1 70%,#cbd9d7 100%)}
+#treatments .branded-grid .product-stage:has(img[src$="wegovy-pill.png"]):before{background:linear-gradient(160deg,rgba(255,255,255,.95),rgba(239,234,223,.75))}
+#treatments .branded-grid .product-stage:has(img[src$="wegovy-injection.png"]){background:radial-gradient(circle at 50% 42%,#faffff 0 18%,#dff3f3 42%,#9fcfd1 70%,#5e959a 100%)}
+#treatments .branded-grid .product-stage:has(img[src$="wegovy-injection.png"]):before{background:linear-gradient(160deg,rgba(255,255,255,.94),rgba(202,234,234,.7))}
+#treatments .branded-grid .product-stage:has(img[src$="zepbound-injection.png"]){background:radial-gradient(circle at 50% 42%,#fff 0 18%,#f2eef8 42%,#d7cee7 70%,#a9cece 100%)}
+#treatments .branded-grid .product-stage:has(img[src$="zepbound-injection.png"]):before{background:linear-gradient(160deg,rgba(255,255,255,.95),rgba(231,226,241,.72))}
+#treatments .branded-grid .product-stage img[src$="glp1-vial-neutral-v2.png"]{
+  width:56%!important;
+  height:56%!important;
+}
+@media(max-width:760px){
+  #treatments .branded-grid .product-stage img{width:76%!important;height:76%!important}
+  #treatments .branded-grid .product-stage img[src$="glp1-vial-neutral-v2.png"]{width:54%!important;height:54%!important}
+}

@@ -1,0 +1,67 @@
+/* Rejuvonix approved brand lock: aqua, charcoal, silver and neutral tints only. */
+.detail-footer-grid .footer-brand img{width:150px!important;height:auto}
+.detail-footer .footer-brand{font-size:23px;gap:15px;flex-wrap:wrap}
+.footer-email{font-size:13px;color:#fff;text-decoration:underline;text-underline-offset:4px}
+.legitscript-reserved{display:none}
+
+.jin-health-page{--jin-ink:#434b4e;--jin-deep:#434b4e;--jin-aqua:#35b6b8;--jin-bright:#35b6b8;--jin-ivory:#fff;--jin-champagne:#bdc3c3;--jin-coral:#35b6b8;color:#434b4e;background:#fff}
+.jin-health-page .jin-hero{background:radial-gradient(circle at 8% 10%,rgba(53,182,184,.2),transparent 30%),linear-gradient(135deg,#fff,#eef8f8 55%,#eef0f0)}
+.jin-health-page .jin-hero-visual{background:radial-gradient(circle at 80% 18%,rgba(53,182,184,.36),transparent 28%),linear-gradient(145deg,#434b4e,#262d30)}
+.jin-health-page .jin-trust{background:linear-gradient(90deg,#fff,#eef8f8 52%,#eef0f0)}
+.jin-health-page .jin-pillars,.jin-health-page .jin-devices{background:radial-gradient(circle at 90% 8%,rgba(53,182,184,.12),transparent 30%),#fff}
+.jin-health-page .jin-today{background:radial-gradient(circle at 10% 10%,rgba(53,182,184,.15),transparent 31%),linear-gradient(135deg,#fff,#eef4f4 58%,#f5f6f6)}
+.jin-health-page .jin-intelligence,.jin-health-page .jin-system{background:radial-gradient(circle at 12% 10%,rgba(53,182,184,.2),transparent 31%),linear-gradient(145deg,#434b4e,#252c2f)}
+.jin-health-page .jin-closing{background:radial-gradient(circle at 20% 30%,rgba(53,182,184,.2),transparent 28%),linear-gradient(135deg,#fff,#eef3f3)}
+.jin-health-page .jin-pillar-panel{background:radial-gradient(circle at 88% 12%,color-mix(in srgb,var(--pillar-accent) 42%,transparent),transparent 34%),linear-gradient(135deg,#fff,#edf5f5 68%,#f1f2f2)}
+.jin-health-page :is(.jin-hero h1){font-size:clamp(46px,4.5vw,69px)}
+.jin-health-page :is(.jin-section-heading h2,.jin-today h2,.jin-closing h2){font-size:clamp(36px,3.5vw,54px)}
+.jin-health-page .jin-pillar-panel h3{font-size:clamp(30px,3vw,44px)}
+.jin-health-page .jin-intelligence h2{font-size:clamp(29px,2.8vw,43px)}
+.jin-health-page .jin-system-map h3{font-size:19px}
+.jin-health-page p{font-size:max(16px,1rem)}
+.jin-health-page :is(.jin-kicker,.jin-safe-copy,.jin-device-note,.jin-demo-note,small){font-size:12px}
+.jin-device-grid article{min-height:350px;background:linear-gradient(145deg,#fff,#eff4f4)!important}
+.jin-device-visual{height:112px;margin:28px auto 9px;display:grid;place-items:center;position:relative;z-index:2}
+.jin-device-visual>img{width:80px;height:80px;object-fit:contain}
+.jin-device-grid h3{margin:12px 0 10px}
+.device-glyph{display:grid;place-items:center;width:92px;height:76px;border:6px solid #434b4e;border-radius:17px;color:#434b4e;font-size:39px;background:#fff;filter:grayscale(1)}
+.watch-pair{display:flex;align-items:center;justify-content:center;gap:20px}
+.watch-pair>b{width:55px;height:76px;border:7px solid #434b4e;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#35b6b8;background:#fff;font-size:18px;box-shadow:0 -14px 0 -8px #434b4e,0 14px 0 -8px #434b4e}
+.watch-pair>b:nth-child(2){border-radius:50%}
+.watch-pair small{display:block;color:#434b4e;font-size:9px!important;margin-top:3px}
+.membership-pillars{grid-template-columns:repeat(4,1fr)}
+.membership-page-v3 :is(.membership-hero h1,.membership-intro>h2,.membership-section-heading h2,.membership-practice h2,.membership-closing h2){font-size:clamp(39px,4.5vw,66px)}
+@media(max-width:900px){.membership-pillars{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.detail-footer-grid .footer-brand img{width:120px!important}.jin-health-page p{font-size:16px}.jin-health-page .jin-hero h1{font-size:43px}.jin-health-page :is(.jin-section-heading h2,.jin-today h2,.jin-closing h2){font-size:36px}.membership-pillars{grid-template-columns:1fr}}
+
+/* Weight loss funnel: readable content and one assessment destination. */
+.goal-page-v2 .goal-care-path-v2{
+  isolation:isolate;
+  background-color:#252c2f!important;
+  background-image:radial-gradient(circle at 8% 12%,rgba(53,182,184,.22),transparent 32%),linear-gradient(145deg,#434b4e,#252c2f 68%,#171c1e)!important;
+  color:#fff;
+}
+.goal-page-v2 .goal-care-path-v2 :is(h2,strong){color:#fff!important}
+.goal-page-v2 .goal-care-path-v2 :is(p,li){color:#f2f6f6!important}
+.goal-page-v2 .goal-care-path-v2 :is(.detail-kicker,small,li>span,a){color:#7fe0de!important}
+.goal-page-v2 .goal-care-path-v2 p{font-size:16px;line-height:1.75}
+.goal-page-v2 .goal-care-path-v2{gap:clamp(54px,8vw,120px);align-items:start}
+.goal-page-v2 .goal-care-path-v2 ol{display:grid;gap:14px}
+.goal-page-v2 .goal-care-path-v2 li{min-width:0;padding:24px;border:1px solid rgba(255,255,255,.28);border-radius:22px;background:#343d40;box-shadow:0 18px 45px rgba(0,0,0,.2)}
+.goal-page-v2 .goal-care-path-v2 li:after{display:none}
+.goal-page-v2 .goal-care-path-v2 li>span{width:52px;height:52px;background:#35b6b8;color:#20282b!important;border-color:#8ce4e1;font-size:15px}
+.goal-page-v2 .goal-stage-label{display:inline-flex;margin:0 0 10px;padding:5px 9px;border-radius:999px;background:#d8f4f3;color:#126f74!important;font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+.goal-page-v2 .goal-care-path-v2 h3{display:block;margin:0 0 9px;color:#fff!important;font-size:clamp(21px,2vw,27px);line-height:1.2;letter-spacing:-.025em}
+.goal-page-v2 .goal-care-path-v2 li p{margin:0;color:#f2f6f6!important;font-size:16px;line-height:1.65}
+@media(max-width:620px){.goal-page-v2 .goal-care-path-v2{gap:40px}.goal-page-v2 .goal-care-path-v2 li{grid-template-columns:46px 1fr;padding:20px 17px;gap:13px}.goal-page-v2 .goal-care-path-v2 li>span{width:44px;height:44px;font-size:13px}.goal-page-v2 .goal-care-path-v2 h3{font-size:21px}.goal-page-v2 .goal-care-path-v2 li p{font-size:15px}}
+
+/* Wegovy Pill: prevent the support heading and benefit labels from colliding. */
+.pill-support>div:last-child{min-width:0;padding:88px clamp(38px,6vw,92px)}
+.pill-support>div:last-child .pill-kicker{margin-bottom:20px}
+.pill-support h2{max-width:720px;margin-bottom:26px;font-size:clamp(44px,4.7vw,68px);line-height:1;overflow-wrap:anywhere}
+.pill-support>div:last-child>p:not(.pill-kicker){max-width:660px;margin:0;font-size:16px;line-height:1.75}
+.pill-support-grid{gap:0 24px;margin-top:34px}
+.pill-support-grid p{display:flex;align-items:baseline;gap:8px;min-width:0;padding:20px 6px 20px 0;line-height:1.4}
+.pill-support-grid b{flex:0 0 auto;margin-right:0}
+@media(max-width:980px){.pill-support>div:last-child{padding:74px 7vw}.pill-support h2{font-size:clamp(44px,7vw,62px)}}
+@media(max-width:650px){.pill-support>div:last-child{padding:64px 22px}.pill-support h2{font-size:44px;line-height:1.04}.pill-support-grid{grid-template-columns:1fr;gap:0}.pill-support-grid p{font-size:14px}}

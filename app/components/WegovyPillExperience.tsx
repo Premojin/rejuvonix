@@ -1,0 +1,35 @@
+import Link from "next/link";
+import { SiteFooter, SiteHeader } from "./SiteChrome";
+import {PageSectionLegend} from "./PageSectionLegend";
+
+const pillSections=[{id:"pill-overview",label:"Overview"},{id:"pill-benefits",label:"Benefits"},{id:"pill-care",label:"Care"},{id:"pill-safety",label:"Safety"}];
+
+const benefits=[
+  ["01","Once-daily pill","An oral GLP-1 routine with no injection device."],
+  ["02","FDA approved","A branded semaglutide medication for chronic weight management in eligible patients."],
+  ["03","Provider guided","An independent licensed provider reviews eligibility, contraindications and follow-up needs."],
+];
+
+function BenefitVisual({number}:{number:string}){
+  if(number==="01") return <div className="pill-benefit-orb pill-tablet-visual"><div className="pill-daily-ring" aria-hidden="true"><span>1</span><small>DAILY</small></div><img src="/novo-pill-daily-v2.png" alt="A pristine Novo-branded daily tablet"/></div>;
+  if(number==="02") return <div className="pill-benefit-orb pill-fda-visual" aria-label="FDA-approved prescription medication"><svg viewBox="0 0 260 260" role="img" aria-labelledby="fda-title"><title id="fda-title">FDA-approved prescription medication</title><defs><path id="fda-orbit" d="M130,28 a102,102 0 1,1 -1,0"/></defs><circle className="fda-ring" cx="130" cy="130" r="92"/><text className="fda-orbit-copy"><textPath href="#fda-orbit" startOffset="4%">FDA APPROVED • PRESCRIPTION MEDICATION •</textPath></text><g className="fda-check"><circle cx="130" cy="130" r="54"/><path d="m100 132 20 20 42-50"/></g><text className="fda-mark" x="130" y="190" textAnchor="middle">FDA</text></svg></div>;
+  return <div className="pill-benefit-orb pill-provider-visual"><img src="/pill-provider-guided-v2.png" alt="A licensed provider guiding care through a telehealth visit"/><span className="provider-signal" aria-hidden="true"><i></i><i></i><i></i></span></div>;
+}
+
+export function WegovyPillExperience(){return <main className="pill-page">
+  <SiteHeader/>
+  <PageSectionLegend items={pillSections} label="Wegovy Pill page sections"/>
+  <section className="pill-hero" id="pill-overview">
+    <div className="pill-hero-copy"><p className="pill-kicker">The first FDA-approved oral GLP-1 for weight management</p><h1>Weight care.<br/><em>Now in a pill.</em></h1><p className="pill-lead">Wegovy® Pill is once-daily prescription semaglutide for eligible adults. The Rejuvonix experience also includes provider-led care, progress check-ins and lifestyle support.</p><div className="pill-actions"><Link className="pill-primary" href="/eligibility/weight-loss">Check eligibility <span>→</span></Link><a href="#pill-safety">Important safety information</a></div></div>
+    <div className="pill-hero-stage"><div className="pill-halo"></div><div className="pill-type" aria-hidden="true">ONCE DAILY</div><img src="/novo-pills-clean.png" alt="Three Wegovy tablets arranged on a Rejuvonix aqua background"/><span className="pill-float float-top">NO INJECTION</span><span className="pill-float float-bottom">SEMAGLUTIDE</span></div>
+  </section>
+  <section className="pill-marquee" aria-label="Wegovy Pill highlights"><span>Once daily</span><i>•</i><span>Needle free</span><i>•</i><span>Provider reviewed</span><i>•</i><span>FDA approved</span></section>
+  <section className="pill-intro"><div><p className="pill-kicker">Meet Wegovy® Pill</p><h2>A familiar ingredient. A new daily format.</h2></div><div><p>Wegovy® Pill contains semaglutide, a GLP-1 receptor agonist. It is used with reduced-calorie nutrition and increased physical activity for chronic weight management in eligible patients.</p><Link href="/eligibility/weight-loss">Start the online assessment →</Link></div></section>
+  <section className="pill-benefits" id="pill-benefits">{benefits.map(([number,title,copy])=><article key={number}><span>{number}</span><BenefitVisual number={number}/><h3>{title}</h3><p>{copy}</p></article>)}</section>
+  <section className="pill-life"><img src="/wegovy-pill-support-unique.png" alt="A member reviewing her care plan from home"/><div className="pill-life-card"><p className="pill-kicker">Designed for real routines</p><h2>Care that lives where you do.</h2><p>Your plan can bring medication guidance, nutrition support, movement education and provider follow-up into one connected online experience.</p><ul><li>Online assessment pathway</li><li>Independent provider review</li><li>Progress and tolerance check-ins</li><li>Order and fulfillment updates</li></ul></div></section>
+  <section className="pill-process" id="pill-care"><div className="pill-process-heading"><p className="pill-kicker">How Rejuvonix works</p><h2>Four clear steps. One connected plan.</h2></div><ol><li><span>01</span><h3>Tell us about your health</h3><p>Complete the approved clinical assessment when it becomes available.</p></li><li><span>02</span><h3>Meet your provider</h3><p>An independent licensed provider reviews your information.</p></li><li><span>03</span><h3>Receive your plan</h3><p>If appropriate, your provider selects treatment and directions.</p></li><li><span>04</span><h3>Stay connected</h3><p>Return for check-ins, questions and next steps.</p></li></ol></section>
+  <section className="pill-support"><div className="pill-support-art"><img src="/wegovy-pill-support-unique.png" alt="A member using the Rejuvonix platform at home"/><span>YOUR CARE<br/>IN ONE PLACE</span></div><div><p className="pill-kicker">Beyond the prescription</p><h2>Support makes the plan sustainable.</h2><p>Medication is one part of a larger care experience. Rejuvonix keeps your assessment, provider communication and progress rhythm together.</p><div className="pill-support-grid"><p><b>01</b>Provider messaging</p><p><b>02</b>Nutrition guidance</p><p><b>03</b>Movement support</p><p><b>04</b>Progress check-ins</p></div></div></section>
+  <section className="pill-safety" id="pill-safety"><div><p className="pill-kicker">Important safety information</p><h2>Understand the risks before treatment.</h2></div><div><p><strong>WARNING: RISK OF THYROID C-CELL TUMORS.</strong> Wegovy® has a boxed warning. Do not use Wegovy® if you or a family member have had medullary thyroid carcinoma or if you have Multiple Endocrine Neoplasia syndrome type 2.</p><p>Tell your provider about all medical conditions, allergies, pregnancy plans, and every medicine or supplement you take. Review the complete prescribing information supplied with the medication.</p><Link href="/safety">Read the full safety overview →</Link></div></section>
+  <section className="pill-closing"><div className="pill-closing-ring" aria-hidden="true"></div><img src="/novo-pills-clean.png" alt="Wegovy tablets"/><div><p className="pill-kicker">Your next step</p><h2>See whether Wegovy® Pill may fit your care plan.</h2><Link className="pill-primary" href="/eligibility/weight-loss">Start the assessment <span>→</span></Link><small>A prescription is not guaranteed.</small></div></section>
+  <SiteFooter/>
+</main>}
