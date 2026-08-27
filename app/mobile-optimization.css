@@ -1,20 +1,50 @@
 .detail-mobile-menu{display:none}
-@media(max-width:1000px){
+
+/* Switch before the desktop navigation can collide with the brand/account row. */
+@media(max-width:1100px){
+  .detail-header{grid-template-columns:minmax(0,1fr) auto auto;gap:12px;padding-inline:clamp(18px,4vw,38px)}
+  .detail-header nav{display:none}
   .detail-mobile-menu{display:block;position:relative;justify-self:end}
   .detail-mobile-menu summary{min-height:42px;padding:0 15px;display:inline-flex;align-items:center;border:1px solid #8d9999;border-radius:999px;color:#30383b;cursor:pointer;font-size:12px;font-weight:800;list-style:none}
   .detail-mobile-menu summary::-webkit-details-marker{display:none}
   .detail-mobile-menu summary:after{content:"＋";margin-left:8px;color:#147f83;font-size:16px}
   .detail-mobile-menu[open] summary:after{content:"×"}
-  .detail-mobile-panel{position:absolute;z-index:80;top:calc(100% + 12px);right:0;width:min(300px,calc(100vw - 38px));padding:10px;display:grid;gap:3px;border:1px solid #d8e4e1;border-radius:16px;background:rgba(255,255,255,.98);box-shadow:0 20px 54px rgba(29,68,68,.16)}
+  .detail-mobile-panel{position:absolute;z-index:80;top:calc(100% + 12px);right:0;width:min(300px,calc(100vw - 38px));padding:8px;display:grid;gap:0;border:1px solid #d8e4e1;border-radius:16px;background:rgba(255,255,255,.98);box-shadow:0 20px 54px rgba(29,68,68,.16)}
   .detail-mobile-panel a{min-height:44px;padding:0 13px;display:flex;align-items:center;border-radius:10px;color:#17384b;font-size:13px;font-weight:750}
   .detail-mobile-panel a:hover,.detail-mobile-panel a:focus-visible{background:#edf8f6;color:#0c7f86}
 }
 @media(max-width:680px){
   html,body,.detail-page,.membership-page,.auth-page,.eligibility-page{overflow-x:hidden}
-  .detail-header{grid-template-columns:1fr auto auto}
+  .site-header{min-width:0}
+  .program-header .nav-links.open{max-height:calc(100dvh - 66px);overflow-y:auto;gap:18px;padding:22px 5vw}
+  .program-header .nav-links.open .nav-menu-group>a{font-size:13px;line-height:1.25}
+  .program-header .nav-links.open .nav-dropdown{padding-top:6px}
+  .program-header .nav-links.open .mega-menu{gap:8px;padding:10px 0 0;max-height:none}
+  .program-header .nav-links.open .mega-menu .mega-title{font-size:11px!important;line-height:1.25}
+  .program-header .nav-links.open .mega-menu .mega-column>a:not(.mega-title){padding:7px 10px;font-size:13px!important;line-height:1.35}
+  .program-header .nav-links.open .mega-existing{padding:12px}
+  .detail-header{grid-template-columns:minmax(0,1fr) auto auto;gap:8px}
+  .detail-header .brand{min-width:0;white-space:nowrap}
   .detail-header>div{gap:0}
   .detail-header .account-only{min-height:40px;padding:0 14px}
   .detail-footer-grid{grid-template-columns:1fr;gap:28px}
   .detail-footer-grid>div:first-child{grid-column:auto}
   .detail-footer-bottom{gap:15px}
+
+  /* A single compact reading rhythm across detail, goal, membership and legal pages. */
+  .detail-page h1,.membership-page h1,.auth-page h1,.eligibility-page h1{line-height:.98;letter-spacing:-.055em}
+  .detail-page h2,.membership-page h2,.auth-page h2,.eligibility-page h2{line-height:1;letter-spacing:-.05em}
+  .detail-page p,.membership-page p,.auth-page p,.eligibility-page p{line-height:1.6}
+  .detail-kicker,.eyebrow{line-height:1.25;margin-bottom:16px}
+  .product-hero-copy,.collection-hero>div,.info-hero>div,.goal-hero,.service-hero,.legal-hero,.auth-form,.start-panel{padding-block:58px}
+  .detail-footer-grid>div{gap:10px}
+}
+
+/* Keep the expanded homepage menu aligned with the two-column goal panel. */
+@media (min-width:681px) and (max-width:1050px){
+  .program-header .nav-links.open{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:24px;row-gap:18px}
+  .program-header .nav-links.open .goals-menu{grid-column:1/-1}
+  .program-header .nav-links.open .membership-menu{grid-column:1}
+  .program-header .nav-links.open .resource-menu{grid-column:2}
+  .program-header .nav-links.open .about-menu{grid-column:1/-1}
 }
