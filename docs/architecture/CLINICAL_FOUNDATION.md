@@ -5,8 +5,9 @@ regression contracts without introducing patient data or changing the live
 marketing experience. The initial domain model remains the approved logical
 boundary: identity, patient, clinical, consent, and security records only.
 
-The synthetic clinical journey is not yet exposed as a public API. Before it is
-enabled, the application needs a reviewed Cognito verifier, PostgreSQL runtime
-adapter, migrations applied to staging, Secrets Manager integration, and
-server-side object authorization. This explicit boundary prevents a UI-only or
-in-memory prototype from being mistaken for a clinical system.
+The first authenticated synthetic non-PHI application API surface is exposed under
+`/api/v1/`: `auth/me`, `patients/me`, `consents`, `appointments`, and
+`clinician/patients`. It requires a reviewed Cognito verifier, PostgreSQL
+runtime adapter, the reviewed non-PHI baseline migration, Secrets Manager integration,
+and server-side object authorization. The public marketing site remains
+anonymous.

@@ -52,7 +52,7 @@ by these server APIs. It must not be described as production authentication.
 
 ## C. Database and PHI disposition
 
-`users`, RBAC tables, sessions, non-PHI patient/profile metadata, consent
+`users`, RBAC tables, non-PHI patient/profile metadata, consent
 metadata, appointments/reference state, clinician assignment metadata, and
 audit/access/security events are valid candidates. The current schema also
 defines `encounters` and `treatment_plans`; their `summary` fields are
@@ -60,22 +60,24 @@ potentially clinical content and cannot be treated as approved non-PHI storage.
 
 ## D. `encounters`
 
-**Disposition: EMBERFLOW-OWNED / LEGACY SCHEMA — NO NEW PHI WRITES.** Current columns:
+**Disposition: EMBERFLOW-OWNED / LEGACY SCHEMA — NO NEW PHI WRITES.** Historical columns:
 `id`, `patient_id`, `clinician_id`, `appointment_id`, `status`, `summary`,
 `created_at`, and `updated_at`. It is defined in the baseline SQL and Drizzle
 schema but has no active API route or runtime query in the dirty work. The
-`summary` field is PHI-risk-bearing. Rejuvonix must not use this table as a
+`summary` field is PHI-risk-bearing. The fresh non-PHI baseline intentionally
+does not create this table. Rejuvonix must not use this table as a
 clinical record store or populate `summary` or any other clinical-content field.
 Do not narrow or drop the historical schema without an applied-state check and
 an approved migration plan.
 
 ## E. `treatment_plans`
 
-**Disposition: EMBERFLOW-OWNED / LEGACY SCHEMA — NO NEW PHI WRITES.** Current columns:
+**Disposition: EMBERFLOW-OWNED / LEGACY SCHEMA — NO NEW PHI WRITES.** Historical columns:
 `id`, `patient_id`, `clinician_id`, `status`, `summary`, `created_at`, and
 `updated_at`. It is defined in the baseline SQL and Drizzle schema but has no
 active API route or runtime query in the dirty work. The `summary` field can
-contain treatment decisions or clinical notes. Rejuvonix must not use this
+contain treatment decisions or clinical notes. The fresh non-PHI baseline
+intentionally does not create this table. Rejuvonix must not use this
 table as a treatment record store or populate `summary` or other clinical
 treatment content. Do not narrow or drop the historical schema during this
 gate.
@@ -94,11 +96,15 @@ gate.
 
 ## I. Migration disposition
 
-`0000_lively_edwin_jarvis.sql` is the historical baseline and creates both
-legacy clinical-shaped tables. The uncommitted journal change adds
-`0001_seed_clinical_roles.sql`, which seeds roles and permissions. The seed is
-likely operationally needed for principal mapping, but its applied state is
-unknown and must not be committed or executed based only on local files.
+`0000_lively_edwin_jarvis.sql` is historical and creates legacy
+clinical-shaped tables; it is superseded and must not be applied to fresh
+environments. `0001_seed_clinical_roles.sql` is also superseded by the current
+non-PHI authorization seed and must not be reused unchanged.
+
+The fresh environment uses
+`drizzle/postgres-baseline/0000_rejuvonix_non_phi_baseline.sql` with an
+independent Drizzle journal. It contains only the current non-PHI application
+schema and least-privilege authorization seed.
 
 The migration runner is explicit rather than startup-triggered, and the local
 approval-confirmation guard is present in the committed reconciliation. No
