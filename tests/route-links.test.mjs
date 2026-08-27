@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+const { default: worker } = await import("../dist/server/index.js");
+
 const publicRoutes = [
   "/",
   "/compounded",
@@ -19,9 +21,6 @@ const publicRoutes = [
 ];
 
 async function fetchWorker(path) {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("route-audit", `${process.pid}-${Date.now()}-${path}`);
-  const { default: worker } = await import(workerUrl.href);
   return worker.fetch(
     new Request(`http://localhost${path}`),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },

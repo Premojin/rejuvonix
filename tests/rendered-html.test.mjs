@@ -1,11 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-test("renders the public home page metadata and content", async () => {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
+const { default: worker } = await import("../dist/server/index.js");
 
+test("renders the public home page metadata and content", async () => {
   const response = await worker.fetch(
     new Request("http://localhost/", {
       headers: { accept: "text/html" },
@@ -32,10 +30,6 @@ test("renders the public home page metadata and content", async () => {
 });
 
 test("exposes a non-sensitive health response", async () => {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("health", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-
   const response = await worker.fetch(
     new Request("http://localhost/api/health", {
       headers: { accept: "application/json" },

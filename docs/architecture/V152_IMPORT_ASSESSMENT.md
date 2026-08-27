@@ -78,3 +78,13 @@ The current governed sign-in page and server `/api/v1` auth/RBAC routes remain i
 - TypeScript and the initial build passed after the import; the full test command must be rechecked after the preview routes were added.
 - Local checks: `/`, `/api/health`, `/treatments`, `/compounded`, `/eligibility`, `/get-started`, `/sign-in`, `/sign-up`, `/account`, `/membership`, `/connected-health`, `/support`, `/faq`, and approved goal pages are expected to be verified on port 5177.
 - The v152 title change was not accepted; the current governed `Rejuvonix | Online Weight Care` metadata and homepage phrase were restored so existing contract tests remain authoritative.
+
+## Formal runtime reconciliation
+
+- The v152 product experience remains present, while the server authority is Cognito JWT verification, local identity mapping, RBAC, and object authorization.
+- The preview account/sessionStorage journey remains explicitly simulation-only and is not accepted as production identity.
+- PostgreSQL/Drizzle/`pg` remain the application data path. Legacy `encounters` and `treatment_plans` are classified as EmberFlow-owned/owner-review entities and are not exposed as clinical APIs.
+- `ClinicalDataProvider` now exposes only a Rejuvonix-owned workflow boundary. The mock provider can be selected only in local/test environments; the default result is `INTEGRATION_NOT_CONFIGURED`.
+- A workflow API rejects clinical payload keys before any persistence and does not invent an EmberFlow endpoint, auth, webhook, payload, or credential contract.
+- Migration execution is not part of startup and now requires explicit approval confirmation. Historical clinical-shaped migrations remain classified, not deleted or run.
+- The test harness reuses one built worker per test file instead of cache-busting generated-server imports per request. This allows `npm test` to complete and exposes real route/content assertions.

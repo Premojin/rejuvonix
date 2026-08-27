@@ -34,3 +34,18 @@ V152 is suitable for local product review, not for blind branch merge or deploym
 ## Selective import recorded
 
 The current branch now contains the v152 public/product UI, routes, components, styles, assets, and clearly labeled fictional account preview. The current branch’s dirty clinical/runtime, auth, PostgreSQL, migration, Terraform, and governance work was preserved. V152 package/runtime, database, provider, ChatGPT-auth, and governance replacements were not imported. This remains a local review state requiring owner reconciliation before any remote integration.
+
+## Formal reconciliation status
+
+| Area | Current reconciled state | Decision |
+|---|---|---|
+| Authentication | Cognito/JWT/RBAC runtime; v152 account remains a labeled preview | KEEP CURRENT; DEMO AUTH ONLY |
+| API | Governed `/api/v1` routes plus guarded workflow boundary | KEEP CURRENT; MERGE SAFE BOUNDARY |
+| Provider | Internal `ClinicalDataProvider`; local mock only by explicit local/test selection | MERGE |
+| PHI | Clinical payload keys rejected; no Rejuvonix clinical persistence | REBUILD/ENFORCE |
+| PostgreSQL | Drizzle + `pg` for identity, RBAC, profile, consent, references, and events | KEEP CURRENT |
+| Legacy clinical tables | `encounters`, `treatment_plans` retained for classification only | EMBERFLOW-OWNED / OWNER REVIEW |
+| Migrations | Historical baseline preserved; explicit confirmation guard; no execution | KEEP HISTORY; DEFER |
+| Runtime | Node 22 and Vinext production dependency remain required | KEEP CURRENT |
+| Tests | Built worker reused per file so suite exits reliably | MERGE |
+| AI | No implementation | KEEP PAUSED |

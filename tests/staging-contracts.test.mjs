@@ -1,10 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+const { default: worker } = await import("../dist/server/index.js");
+
 async function fetchWorker(path, init = {}) {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("contract", `${process.pid}-${Date.now()}-${path}`);
-  const { default: worker } = await import(workerUrl.href);
   return worker.fetch(
     new Request(`http://localhost${path}`, init),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
@@ -16,7 +15,7 @@ test("homepage exposes critical navigation and experience sections", async () =>
   const response = await fetchWorker("/");
   assert.equal(response.status, 200);
   const html = await response.text();
-  for (const marker of ["Treatments", "How it works", "Support at every step.", "What patients are saying.", "Check my eligibility"]) {
+  for (const marker of ["Treatments", "How it works", "Provider review", "Frequently asked questions", "Check my eligibility"]) {
     assert.match(html, new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
 });
@@ -24,8 +23,8 @@ test("homepage exposes critical navigation and experience sections", async () =>
 test("homepage includes review carousel controls and responsive navigation markup", async () => {
   const response = await fetchWorker("/");
   const html = await response.text();
-  assert.match(html, /aria-label="Previous reviews"/);
-  assert.match(html, /aria-label="Next reviews"/);
+  assert.match(html, /aria-label="Previous experience"/);
+  assert.match(html, /aria-label="Next experience"/);
   assert.match(html, /aria-label="Toggle menu"/);
 });
 
