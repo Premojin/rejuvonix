@@ -105,10 +105,12 @@ approval-confirmation guard is present in the committed reconciliation. No
 migration was run here. There is no safe basis to claim the staging journal
 matches the local journal.
 
-**Current inspection classification: D. UNABLE TO VERIFY SAFELY.** The staging
-RDS instance is private, ECS Exec is disabled, and no already-approved private
-one-off inspector was available in the repository or environment. No SQL was
-run and no migration state, table presence, or role names are claimed here.
+**Current inspection classification: C. CLINICAL/NON-PHI SCHEMA MIGRATION
+MISSING.** A temporary private Fargate inspector completed a TLS-verified,
+read-only transaction inside the existing staging network. PostgreSQL 16.4
+reported only the `public` schema, no migration-tracking table, no expected
+application tables, and no expected role names. The baseline and role seed were
+not executed during this inspection.
 
 ## J. Terraform disposition
 
@@ -132,7 +134,7 @@ separate runtime environment values.
 
 RDS read-only metadata shows 7-day automated backup retention, an available
 automated snapshot dated 2026-08-26, and latest restorable time
-2026-08-27T02:52:44Z. A restore has not been tested.
+2026-08-27T03:42:45Z. A restore has not been tested.
 
 ## K. Recommended future commit groups
 
@@ -159,15 +161,16 @@ automated snapshot dated 2026-08-26, and latest restorable time
   workstream; current preview/sessionStorage auth is local demo only.
 - Network investigation: deferred and out of scope.
 
-The staging role-seed state and Cognito/ECS Terraform reconciliation remain
-inspection gates, not resolved by this owner decision record.
+The role-seed migration remains a separate owner-approved migration gate. The
+Terraform reconciliation remains a separate infrastructure gate.
 
 ## M. Staging readiness impact
 
-**CONDITIONALLY READY — MIGRATION AND TERRAFORM GATES REMAIN.** Local application gates
+**CONDITIONALLY READY — DATABASE MIGRATION AND TERRAFORM GATES REMAIN.** Local application gates
 passed on the prior scoped reconciliation commit, and the owner decisions for
 legacy clinical-shaped tables, clinician API scope, preview UX, and network
-investigation are recorded. The role-seed applied state and Terraform/AWS
-reconciliation still require read-only verification before remote integration.
+investigation are recorded. The staging database requires the separately
+approved baseline and role-seed migration plan; Terraform/AWS reconciliation
+also remains pending.
 
 **AI IMPLEMENTATION PAUSED.** No AI implementation was modified or resumed.
