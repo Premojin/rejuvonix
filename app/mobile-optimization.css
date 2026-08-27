@@ -1,0 +1,20 @@
+.detail-mobile-menu{display:none}
+@media(max-width:1000px){
+  .detail-mobile-menu{display:block;position:relative;justify-self:end}
+  .detail-mobile-menu summary{min-height:42px;padding:0 15px;display:inline-flex;align-items:center;border:1px solid #8d9999;border-radius:999px;color:#30383b;cursor:pointer;font-size:12px;font-weight:800;list-style:none}
+  .detail-mobile-menu summary::-webkit-details-marker{display:none}
+  .detail-mobile-menu summary:after{content:"＋";margin-left:8px;color:#147f83;font-size:16px}
+  .detail-mobile-menu[open] summary:after{content:"×"}
+  .detail-mobile-panel{position:absolute;z-index:80;top:calc(100% + 12px);right:0;width:min(300px,calc(100vw - 38px));padding:10px;display:grid;gap:3px;border:1px solid #d8e4e1;border-radius:16px;background:rgba(255,255,255,.98);box-shadow:0 20px 54px rgba(29,68,68,.16)}
+  .detail-mobile-panel a{min-height:44px;padding:0 13px;display:flex;align-items:center;border-radius:10px;color:#17384b;font-size:13px;font-weight:750}
+  .detail-mobile-panel a:hover,.detail-mobile-panel a:focus-visible{background:#edf8f6;color:#0c7f86}
+}
+@media(max-width:680px){
+  html,body,.detail-page,.membership-page,.auth-page,.eligibility-page{overflow-x:hidden}
+  .detail-header{grid-template-columns:1fr auto auto}
+  .detail-header>div{gap:0}
+  .detail-header .account-only{min-height:40px;padding:0 14px}
+  .detail-footer-grid{grid-template-columns:1fr;gap:28px}
+  .detail-footer-grid>div:first-child{grid-column:auto}
+  .detail-footer-bottom{gap:15px}
+}

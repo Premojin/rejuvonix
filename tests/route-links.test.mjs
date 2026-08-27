@@ -79,3 +79,11 @@ test("health remains minimal and public clinical portal paths are not exposed", 
     assert.equal(response.status, 404, `${path} is not an implemented public route`);
   }
 });
+
+test("Jin Health is not exposed in shared navigation", async () => {
+  const response = await fetchWorker("/treatments");
+  const html = await response.text();
+  assert.match(html, /class="detail-mobile-menu"/);
+  assert.doesNotMatch(html, />Jin Health</);
+  assert.doesNotMatch(html, />Jin Connected Health</);
+});
