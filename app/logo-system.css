@@ -1,0 +1,33 @@
+/*
+ * Shared Rejuvonix logo contract.
+ *
+ * These dimensions match the Weight Loss detail experience and apply to every
+ * shared header/footer so new pages inherit the same brand scale by default.
+ */
+.site-header .brand img,
+.detail-header .brand img,
+.eligibility-header .eligibility-brand img {
+  width: 50px !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+.footer-main .brand img,
+.detail-footer-grid .footer-brand img {
+  width: 150px !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+@media (max-width: 680px) {
+  .site-header .brand img,
+  .detail-header .brand img,
+  .eligibility-header .eligibility-brand img {
+    width: 39px !important;
+  }
+
+  .footer-main .brand img,
+  .detail-footer-grid .footer-brand img {
+    width: 120px !important;
+  }
+}
