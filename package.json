@@ -10,7 +10,7 @@
     "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vite",
     "build": "bash scripts/build-verified.sh",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs tests/homepage-interactions.test.mjs tests/staging-contracts.test.mjs tests/route-links.test.mjs tests/postgres-baseline.test.mjs && node --experimental-strip-types --test tests/authorization.test.mjs tests/clinical-runtime.test.mjs tests/provider-boundary.test.mjs tests/crm-provider.test.mjs tests/crm-models.test.mjs",
+    "test": "npm run build && node --test tests/rendered-html.test.mjs tests/homepage-interactions.test.mjs tests/staging-contracts.test.mjs tests/route-links.test.mjs tests/postgres-baseline.test.mjs tests/protocol-catalog.test.mjs && node --experimental-strip-types --test tests/authorization.test.mjs tests/clinical-runtime.test.mjs tests/provider-boundary.test.mjs tests/crm-provider.test.mjs tests/crm-models.test.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "bash scripts/sites-env.sh -- eslint . --ignore-pattern dist --ignore-pattern .next",
     "governance:validate": "node scripts/validate-governance.mjs",
