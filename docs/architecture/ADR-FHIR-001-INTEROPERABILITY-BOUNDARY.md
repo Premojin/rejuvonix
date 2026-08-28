@@ -1,7 +1,12 @@
 # ADR-FHIR-001: Interoperability Boundary
 
-**Status:** PROPOSED / PENDING EMBERFLOW CONTRACT CONFIRMATION
+**Status:** RETAINED AS DOWNSTREAM INTEROPERABILITY REFERENCE; DIRECT FHIR/EMBERFLOW PATH DEMOTED
 **Date:** 2026-08-27
+
+> **Amendment 2026-08-27:** Owner clarification establishes EmberFlow CRM as
+> the current Rejuvonix boundary. This ADR is not the active primary integration
+> plan. It remains reference architecture for a possible downstream
+> EmberFlow/EMR environment. See `ADR-CRM-001-EMBERFLOW-CRM-BOUNDARY.md`.
 
 ## Context
 
