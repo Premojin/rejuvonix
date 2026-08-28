@@ -4,8 +4,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { GoalMegaMenu } from "./components/SiteChrome";
 import { careJourney } from "./components/CareJourney";
-import { products } from "./components/product-data";
-import { TreatmentCard } from "./components/TreatmentCard";
 
 const legacyJourney = [
   ["01","Program selected","Choose the area where you want support."],
@@ -132,12 +130,6 @@ export default function Home() {
       <div className="wellness-tabs" role="tablist" aria-label="Wellness programs">{wellnessPrograms.map((program,index)=><button key={program.name} className={programActive===index?"active":""} onClick={()=>setProgramActive(index)} role="tab" aria-selected={programActive===index}><span>{program.number}</span><strong>{program.name}</strong><small>{program.kicker}</small><i><b></b></i></button>)}</div>
     </section>
 
-    <section className="section-shell" id="treatments">
-      <div className="section-heading"><div><p className="eyebrow">Treatment options</p><h2>Find out which option may be right for you.</h2></div><p>A provider reviews your health history, preferences and goals before recommending treatment.</p></div>
-      <div className="treatment-grid branded-grid">{products.map((product,index)=><TreatmentCard product={product} index={index} key={product.slug}/>)}</div>
-      <p className="section-disclaimer">Prescription products require an online consultation with an independent licensed healthcare provider who determines whether a prescription is appropriate. Compounded medications are not FDA approved.</p>
-    </section>
-
     <section className="bmi-section" aria-labelledby="bmi-title">
       <div className="bmi-intro"><p className="eyebrow">A useful starting point</p><h2 id="bmi-title">Check your BMI.</h2><p>Enter your height and weight for a quick estimate. A licensed provider considers your full health history, not BMI alone.</p></div>
       <div className="bmi-card">
@@ -174,8 +166,8 @@ export default function Home() {
     <section className="compounded-section" id="compounded">
       <div className="compounded-intro"><p className="eyebrow">Compounded medications</p><h2>Compare semaglutide and tirzepatide.</h2><p>An independent provider may prescribe a compounded medication when it is legally available and appropriate for the patient. Compounded medications are not generic versions of branded drugs, and they are not FDA approved.</p></div>
       <div className="glance-grid">
-        <article className="glance-card semaglutide"><img className="glance-silhouette homepage-vial-silhouette" src="/homepage-semaglutide-silhouette.png" alt="" aria-hidden="true" /><div className="glance-content"><div className="glance-number">01</div><p className="pill-label">Compounded option</p><h3>Semaglutide</h3><p className="glance-sub">Acts on the GLP-1 receptor.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></div></article>
-        <article className="glance-card tirzepatide"><img className="glance-silhouette homepage-vial-silhouette" src="/homepage-tirzepatide-silhouette.png" alt="" aria-hidden="true" /><div className="glance-content"><div className="glance-number">02</div><p className="pill-label">Compounded option</p><h3>Tirzepatide</h3><p className="glance-sub">Acts on the GIP and GLP-1 receptors.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></div></article>
+        <article className="glance-card semaglutide"><img className="glance-silhouette homepage-vial-silhouette" src="/glp1-vial-neutral-v2.png" alt="" aria-hidden="true" /><div className="glance-content"><div className="glance-number">01</div><p className="pill-label">Compounded option</p><h3>Semaglutide</h3><p className="glance-sub">Acts on the GLP-1 receptor.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></div></article>
+        <article className="glance-card tirzepatide"><img className="glance-silhouette homepage-vial-silhouette" src="/tirzepatide-vial-clean.png" alt="" aria-hidden="true" /><div className="glance-content"><div className="glance-number">02</div><p className="pill-label">Compounded option</p><h3>Tirzepatide</h3><p className="glance-sub">Acts on the GIP and GLP-1 receptors.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><button onClick={openQuiz}>Check eligibility <span>→</span></button></div></article>
       </div><p className="compounded-note">*Form, ingredients, concentration and availability vary by prescription and dispensing pharmacy. Compounded medications are prepared for an identified patient and are not reviewed by FDA for safety, effectiveness or quality before marketing.</p>
     </section>
 
@@ -231,7 +223,7 @@ export default function Home() {
 
     {quizOpen && <div className="modal-backdrop" onMouseDown={(e) => e.target === e.currentTarget && setQuizOpen(false)}><section className="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="quiz-title"><button className="modal-close" onClick={() => setQuizOpen(false)} aria-label="Close">×</button><div className="quiz-brand"><img src="/rejuvonix-logo-mark.png" alt="" />REJUVONIX<span>.</span></div>
       {step < 3 ? <><div className="progress"><span style={{width:`${(step + 1) * 33.33}%`}}></span></div><p className="quiz-step">Question {step + 1} of 3</p><h2 id="quiz-title">{["What would you most like help achieving?","How would you prefer to receive treatment?","Do you plan to use insurance?"][step]}</h2><div className="quiz-options">{[["Lose weight","Control my appetite","Improve metabolic health","Maintain my progress"],["Weekly injection","Daily pill","I’m open to either","Let a provider help me decide"],["Yes","No","I’m not sure"]][step].map(option => <button key={option} onClick={() => choose(option)}>{option}<span>→</span></button>)}</div>{step > 0 && <button className="back-button" onClick={() => setStep(step - 1)}>← Back</button>}</>
-      : <div className="quiz-result"><span className="result-mark">✓</span><p className="eyebrow">Your next step</p><h2 id="quiz-title">You may have more than one treatment option.</h2><p>Continue to the non-submitting assessment preview. A licensed provider would determine what may be appropriate after the approved clinical intake is connected.</p><button className="primary" onClick={openQuiz}>Continue to assessment</button><button className="secondary" onClick={() => {setQuizOpen(false); document.getElementById("treatments")?.scrollIntoView({behavior:"smooth"});}}>Compare treatments first</button><small>Completing an assessment does not guarantee a prescription.</small></div>}
+      : <div className="quiz-result"><span className="result-mark">✓</span><p className="eyebrow">Your next step</p><h2 id="quiz-title">You may have more than one treatment option.</h2><p>Continue to the non-submitting assessment preview. A licensed provider would determine what may be appropriate after the approved clinical intake is connected.</p><button className="primary" onClick={openQuiz}>Continue to assessment</button><button className="secondary" onClick={() => {setQuizOpen(false); window.location.href="/treatments";}}>Compare treatments first</button><small>Completing an assessment does not guarantee a prescription.</small></div>}
     </section></div>}
   </main>;
 }
