@@ -18,6 +18,31 @@ const publicRoutes = [
   "/treatments/wegovy-pill",
   "/treatments/wegovy-injection",
   "/treatments/zepbound-injection",
+  "/protocols",
+  "/protocols/weight-loss",
+  "/protocols/performance",
+  "/protocols/sexual-health",
+  "/protocols/hair-restoration",
+  "/protocols/skin-regeneration",
+  "/protocols/semaglutide",
+  "/protocols/tirzepatide",
+  "/protocols/aod-9604",
+  "/protocols/mots-c",
+  "/protocols/tesamorelin",
+  "/protocols/cjc-1295-ipamorelin",
+  "/protocols/sermorelin",
+  "/protocols/epithalon",
+  "/protocols/ghk-cu",
+  "/protocols/bpc-157",
+  "/protocols/tb-500",
+  "/protocols/ss-31",
+  "/protocols/thymosin-alpha-1",
+  "/protocols/glutathione",
+  "/protocols/semax-selank",
+  "/protocols/dsip",
+  "/protocols/nad-plus",
+  "/protocols/pt-141",
+  "/protocols/gonadorelin",
 ];
 
 async function fetchWorker(path) {
@@ -40,6 +65,8 @@ test("all canonical public routes render and invalid routes return 404", async (
 
   const invalid = await fetchWorker("/treatments/not-a-real-treatment");
   assert.equal(invalid.status, 404);
+  const invalidProtocol = await fetchWorker("/protocols/not-a-real-protocol");
+  assert.equal(invalidProtocol.status, 404);
 });
 
 test("public internal links resolve without broken routes or anchors", async () => {

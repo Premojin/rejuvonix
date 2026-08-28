@@ -1,0 +1,88 @@
+{
+  "semaglutide": {
+    "status": "official-documentation",
+    "label": "Official prescribing information \u00b7 COA not required",
+    "url": "https://www.novo-pi.com/wegovy.pdf",
+    "source": "Official product prescribing information"
+  },
+  "tirzepatide": {
+    "status": "official-documentation",
+    "label": "Official prescribing information \u00b7 COA not required",
+    "url": "https://pi.lilly.com/us/zepbound-uspi.pdf",
+    "source": "Official product prescribing information"
+  },
+  "tesamorelin": {
+    "status": "official-documentation",
+    "label": "Official prescribing information \u00b7 COA not required",
+    "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/022505s020lbl.pdf",
+    "source": "U.S. FDA"
+  },
+  "ss-31": {
+    "status": "official-documentation",
+    "label": "Official prescribing information \u00b7 COA not required",
+    "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/215244s000lbl.pdf",
+    "source": "U.S. FDA"
+  },
+  "pt-141": {
+    "status": "official-documentation",
+    "label": "Official prescribing information \u00b7 COA not required",
+    "url": "https://vyleesi.com/docs/Vyleesi-Full-Prescribing-Information.pdf",
+    "source": "Official product prescribing information"
+  },
+  "aod-9604": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "mots-c": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "cjc-1295-ipamorelin": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "sermorelin": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "epithalon": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "ghk-cu": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "bpc-157": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "tb-500": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "thymosin-alpha-1": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "glutathione": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "semax-selank": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "dsip": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "nad-plus": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  },
+  "gonadorelin": {
+    "status": "pending-verification",
+    "label": "COA pending verification"
+  }
+}

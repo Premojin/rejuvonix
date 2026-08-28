@@ -1,0 +1,124 @@
+{
+  "version": 4,
+  "policy": {
+    "fdaApproved": "Official prescribing information; COA not required for FDA-approved finished-product pathways.",
+    "otherItems": "Import an existing certificate only after exact item-to-document verification.",
+    "certificateIntegrity": "Original certificate contents remain unchanged."
+  },
+  "items": [
+    {
+      "slug": "semaglutide",
+      "name": "Semaglutide",
+      "status": "official-documentation",
+      "document": "https://www.novo-pi.com/wegovy.pdf"
+    },
+    {
+      "slug": "tirzepatide",
+      "name": "Tirzepatide",
+      "status": "official-documentation",
+      "document": "https://pi.lilly.com/us/zepbound-uspi.pdf"
+    },
+    {
+      "slug": "aod-9604",
+      "name": "AOD-9604",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "mots-c",
+      "name": "MOTS-C",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "tesamorelin",
+      "name": "Tesamorelin",
+      "status": "official-documentation",
+      "document": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/022505s020lbl.pdf"
+    },
+    {
+      "slug": "cjc-1295-ipamorelin",
+      "name": "CJC-1295 / Ipamorelin",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "sermorelin",
+      "name": "Sermorelin",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "epithalon",
+      "name": "Epithalon",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "ghk-cu",
+      "name": "GHK-Cu",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "bpc-157",
+      "name": "BPC-157",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "tb-500",
+      "name": "TB-500",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "ss-31",
+      "name": "SS-31 / Elamipretide",
+      "status": "official-documentation",
+      "document": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/215244s000lbl.pdf"
+    },
+    {
+      "slug": "thymosin-alpha-1",
+      "name": "Thymosin Alpha-1",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "glutathione",
+      "name": "Glutathione",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "semax-selank",
+      "name": "Semax / Selank",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "dsip",
+      "name": "DSIP",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "nad-plus",
+      "name": "NAD+",
+      "status": "pending-verification",
+      "document": null
+    },
+    {
+      "slug": "pt-141",
+      "name": "PT-141 / Bremelanotide",
+      "status": "official-documentation",
+      "document": "https://vyleesi.com/docs/Vyleesi-Full-Prescribing-Information.pdf"
+    },
+    {
+      "slug": "gonadorelin",
+      "name": "Gonadorelin",
+      "status": "pending-verification",
+      "document": null
+    }
+  ]
+}
