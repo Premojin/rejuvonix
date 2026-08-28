@@ -17,7 +17,8 @@
     "smoke:staging": "bash scripts/staging-smoke.sh",
     "db:generate": "bash scripts/sites-env.sh -- drizzle-kit generate",
     "db:generate:postgres": "drizzle-kit generate --config drizzle.postgres.config.ts",
-    "db:migrate:postgres": "node --experimental-strip-types scripts/migrate-postgres.ts"
+    "db:migrate:postgres": "node --experimental-strip-types scripts/migrate-postgres.ts",
+    "protocols:verify-coa": "node scripts/verify-biopivot-coa-imports.mjs"
   },
   "dependencies": {
     "aws-jwt-verify": "^5.2.1",

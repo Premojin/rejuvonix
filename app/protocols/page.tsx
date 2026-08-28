@@ -13,6 +13,7 @@ export default function ProtocolsPage(){
       <Link className="active" href="/protocols">All Protocols</Link>
       {protocolGoals.map((goal)=><Link href={`/protocols/${goal.slug}`} key={goal.slug}>{goal.name}</Link>)}
     </nav>
+    <section className="protocol-documentation-key" aria-label="Protocol documentation key"><article><strong>FDA-approved finished products</strong><span>Official FDA/manufacturer documentation. COA not required.</span></article><article><strong>Verified BioPivot COA</strong><span>Exact item certificate may be imported with source traceability.</span></article><article><strong>Pending verification</strong><span>No certificate is shown until the BioPivot item-to-document match is verified.</span></article></section>
     <section className="protocol-library" id="all-protocols">
       <div className="protocol-library-heading"><div><p className="detail-kicker">All protocols</p><h2>One library. Clear pathways.</h2></div><p>The catalog is organized using the Rejuvonix goals while retaining the source-category context needed for clinical and compliance review.</p></div>
       <div className="protocol-grid">
@@ -21,7 +22,7 @@ export default function ProtocolsPage(){
           <span className="protocol-card-category">{protocol.sourceCategory}</span>
           <h3>{protocol.name}</h3><p>{protocol.summary}</p>
           <span className="protocol-goal-tags">{protocol.goals.map((goal)=><i key={goal}>{protocolGoals.find((item)=>item.slug===goal)?.name}</i>)}</span>
-          <span className={`protocol-doc-status status-${protocol.documentation.status}`}>{protocol.documentation.status==="coa-verified"?"COA available":protocol.documentation.label}</span>
+          <span className={`protocol-doc-status status-${protocol.documentation.status}`}>{protocol.approval.status==="fda-approved"?"Official documentation · COA not required":protocol.bioPivotCoa.status==="verified"?"BioPivot COA imported":"BioPivot COA verification pending"}</span>
           <b>View protocol →</b>
         </Link>)}
       </div>
