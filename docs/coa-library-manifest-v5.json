@@ -1,0 +1,342 @@
+{
+  "semaglutide": {
+    "status": "official-documentation",
+    "label": "Official product documentation",
+    "url": "https://www.novo-pi.com/wegovy.pdf",
+    "source": "Official product prescribing information",
+    "batches": [
+      {
+        "id": "semaglutide-lg343002572",
+        "label": "Compounded semaglutide batch",
+        "formulation": "Semaglutide/Glycine 2.5 mg/2.5 mg/mL \u00b7 2 mL vial",
+        "lot": "LG343002572",
+        "laboratory": "FOCUS Laboratories",
+        "testedAt": "2026-02-02",
+        "url": "/documents/coa/semaglutide-lg343002572.pdf",
+        "sha256": "23510ddc379335c2c9ad4714856e50eebfb1edcce230e66b4cf96e0c50ea33ab"
+      },
+      {
+        "id": "semaglutide-221336",
+        "label": "Compounded semaglutide batch",
+        "formulation": "Semaglutide 4 mg/Glycine 5 mg/mL \u00b7 solution for injection",
+        "lot": "221336",
+        "laboratory": "Eagle Analytical Services",
+        "testedAt": "2026-04-07",
+        "url": "/documents/coa/semaglutide-221336.pdf",
+        "sha256": "03635fee89b159dc3ad11258ee9ff5f3d3328239430c587ae0d88fb7932019ae"
+      }
+    ]
+  },
+  "tirzepatide": {
+    "status": "official-documentation",
+    "label": "Official product documentation",
+    "url": "https://pi.lilly.com/us/zepbound-uspi.pdf",
+    "source": "Official product prescribing information",
+    "batches": [
+      {
+        "id": "tirzepatide-lg343002574",
+        "label": "Compounded tirzepatide batch",
+        "formulation": "Tirzepatide/Glycine 10 mg/5 mg/mL \u00b7 1 mL vial",
+        "lot": "LG343002574",
+        "laboratory": "FOCUS Laboratories",
+        "testedAt": "2026-02-02",
+        "url": "/documents/coa/tirzepatide-lg343002574.pdf",
+        "sha256": "894cefff4a88f12f5b17f297eff74ba05db04d6f0541d71098d226a35ca3847e"
+      },
+      {
+        "id": "tirzepatide-221816",
+        "label": "Compounded tirzepatide batch",
+        "formulation": "Tirzepatide 20 mg/Glycine 5 mg/mL \u00b7 injection solution",
+        "lot": "221816",
+        "laboratory": "Eagle Analytical Services",
+        "testedAt": "2026-04-07",
+        "url": "/documents/coa/tirzepatide-221816.pdf",
+        "sha256": "8894ce6aedbe0dca84375a3b7667a88a09443aa5dd995f16bea58e83a54d2c77"
+      }
+    ]
+  },
+  "tesamorelin": {
+    "status": "official-documentation",
+    "label": "Official product documentation",
+    "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/022505s020lbl.pdf",
+    "source": "U.S. FDA",
+    "batches": [
+      {
+        "id": "tesamorelin-0037-070326-1",
+        "label": "Compounded tesamorelin batch",
+        "formulation": "Tesamorelin 3 mg/mL solution",
+        "lot": "0037-070326-1",
+        "laboratory": "Miraxis Labs",
+        "testedAt": "2026-07-13",
+        "url": "/documents/coa/tesamorelin-0037-070326-1.pdf",
+        "sha256": "9e285530c3ab1a5a241b126661fc5830df3bd6a13e1a76dc66507aac4a958c0d"
+      }
+    ]
+  },
+  "ss-31": {
+    "status": "official-documentation",
+    "label": "Official product documentation",
+    "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/215244s000lbl.pdf",
+    "source": "U.S. FDA",
+    "batches": []
+  },
+  "pt-141": {
+    "status": "official-documentation",
+    "label": "Official product documentation",
+    "url": "https://vyleesi.com/docs/Vyleesi-Full-Prescribing-Information.pdf",
+    "source": "Official product prescribing information",
+    "batches": [
+      {
+        "id": "pt-141-0035-062526-1",
+        "label": "Compounded PT-141 batch",
+        "formulation": "PT-141 2 mg/mL solution",
+        "lot": "0035-062526-1",
+        "laboratory": "Miraxis Labs",
+        "testedAt": "2026-07-03",
+        "url": "/documents/coa/pt-141-0035-062526-1.pdf",
+        "sha256": "20c9b134307ac8e8e0a30edb7883585f78248069e6a3054e67089a7803e020ce"
+      }
+    ]
+  },
+  "aod-9604": {
+    "status": "quality-documentation",
+    "label": "Quality documentation",
+    "batches": []
+  },
+  "mots-c": {
+    "status": "coa-available",
+    "label": "COA available",
+    "batches": [
+      {
+        "id": "mots-c-0033-070926-1",
+        "label": "MOTS-C batch",
+        "formulation": "MOTS-C 2 mg/mL solution",
+        "lot": "0033-070926-1",
+        "laboratory": "Miraxis Labs",
+        "testedAt": "2026-07-14",
+        "url": "/documents/coa/mots-c-0033-070926-1.pdf",
+        "sha256": "29effdebd1ed9feee2251778f019b257532b933675cb6065c33ea07d079dd51c"
+      }
+    ]
+  },
+  "cjc-1295-ipamorelin": {
+    "status": "coa-available",
+    "label": "COA available",
+    "batches": [
+      {
+        "id": "cjc-1295-ipamorelin-0041-063026-1",
+        "label": "CJC-1295 / Ipamorelin batch",
+        "formulation": "CJC-1295 without DAC 1.2 mg/mL + Ipamorelin 2 mg/mL",
+        "lot": "0041-063026-1",
+        "laboratory": "Miraxis Labs",
+        "testedAt": "2026-07-11",
+        "url": "/documents/coa/cjc-1295-ipamorelin-0041-063026-1.pdf",
+        "sha256": "8fc3461f70df5ca4abd8819a812d38fb44e720c2af58ab4ac72f79061a6194f0"
+      }
+    ]
+  },
+  "sermorelin": {
+    "status": "coa-available",
+    "label": "COA available",
+    "batches": [
+      {
+        "id": "sermorelin-lg343002556",
+        "label": "Sermorelin batch",
+        "formulation": "Sermorelin 1 mg/mL \u00b7 9 mL vial",
+        "lot": "LG343002556",
+        "laboratory": "FOCUS Laboratories",
+        "testedAt": "2026-02-02",
+        "url": "/documents/coa/sermorelin-lg343002556.pdf",
+        "sha256": "d7db9c4ba3e8c4b43b33d3640e8ae01b254318505d8bbc43ac6f902176115de2"
+      },
+      {
+        "id": "sermorelin-lg52241285",
+        "label": "Sermorelin batch",
+        "formulation": "Sermorelin 3 mg/mL \u00b7 5 mL vial",
+        "lot": "LG52241285",
+        "laboratory": "VIOS / Pharmetric Laboratory",
+        "testedAt": "2026-03-31",
+        "url": "/documents/coa/sermorelin-lg52241285.pdf",
+        "sha256": "fd0f90b7e3624a4f60a2294ea81b734072ea6a60e03d8dec5800a927046ae31a",
+        "parts": [
+          {
+            "label": "Part 1 \u2014 Pharmacy COA",
+            "url": "/documents/coa/sermorelin-lg52241285.pdf#page=1"
+          },
+          {
+            "label": "Part 2 \u2014 Laboratory COA",
+            "url": "/documents/coa/sermorelin-lg52241285.pdf#page=2"
+          }
+        ]
+      }
+    ]
+  },
+  "epithalon": {
+    "status": "coa-available",
+    "label": "COA available",
+    "batches": [
+      {
+        "id": "epithalon-0026-062626-1",
+        "label": "Epithalon batch",
+        "formulation": "Epithalon 2 mg/mL solution",
+        "lot": "0026-062626-1",
+        "laboratory": "Miraxis Labs",
+        "testedAt": "2026-07-06",
+        "url": "/documents/coa/epithalon-0026-062626-1.pdf",
+        "sha256": "1a874e1c2e7f63c213a620895920eb48c96233d5d32a885b2b4b38b714ce3afc"
+      }
+    ]
+  },
+  "ghk-cu": {
+    "status": "coa-available",
+    "label": "COA available",
+    "batches": [
+      {
+        "id": "ghk-cu-0027-071026-1",
+        "label": "GHK-Cu batch",
+        "formulation": "GHK-Cu 10 mg/mL solution",
+        "lot": "0027-071026-1",
+        "laboratory": "Miraxis Labs",
+        "testedAt": "2026-07-14",
+        "url": "/documents/coa/ghk-cu-0027-071026-1.pdf",
+        "sha256": "e4fa12e6ee030ad6115e502b5065635eeba95be98f6bffa14349496c89a6a796"
+      }
+    ]
+  },
+  "bpc-157": {
+    "status": "coa-available",
+    "label": "COA available",
+    "batches": [
+      {
+        "id": "bpc-157-0019-050726-1",
+        "label": "BPC-157 batch",
+        "formulation": "BPC-157 solution",
+        "lot": "0019-050726-1",
+        "laboratory": "Miraxis Labs",
+        "testedAt": "2026-05-18",
+        "url": "/documents/coa/bpc-157-0019-050726-1.pdf",
+        "sha256": "938c525a3c63f872f1359d9cb3bfb85f5e055a19f085064a99f60eab4009deff"
+      }
+    ]
+  },
+  "tb-500": {
+    "status": "quality-documentation",
+    "label": "Quality documentation",
+    "batches": []
+  },
+  "thymosin-alpha-1": {
+    "status": "coa-available",
+    "label": "COA available",
+    "batches": [
+      {
+        "id": "thymosin-alpha-1-0124-071026-1",
+        "label": "Thymosin Alpha-1 batch",
+        "formulation": "Thymosin Alpha-1 2 mg/mL solution",
+        "lot": "0124-071026-1",
+        "laboratory": "Miraxis Labs",
+        "testedAt": "2026-07-14",
+        "url": "/documents/coa/thymosin-alpha-1-0124-071026-1.pdf",
+        "sha256": "6a440c54d78de5ae5c6b1ed2f6521d5d92bd487c9370be9e259caa9160d5be57"
+      }
+    ]
+  },
+  "glutathione": {
+    "status": "coa-available",
+    "label": "COA available",
+    "batches": [
+      {
+        "id": "glutathione-prorx062625-1",
+        "label": "Glutathione batch",
+        "formulation": "Glutathione 200 mg/mL \u00b7 10 mL MDV",
+        "lot": "ProRx062625-1",
+        "laboratory": "ProRx / Pharmetric Laboratory",
+        "testedAt": "2025-07-01",
+        "url": "/documents/coa/glutathione-prorx062625-1.pdf",
+        "sha256": "95acc76ca0b826aca13dcb5ae41925b8dceeb6289232d468bc6ad05ad4a6155d",
+        "parts": [
+          {
+            "label": "Part 1 \u2014 Certificate of Analysis",
+            "url": "/documents/coa/glutathione-prorx062625-1.pdf#page=1"
+          },
+          {
+            "label": "Part 2 \u2014 Signature audit trail",
+            "url": "/documents/coa/glutathione-prorx062625-1.pdf#page=2"
+          }
+        ]
+      }
+    ]
+  },
+  "semax-selank": {
+    "status": "coa-available",
+    "label": "COA available",
+    "batches": [
+      {
+        "id": "semax-selank-0036-061826-1",
+        "label": "Semax / Selank batch",
+        "formulation": "Semax/Selank 1 mg/1 mg/mL solution",
+        "lot": "0036-061826-1",
+        "laboratory": "Miraxis Labs",
+        "testedAt": "2026-06-29",
+        "url": "/documents/coa/semax-selank-0036-061826-1.pdf",
+        "sha256": "38241410c606207f2be88aa90574b0ec309907c141872eb8b27af3d44cdc743d"
+      }
+    ]
+  },
+  "dsip": {
+    "status": "coa-available",
+    "label": "COA available",
+    "batches": [
+      {
+        "id": "dsip-0024-062526-1",
+        "label": "DSIP batch",
+        "formulation": "DSIP 1 mg/mL solution",
+        "lot": "0024-062526-1",
+        "laboratory": "Miraxis Labs",
+        "testedAt": "2026-07-03",
+        "url": "/documents/coa/dsip-0024-062526-1.pdf",
+        "sha256": "a345ec050950fe1a8d4b3f3b18a7227e9ffaa229d10ba40594acae946a2a9632"
+      }
+    ]
+  },
+  "nad-plus": {
+    "status": "coa-available",
+    "label": "COA available",
+    "batches": [
+      {
+        "id": "nad-plus-0059-070226-1",
+        "label": "NAD+ batch",
+        "formulation": "NAD+ 500 mg \u00b7 200 mg/mL solution",
+        "lot": "0059-070226-1",
+        "laboratory": "Miraxis Labs",
+        "testedAt": "2026-07-13",
+        "url": "/documents/coa/nad-plus-0059-070226-1.pdf",
+        "sha256": "2b7f47e95a5c34ab68cf4ad75c2cc3471503fcb906c8cec7b205c2b24b808c96"
+      },
+      {
+        "id": "nad-plus-lg52243282",
+        "label": "NAD+ batch",
+        "formulation": "NAD+ 200 mg/mL \u00b7 5 mL vial",
+        "lot": "LG52243282",
+        "laboratory": "VIOS / Pharmetric Laboratory",
+        "testedAt": "2026-04-22",
+        "url": "/documents/coa/nad-plus-lg52243282.pdf",
+        "sha256": "ee59d3c7800d41dbcfcb724c9c2f189b74a42b05b1dd9c657f852c360960b053",
+        "parts": [
+          {
+            "label": "Part 1 \u2014 Pharmacy COA",
+            "url": "/documents/coa/nad-plus-lg52243282.pdf#page=1"
+          },
+          {
+            "label": "Part 2 \u2014 Laboratory COA",
+            "url": "/documents/coa/nad-plus-lg52243282.pdf#page=2"
+          }
+        ]
+      }
+    ]
+  },
+  "gonadorelin": {
+    "status": "quality-documentation",
+    "label": "Quality documentation",
+    "batches": []
+  }
+}
