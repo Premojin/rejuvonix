@@ -1,6 +1,6 @@
 # Rejuvonix CRM Website Change Plan
 
-**Status:** Assessment only; no website behavior changed
+**Status:** Assessment plus provider-neutral scaffold; no website behavior changed
 
 ## P0 — required before production CRM activation
 
@@ -24,6 +24,10 @@
 | Appointments | Local API/table | CRM-authoritative or reference-only model | Calendar contract |
 | Contact forms | Support mailto/public content | Use CRM form only for approved non-clinical support/lead data | Form and consent contract |
 | Communications | No CRM messaging active | Show consent/status only; CRM may send if approved | Messaging/A2P contract |
+
+The inactive `GET /api/v1/patients/me/status` contract is now available as an
+application-oriented seam. It requires the existing Cognito boundary and
+returns normalized status only; the current frontend does not consume it.
 
 ## P2 — optional
 
