@@ -23,6 +23,7 @@ export function ProtocolGoalOrbit({goals}:{goals:string[]}){
   useEffect(()=>{
     let frame=0;
     const started=performance.now();
+    const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const tick=(now:number)=>{
       const phase=((now-started)/15000)*Math.PI*2;
       glyphs.forEach((glyph)=>{
@@ -32,16 +33,15 @@ export function ProtocolGoalOrbit({goals}:{goals:string[]}){
         const y=Math.sin(angle)*78;
         const scale=.86+Math.max(depth,0)*.14;
         const opacity=.28+Math.max(depth,0)*.72;
-        const rotation=(Math.atan2(Math.cos(angle)*78,-Math.sin(angle)*178)*180/Math.PI)+90;
-        const transform=`translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), ${depth*34}px) rotate(${rotation}deg) scale(${scale})`;
+        const transform=`translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), ${depth*34}px) rotate(0deg) scale(${scale})`;
         const rear=rearRefs.current.get(glyph.id);
         const front=frontRefs.current.get(glyph.id);
         if(rear){rear.style.transform=transform;rear.style.opacity=String(depth<0?opacity:0)}
         if(front){front.style.transform=transform;front.style.opacity=String(depth>=0?opacity:0)}
       });
-      frame=requestAnimationFrame(tick);
+      if(!reduced)frame=requestAnimationFrame(tick);
     };
-    frame=requestAnimationFrame(tick);
+    tick(reduced?started:performance.now());
     return()=>cancelAnimationFrame(frame);
   },[glyphs]);
 

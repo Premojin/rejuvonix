@@ -58,7 +58,7 @@ test("V7 GLP cards use the dedicated bottle assets and a dedicated visual zone",
   const source=home;
   for(const asset of ["semaglutide-2.5mg-ml.png","tirzepatide-5mg-0.5ml.png","glp1-microdose-500mcg-ml.png"]){assert.match(source,new RegExp(`/v6/${asset}`));}
   assert.equal((source.match(/glance-visual-zone/g)??[]).length,3);
-  assert.equal((source.match(/glance-number/g)??[]).length,3);
+  assert.doesNotMatch(source,/glance-number/);
 });
 
 test("V7 protocol detail uses a shared orbital halo track",()=>{
@@ -83,10 +83,8 @@ test("current compounded presentation uses the supplied generic vial and removes
   assert.match(compounded,/v6\/compounded-medication-generic\.png/);
 });
 
-test("numbered cards and protocol summaries retain the supplied bottle behind pulsing rings",()=>{
-  assert.match(home,/glance-number/);
+test("protocol summaries retain their supplied bottle behind pulsing rings",()=>{
   assert.match(index,/protocol-count-ring/);
-  assert.match(css,/compoundedNumberPulse/);
   assert.match(css,/protocolCountPulse/);
 });
 

@@ -111,13 +111,13 @@
 @media(prefers-reduced-motion:reduce){.protocol-category-count>img,.protocol-shelf-arrow{animation:none}.protocol-shelf-arrow{transition:none}}
 
 /* V7.1: glyphs are duplicated into rear/front planes so the opaque vial creates real occlusion. */
-.protocol-vial-orbit{position:absolute;inset:0;z-index:3;pointer-events:none;perspective:900px;transform-style:preserve-3d}
+.protocol-vial-orbit{position:absolute;inset:0;z-index:auto;pointer-events:none;perspective:900px;transform-style:preserve-3d}
 .protocol-character-orbit{position:absolute;left:50%;top:29%;width:1px;height:1px;transform-style:preserve-3d}
 .protocol-character-orbit--rear{z-index:1}.protocol-character-orbit--front{z-index:4}
-.protocol-character-orbit span{position:absolute;left:0;top:0;display:block;color:#0d7d84;font-size:12px;font-weight:900;letter-spacing:.12em;text-shadow:0 8px 22px rgba(18,145,152,.3);transform-origin:center;will-change:transform,opacity}
+.protocol-character-orbit span{position:absolute;left:0;top:0;display:block;color:#0d7d84;font-size:17px;font-weight:900;letter-spacing:.1em;text-shadow:0 8px 22px rgba(18,145,152,.3);transform-origin:center;will-change:transform,opacity}
 .protocol-character-orbit--rear span{text-shadow:0 5px 12px rgba(18,145,152,.12)}
-@media(max-width:680px){.protocol-character-orbit{top:29%}.protocol-character-orbit span{font-size:9px;letter-spacing:.1em}}
-@media(prefers-reduced-motion:reduce){.protocol-vial-orbit{inset:0}.protocol-character-orbit span{opacity:1!important}.protocol-character-orbit--rear{display:none}.protocol-character-orbit--front{top:29%}.protocol-character-orbit--front span{transform:translate3d(calc(-50% + 138px),-50%,0)!important}.protocol-character-orbit--front span:nth-child(2n){transform:translate3d(calc(-50% - 138px),-50%,0)!important}}
+@media(max-width:680px){.protocol-character-orbit{top:29%}.protocol-character-orbit span{font-size:13px;letter-spacing:.08em}}
+@media(prefers-reduced-motion:reduce){.protocol-character-orbit span{transition:none}}
 
 /* Trust message sits directly below the protocol navigation, matching the compact dark assurance strip. */
 .protocol-inline-trust{max-width:none;margin:0;padding:18px 5vw;background:#30383b;border:0;color:#d9e1e0;gap:34px;justify-content:center}
