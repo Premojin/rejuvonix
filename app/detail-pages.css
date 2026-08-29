@@ -31,4 +31,6 @@
 .two-treatment-grid-v6 .compounded-option-card img.matched-vial{width:131px!important;height:225px!important}
 .two-treatment-grid-v6 .compounded-option-card>b{min-height:54px;border-radius:16px;font-weight:900;letter-spacing:.02em;transition:box-shadow .25s ease,transform .25s ease}
 .two-treatment-grid-v6 .compounded-option-card>b span{color:var(--aqua,#35b6b8);margin-left:10px}
+.two-treatment-grid-v6 .compounded-option-card>b{border:0;border-radius:999px;background:linear-gradient(90deg,#565b60,#34383d);color:#fff;font-size:11px;letter-spacing:.13em;text-transform:uppercase;box-shadow:0 14px 28px rgba(36,42,47,.24)}
+.two-treatment-grid-v6 .compounded-option-card:hover>b{background:linear-gradient(90deg,#33484c,#145d62);box-shadow:0 16px 34px rgba(20,107,113,.25);transform:translateY(-2px)}
 @media(max-width:680px){.two-treatment-grid-v6 .compounded-option-card img.matched-vial{width:125px!important;height:215px!important}}

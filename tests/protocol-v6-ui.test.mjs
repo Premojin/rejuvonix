@@ -10,6 +10,7 @@ const read=(p)=>readFile(path.join(root,p),"utf8");
 const card=await read("app/components/ProtocolCard.tsx");
 const data=await read("app/components/protocol-data.ts");
 const index=await read("app/protocols/page.tsx");
+const shelf=await read("app/components/ProtocolShelf.tsx");
 const detail=await read("app/protocols/[slug]/page.tsx");
 const home=await read("app/page.tsx");
 const compounded=await read("app/compounded/page.tsx");
@@ -32,7 +33,7 @@ test("protocol cards include bottle, price, trust lines and named CTA",()=>{
 });
 
 test("protocol library and goal collections use horizontal shelves and compact trust strip",()=>{
-  assert.match(index,/protocol-scroll-track/);
+  assert.match(shelf,/protocol-scroll-track/);
   assert.match(detail,/protocol-scroll-track/);
   assert.match(index,/ProtocolTrustStrip/);
   assert.match(detail,/ProtocolTrustStrip/);
@@ -63,6 +64,16 @@ test("V7 GLP cards use the dedicated bottle assets and a dedicated visual zone",
 test("V7 protocol detail uses a shared orbital halo track",()=>{
   assert.match(detail,/protocol-goal-orbit-track/);
   assert.match(css,/protocolNeckHalo/);
+});
+
+test("V7 catalog count and protocol shelf controls are data-driven and accessible",()=>{
+  assert.match(detail,/\{items\.length\}/);
+  assert.match(css,/protocol-shelf-arrow/);
+});
+
+test("Compound Care CTAs use the shared protocol CTA visual tokens",()=>{
+  assert.match(css,/\.protocol-card-cta[^}]*border-radius:999px/);
+  assert.match(css,/\.two-treatment-grid-v6 \.compounded-option-card>b[^}]*border-radius:999px/);
 });
 
 test("current compounded presentation uses the supplied generic vial and removes the duplicate treatment-options section",()=>{

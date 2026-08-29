@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {SiteFooter,SiteHeader} from "../components/SiteChrome";
-import {ProtocolCard,ProtocolTrustStrip} from "../components/ProtocolCard";
+import {ProtocolTrustStrip} from "../components/ProtocolCard";
+import {ProtocolShelf} from "../components/ProtocolShelf";
 import {protocolGoals,protocols} from "../components/protocol-data";
 
 export default function ProtocolsPage(){
@@ -17,9 +18,7 @@ export default function ProtocolsPage(){
     <ProtocolTrustStrip/>
     <section className="protocol-library" id="all-protocols">
       <div className="protocol-library-heading"><div><p className="detail-kicker">All protocols</p><h2>One library. Clear pathways.</h2></div><p>Browse horizontally to compare protocols, then open the individual page for clinical context, provider review and supporting quality documentation.</p></div>
-      <div className="protocol-scroll-shell" aria-label="All protocols horizontal list"><div className="protocol-scroll-track">
-        {protocols.map((protocol,index)=><ProtocolCard protocol={protocol} index={index} key={protocol.slug}/>) }
-      </div></div>
+      <ProtocolShelf protocols={protocols}/>
     </section>
     <section className="protocol-clinical-note"><div><p className="detail-kicker">Clinical boundary</p><h2>Education first. Provider judgment always.</h2></div><p>Some catalog entries are investigational, compounded, not FDA approved for the goal shown, or may not be legally or clinically available. Rejuvonix will not convert a catalog entry into a treatment offer until the relevant provider, pharmacy, state and regulatory requirements are verified.</p></section>
     <SiteFooter/>
