@@ -29,3 +29,10 @@
   filter:saturate(.95) brightness(1.22) contrast(1.02);
   mix-blend-mode:normal;
 }
+.glance-card .glance-silhouette-wrap{position:absolute;z-index:0;left:50%;top:50%;height:auto;aspect-ratio:1;transform:translate(-50%,-50%) rotate(35deg);transform-origin:center;pointer-events:none}
+.glance-card.semaglutide .glance-silhouette-wrap{width:48.5%;opacity:.42;filter:saturate(.95) brightness(1.22) contrast(1.02);mix-blend-mode:normal}
+.glance-card.tirzepatide .glance-silhouette-wrap{width:44%;opacity:.42;filter:saturate(.95) brightness(1.22) contrast(1.02);mix-blend-mode:normal}
+.glance-card .glance-silhouette-wrap .glance-silhouette{position:static;width:100%;height:100%;transform:none;object-fit:contain;opacity:1;filter:none;mix-blend-mode:normal}
+.glance-silhouette-label{position:absolute;left:15%;top:43%;width:70%;padding:7px 4px 6px;border:1px solid rgba(20,92,96,.18);background:rgba(255,255,255,.82);color:#22656a;text-align:center;font-size:8px;font-weight:900;letter-spacing:.08em;line-height:1.15}
+.glance-silhouette-label small{display:block;margin-top:3px;font-size:5px;letter-spacing:.08em}
+.tirzepatide .glance-silhouette-label{border-color:rgba(255,255,255,.26);background:rgba(24,78,79,.76);color:#e1fffb}
