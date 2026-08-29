@@ -1,4 +1,5 @@
 import coaManifestJson from "../data/coa-manifest.json";
+import { intakeUrl, type IntakeType } from "./routing";
 
 export type RejuvonixGoal = "weight-loss" | "performance" | "sexual-health" | "hair-restoration" | "skin-regeneration";
 
@@ -25,6 +26,7 @@ export type ProtocolItem = {
   imageAlt: string;
   sourceCategory: string;
   goals: RejuvonixGoal[];
+  intakeType: IntakeType;
   summary: string;
   discussionPoints: string[];
   regulatoryNote: string;
@@ -38,17 +40,17 @@ export type ProtocolItem = {
   };
 };
 
-export const protocolGoals: {slug: RejuvonixGoal; name: string; intro: string; assessmentRoute: string}[] = [
-  {slug:"weight-loss",name:"Weight Loss",intro:"Metabolic and body-composition protocol education, with provider review required before any treatment decision.",assessmentRoute:"/eligibility/weight-loss"},
-  {slug:"performance",name:"Performance",intro:"Recovery, resilience, energy and performance-oriented protocol education for discussion with an independent licensed provider.",assessmentRoute:"/eligibility/performance"},
-  {slug:"sexual-health",name:"Sexual Health",intro:"Private protocol education related to sexual wellness and hormone-linked concerns, subject to provider evaluation.",assessmentRoute:"/eligibility/sexual-health"},
-  {slug:"hair-restoration",name:"Hair Restoration",intro:"Protocol education relevant to hair and scalp goals, with treatment availability determined through provider review.",assessmentRoute:"/eligibility/hair-restoration"},
-  {slug:"skin-regeneration",name:"Skin Regeneration",intro:"Protocol education related to skin quality, recovery and regenerative goals, without guaranteeing treatment availability.",assessmentRoute:"/eligibility/skin-restoration"},
+export const protocolGoals: {slug: RejuvonixGoal; name: string; intro: string; intakeType: IntakeType; assessmentRoute: string}[] = [
+  {slug:"weight-loss",name:"Weight Loss",intro:"Metabolic and body-composition protocol education, with provider review required before any treatment decision.",intakeType:"glp",assessmentRoute:intakeUrl("glp")},
+  {slug:"performance",name:"Performance",intro:"Recovery, resilience, energy and performance-oriented protocol education for discussion with an independent licensed provider.",intakeType:"peptide",assessmentRoute:intakeUrl("peptide")},
+  {slug:"sexual-health",name:"Sexual Health",intro:"Private protocol education related to sexual wellness and hormone-linked concerns, subject to provider evaluation.",intakeType:"peptide",assessmentRoute:intakeUrl("peptide")},
+  {slug:"hair-restoration",name:"Hair Restoration",intro:"Protocol education relevant to hair and scalp goals, with treatment availability determined through provider review.",intakeType:"peptide",assessmentRoute:intakeUrl("peptide")},
+  {slug:"skin-regeneration",name:"Skin Regeneration",intro:"Protocol education related to skin quality, recovery and regenerative goals, without guaranteeing treatment availability.",intakeType:"peptide",assessmentRoute:intakeUrl("peptide")},
 ];
 
 // Master protocol inventory captured for the Rejuvonix protocol architecture.
 // COA files in the published library are local, item-specific documents supplied for the matching protocol and batch.
-type BaseProtocolItem = Omit<ProtocolItem, "documentation" | "priceLabel" | "image" | "imageAlt">;
+type BaseProtocolItem = Omit<ProtocolItem, "documentation" | "priceLabel" | "image" | "imageAlt" | "intakeType">;
 
 const baseProtocols: BaseProtocolItem[] = [
   {slug:"semaglutide",name:"Semaglutide",sourceCategory:"Metabolic / body composition",goals:["weight-loss"],summary:"GLP-1 receptor agonist protocol education for weight-management pathways.",discussionPoints:["Personal health history and treatment goals","Medication history and contraindication screening","Whether an FDA-approved branded option or another pathway is clinically appropriate"],regulatoryNote:"Semaglutide is an active ingredient in FDA-approved prescription medicines. Compounded versions are not FDA approved and may be considered only when clinically appropriate and legally available.",compoundedContext:"possible"},
@@ -91,6 +93,7 @@ const documentationManifest = coaManifestJson as Record<string, ProtocolItem["do
 
 export const protocols: ProtocolItem[] = baseProtocols.map((protocol) => ({
   ...protocol,
+  intakeType: protocol.slug === "semaglutide" || protocol.slug === "tirzepatide" ? "glp" : "peptide",
   ...(protocolPresentation[protocol.slug] ?? defaultProtocolPresentation),
   documentation: documentationManifest[protocol.slug] ?? {
     status: "quality-documentation",

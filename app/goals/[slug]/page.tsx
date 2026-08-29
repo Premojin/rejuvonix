@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter, SiteHeader } from "../../components/SiteChrome";
 import { findGoal, goalGroups } from "../../components/service-data";
+import { intakeUrl } from "../../components/routing";
 
 const pathwaySilhouettes:Record<string,string>={
   "glp-1-injections":"/v6/compounded-medication-generic.png",
@@ -17,7 +18,7 @@ export default async function GoalPage({params}:{params:Promise<{slug:string}>})
   const {slug}=await params;
   const goal=findGoal(slug);
   if(!goal) notFound();
-  const assessmentRoute=goal.slug==="weight-loss"?"/eligibility/weight-loss":"/eligibility";
+  const assessmentRoute=intakeUrl(goal.slug==="weight-loss"?"glp":"peptide");
   const routeFor=(serviceSlug:string)=>goal.slug==="weight-loss"?assessmentRoute:`/services/${serviceSlug}`;
   return <main className="detail-page goal-page goal-page-v2">
     <SiteHeader/>

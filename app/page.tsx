@@ -4,6 +4,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { GoalMegaMenu } from "./components/SiteChrome";
 import { careJourney } from "./components/CareJourney";
+import { MAIN_GLP_INTAKE_URL, PATIENT_PORTAL_URL, PEPTIDE_INTAKE_URL } from "./components/routing";
 
 const legacyJourney = [
   ["01","Program selected","Choose the area where you want support."],
@@ -45,11 +46,11 @@ const wellnessPrograms = [
 ];
 
 const heroPrograms: HeroProgram[] = [
-  { title:"Weight Loss", href:"/eligibility/weight-loss", image:"/program-weight-loss-success-v2.png", kind:"person weight" },
-  { title:"Performance", href:"/eligibility/performance", image:"/mens-hormone-runner-card.png", kind:"person men" },
-  { title:"Sexual Health", href:"/eligibility/sexual-health", image:"/program-sexual-health-silhouette.webp", kind:"person women sexual" },
-  { title:"Hair Restoration", href:"/eligibility/hair-restoration", image:"/program-hair-restoration-silhouette.webp", kind:"person hair" },
-  { title:"Skin Regeneration", href:"/eligibility/skin-restoration", image:"/program-skin-rejuvenation-silhouette.webp", kind:"person skin" },
+  { title:"Weight Loss", href:MAIN_GLP_INTAKE_URL, image:"/program-weight-loss-success-v2.png", kind:"person weight" },
+  { title:"Performance", href:PEPTIDE_INTAKE_URL, image:"/mens-hormone-runner-card.png", kind:"person men" },
+  { title:"Sexual Health", href:PEPTIDE_INTAKE_URL, image:"/program-sexual-health-silhouette.webp", kind:"person women sexual" },
+  { title:"Hair Restoration", href:PEPTIDE_INTAKE_URL, image:"/program-hair-restoration-silhouette.webp", kind:"person hair" },
+  { title:"Skin Regeneration", href:PEPTIDE_INTAKE_URL, image:"/program-skin-rejuvenation-silhouette.webp", kind:"person skin" },
   { title:"Compounded care", subtitle:"Patient-specific options", price:"$199", href:"/compounded", image:"/v6/compounded-medication-generic.png", kind:"product semaglutide" },
 ];
 
@@ -76,7 +77,7 @@ export default function Home() {
   }, [feet, inches, weight]);
   useEffect(() => { const timer = window.setInterval(() => setExperienceActive((current) => (current + 1) % completeExperience.length), 5000); return () => window.clearInterval(timer); }, []);
   useEffect(() => { const timer = window.setInterval(() => setProgramActive((current) => (current + 1) % wellnessPrograms.length), 5000); return () => window.clearInterval(timer); }, []);
-  const openQuiz = () => { window.location.href = "/eligibility/weight-loss"; };
+  const openQuiz = () => { window.location.href = MAIN_GLP_INTAKE_URL; };
   const choose = (answer: string) => { const next = [...answers]; next[step] = answer; setAnswers(next); setStep(Math.min(step + 1, 3)); };
 
   return <main>
@@ -86,7 +87,7 @@ export default function Home() {
       <nav className={`nav-links ${menuOpen ? "open" : ""}`} aria-label="Primary navigation">
         <span className="nav-menu-group goals-menu"><a href="/goals/weight-loss">Your Goals</a><GoalMegaMenu/></span><span className="nav-menu-group membership-menu"><a href="/membership">Membership</a><span className="nav-dropdown"><a href="/membership">Why Membership</a><a href="/how-it-works">How membership works</a></span></span><span className="nav-menu-group resource-menu"><a href="/support">Resource Center</a><span className="nav-dropdown"><a href="/how-it-works">How it works</a><a href="/support">Support</a><a href="/faq">FAQs</a><a href="/safety">Safety</a></span></span><span className="nav-menu-group about-menu"><a href="/how-it-works">About Us</a><span className="nav-dropdown"><a href="/how-it-works">Our approach</a><a href="/support">Our care model</a><a href="/safety">Clinical standards</a></span></span>
       </nav>
-      <div className="header-actions"><a className="account-button" href="/sign-in">Account</a><button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle menu"><span></span><span></span></button></div>
+      <div className="header-actions"><a className="account-button" href={PATIENT_PORTAL_URL}>Patient Portal Login</a><button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle menu"><span></span><span></span></button></div>
     </header>
 
     <section className="program-hero" id="top">
@@ -122,7 +123,7 @@ export default function Home() {
           <p className="wellness-kicker">{wellnessPrograms[programActive].kicker}</p>
           <h3>{wellnessPrograms[programActive].headline}</h3>
           <p className="wellness-description">{wellnessPrograms[programActive].copy}</p>
-          <div className="wellness-action"><button className="primary aqua" onClick={()=>{const slugs=["weight-loss","performance","sexual-health","hair-restoration","skin-restoration"];window.location.href=`/eligibility/${slugs[programActive]}`}}>Explore {wellnessPrograms[programActive].name.toLowerCase()}</button><span>✓ {wellnessPrograms[programActive].reassurance}</span></div>
+          <div className="wellness-action"><button className="primary aqua" onClick={()=>{window.location.href=programActive===0?MAIN_GLP_INTAKE_URL:PEPTIDE_INTAKE_URL}}>Explore {wellnessPrograms[programActive].name.toLowerCase()}</button><span>✓ {wellnessPrograms[programActive].reassurance}</span></div>
         </div>
         <div className="wellness-word" aria-hidden="true">{wellnessPrograms[programActive].moment}</div>
         <div className="wellness-arrows"><button onClick={()=>setProgramActive((programActive+wellnessPrograms.length-1)%wellnessPrograms.length)} aria-label="Previous program">←</button><button onClick={()=>setProgramActive((programActive+1)%wellnessPrograms.length)} aria-label="Next program">→</button></div>
@@ -166,9 +167,9 @@ export default function Home() {
     <section className="compounded-section compounded-section-v6" id="compounded">
       <div className="compounded-intro"><p className="eyebrow">Compounded medications</p><h2>Compare semaglutide, tirzepatide, and GLP-1 microdose.</h2><p>An independent provider may prescribe a compounded medication when it is legally available and appropriate for the patient. Compounded medications are not generic versions of branded drugs, and they are not FDA approved.</p></div>
       <div className="glance-grid glance-grid-v6">
-        <a className="glance-card semaglutide glance-card-v6" href="/eligibility/weight-loss"><img className="glance-product-vial" src="/v6/compounded-medication-generic.png" alt="Compounded medication vial"/><div className="glance-content"><div className="glance-number">01</div><p className="pill-label">Compounded option</p><h3>Semaglutide</h3><p className="glance-sub">Acts on the GLP-1 receptor.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
-        <a className="glance-card tirzepatide glance-card-v6" href="/eligibility/weight-loss"><img className="glance-product-vial" src="/v6/compounded-medication-generic.png" alt="Compounded medication vial"/><div className="glance-content"><div className="glance-number">02</div><p className="pill-label">Compounded option</p><h3>Tirzepatide</h3><p className="glance-sub">Acts on the GIP and GLP-1 receptors.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
-        <a className="glance-card microdose glance-card-v6" href="/eligibility/weight-loss"><img className="glance-product-vial" src="/v6/compounded-medication-generic.png" alt="Compounded medication vial"/><div className="glance-content"><div className="glance-number">03</div><p className="pill-label">Compounded option</p><h3>GLP-1 Microdose</h3><p className="glance-sub">Lower-dose GLP-1 pathway considered only after provider review.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
+        <a className="glance-card semaglutide glance-card-v6" href={MAIN_GLP_INTAKE_URL}><img className="glance-product-vial" src="/v6/compounded-medication-generic.png" alt="Compounded medication vial"/><div className="glance-content"><div className="glance-number">01</div><p className="pill-label">Compounded option</p><h3>Semaglutide</h3><p className="glance-sub">Acts on the GLP-1 receptor.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
+        <a className="glance-card tirzepatide glance-card-v6" href={MAIN_GLP_INTAKE_URL}><img className="glance-product-vial" src="/v6/compounded-medication-generic.png" alt="Compounded medication vial"/><div className="glance-content"><div className="glance-number">02</div><p className="pill-label">Compounded option</p><h3>Tirzepatide</h3><p className="glance-sub">Acts on the GIP and GLP-1 receptors.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
+        <a className="glance-card microdose glance-card-v6" href={MAIN_GLP_INTAKE_URL}><img className="glance-product-vial" src="/v6/compounded-medication-generic.png" alt="Compounded medication vial"/><div className="glance-content"><div className="glance-number">03</div><p className="pill-label">Compounded option</p><h3>GLP-1 Microdose</h3><p className="glance-sub">Lower-dose GLP-1 pathway considered only after provider review.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
       </div><p className="compounded-note">*Form, ingredients, concentration and availability vary by prescription and dispensing pharmacy. Compounded medications are prepared for an identified patient and are not reviewed by FDA for safety, effectiveness or quality before marketing.</p>
     </section>
 

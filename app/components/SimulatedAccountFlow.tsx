@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {FormEvent,useEffect,useState} from "react";
+import { MAIN_GLP_INTAKE_URL } from "./routing";
 
 const SESSION_KEY="rejuvonix-demo-session";
 
@@ -72,7 +73,7 @@ export function DemoAccountDashboard(){
   if(!session)return <section className="demo-empty"><p className="detail-kicker">No demo session</p><h1>Start with a simulated account.</h1><p>This area does not contain patient records or saved assessment answers.</p><div><Link className="detail-primary" href="/sign-up">Create demo account</Link><Link className="detail-secondary" href="/sign-in">Sign in</Link></div></section>;
   const stage=session.journeyStage??0;
   const stages=[
-    {label:"Program selected",title:"Start the assessment",copy:"Choose a program and complete the fictional assessment questions.",action:"Start simulated assessment",href:"/eligibility/weight-loss"},
+    {label:"Program selected",title:"Start the assessment",copy:"Choose a program and complete the fictional assessment questions.",action:"Start simulated assessment",href:MAIN_GLP_INTAKE_URL},
     {label:"Assessment complete",title:"Review and confirm",copy:"The preview is complete. In production, the patient would review answers and approved consent language before submission.",action:"Simulate submission"},
     {label:"Submitted",title:"Provider review pending",copy:"A fictional submission receipt is shown. No information has been transmitted and no clinical decision has been made.",action:"Simulate provider request"},
     {label:"More information needed",title:"Complete a follow-up request",copy:"Preview how a request for clarification, laboratory testing or an appointment would appear. No upload or scheduling is active.",action:"Simulate information supplied"},

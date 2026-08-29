@@ -7,11 +7,11 @@ test("all actionable homepage tiles are single semantic card links", async () =>
   const response = await worker.fetch(new Request("http://localhost/"), { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } }, { waitUntil() {}, passThroughOnException() {} });
   const html = await response.text();
   const destinations = {
-    "Weight Loss": "/eligibility/weight-loss",
-    Performance: "/eligibility/performance",
-    "Sexual Health": "/eligibility/sexual-health",
-    "Hair Restoration": "/eligibility/hair-restoration",
-    "Skin Regeneration": "/eligibility/skin-restoration",
+    "Weight Loss": "https://rejuvonix.com/eligibility",
+    Performance: "https://rejuvonix.com/peptides/eligibility",
+    "Sexual Health": "https://rejuvonix.com/peptides/eligibility",
+    "Hair Restoration": "https://rejuvonix.com/peptides/eligibility",
+    "Skin Regeneration": "https://rejuvonix.com/peptides/eligibility",
     "Compounded care": "/compounded",
   };
   for (const [name, href] of Object.entries(destinations)) {
