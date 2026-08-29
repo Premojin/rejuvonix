@@ -45,6 +45,15 @@ module "database" {
   tags              = var.tags
 }
 
+module "cognito" {
+  source        = "../../modules/cognito"
+  name          = "${var.name}-identity"
+  domain_prefix = "rejuvonix-staging-identity"
+  callback_urls = ["https://${var.staging_domain}/auth/callback"]
+  logout_urls   = ["https://${var.staging_domain}/"]
+  tags          = var.tags
+}
+
 module "storage" {
   source      = "../../modules/storage"
   name        = var.name
@@ -53,14 +62,22 @@ module "storage" {
 }
 
 module "ecs" {
-  source            = "../../modules/ecs"
-  name              = var.name
-  subnet_ids        = module.network.app_subnet_ids
-  security_group_id = module.security.app_security_group_id
-  target_group_arn  = module.alb.target_group_arn
-  create_service    = var.create_service
-  image_tag         = var.image_tag
-  tags              = var.tags
+  source               = "../../modules/ecs"
+  name                 = var.name
+  subnet_ids           = module.network.app_subnet_ids
+  security_group_id    = module.security.app_security_group_id
+  target_group_arn     = module.alb.target_group_arn
+  create_service       = var.create_service
+  image_tag            = var.image_tag
+  db_secret_arn        = module.database.master_user_secret_arn
+  db_host              = module.database.endpoint
+  db_port              = module.database.port
+  db_name              = "rejuvonix"
+  cognito_user_pool_id = module.cognito.user_pool_id
+  auth_client_id       = module.cognito.app_client_id
+  cognito_domain       = module.cognito.domain
+  kms_key_arn          = module.security.kms_key_arn
+  tags                 = var.tags
 }
 
 module "github_oidc" {

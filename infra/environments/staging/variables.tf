@@ -21,6 +21,7 @@ variable "azs" {
 variable "tags" {
   type = map(string)
   default = {
+    Application        = "Rejuvonix"
     Project            = "Rejuvonix"
     ManagedBy          = "Terraform"
     CostCenter         = "Rejuvonix"

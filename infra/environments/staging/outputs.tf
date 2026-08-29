@@ -10,6 +10,14 @@ output "rds_endpoint" {
   value = module.database.endpoint
 }
 
+output "rds_master_user_secret_arn" {
+  value     = module.database.master_user_secret_arn
+  sensitive = true
+}
+
+output "cognito_user_pool_id" { value = module.cognito.user_pool_id }
+output "cognito_app_client_id" { value = module.cognito.app_client_id }
+
 output "documents_bucket" {
   value = module.storage.bucket_name
 }

@@ -51,6 +51,28 @@ resource "aws_iam_role_policy_attachment" "execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
+data "aws_iam_policy_document" "execution_secrets" {
+  count = var.db_secret_arn == null ? 0 : 1
+  statement {
+    actions   = ["secretsmanager:GetSecretValue"]
+    resources = [var.db_secret_arn]
+  }
+  dynamic "statement" {
+    for_each = var.kms_key_arn == null ? [] : [var.kms_key_arn]
+    content {
+      actions   = ["kms:Decrypt"]
+      resources = [statement.value]
+    }
+  }
+}
+
+resource "aws_iam_role_policy" "execution_secrets" {
+  count  = var.db_secret_arn == null ? 0 : 1
+  name   = "${var.name}-ecs-secrets"
+  role   = aws_iam_role.execution.id
+  policy = data.aws_iam_policy_document.execution_secrets[0].json
+}
+
 resource "aws_iam_role" "task" {
   name               = "${var.name}-ecs-task"
   assume_role_policy = data.aws_iam_policy_document.ecs_assume.json
@@ -86,7 +108,32 @@ resource "aws_ecs_task_definition" "app" {
     environment = [{
       name  = "APP_ENV"
       value = "staging"
+      }, {
+      name  = "DATABASE_SSL"
+      value = "true"
+      }, {
+      name  = "DB_HOST"
+      value = coalesce(var.db_host, "")
+      }, {
+      name  = "DB_PORT"
+      value = var.db_port == null ? "" : tostring(var.db_port)
+      }, {
+      name  = "DB_NAME"
+      value = var.db_name
+      }, {
+      name  = "COGNITO_USER_POOL_ID"
+      value = coalesce(var.cognito_user_pool_id, "")
+      }, {
+      name  = "AUTH_CLIENT_ID"
+      value = coalesce(var.auth_client_id, "")
+      }, {
+      name  = "COGNITO_DOMAIN"
+      value = coalesce(var.cognito_domain, "")
     }]
+    secrets = var.db_secret_arn == null ? [] : [
+      { name = "DB_USER", valueFrom = "${var.db_secret_arn}:username::" },
+      { name = "DB_PASSWORD", valueFrom = "${var.db_secret_arn}:password::" }
+    ]
     logConfiguration = {
       logDriver = "awslogs"
       options = {

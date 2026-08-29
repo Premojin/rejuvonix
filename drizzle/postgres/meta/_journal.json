@@ -8,6 +8,13 @@
       "when": 1787505955782,
       "tag": "0000_lively_edwin_jarvis",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1787510000000,
+      "tag": "0001_seed_clinical_roles",
+      "breakpoints": true
     }
   ]
 }
