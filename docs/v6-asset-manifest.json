@@ -1,0 +1,9 @@
+{
+  "public_assets": [
+    {"path":"public/v6/compounded-medication-generic.png","source":"No Background.png","usage":"default protocol-card and protocol-detail vial"},
+    {"path":"public/v6/semaglutide-2.5mg-ml.png","source":"Semaglutide_2.5mg-per-mL_Transparent_Final.png","usage":"Semaglutide protocol and weight-loss comparison cards"},
+    {"path":"public/v6/tirzepatide-5mg-0.5ml.png","source":"Tirzepatide_5mg-per-0.5mL_Transparent_Final.png","usage":"Tirzepatide protocol and weight-loss comparison cards"},
+    {"path":"public/v6/glp1-microdose-500mcg-ml.png","source":"GLP-1_Microdose_500mcg-per-mL_Transparent_Final.png","usage":"GLP-1 Microdose comparison cards"}
+  ]
+  ,"notes":"Only supplied visual assets used by the V6 UI are packaged. Reference screenshots are not shipped."
+}

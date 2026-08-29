@@ -53,3 +53,6 @@ crash.log
 *.tfvars
 *.tfvars.json
 *.tsbuildinfo
+
+# Local certificate retrieval provenance; not published with the site
+.coa-source-log.json

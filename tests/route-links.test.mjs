@@ -1,5 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import {access} from "node:fs/promises";
+import pathModule from "node:path";
+import {fileURLToPath} from "node:url";
 
 const { default: worker } = await import("../dist/server/index.js");
 
@@ -18,12 +21,47 @@ const publicRoutes = [
   "/treatments/wegovy-pill",
   "/treatments/wegovy-injection",
   "/treatments/zepbound-injection",
+  "/protocols",
+  "/protocols/weight-loss",
+  "/protocols/performance",
+  "/protocols/sexual-health",
+  "/protocols/hair-restoration",
+  "/protocols/skin-regeneration",
+  "/protocols/semaglutide",
+  "/protocols/tirzepatide",
+  "/protocols/aod-9604",
+  "/protocols/mots-c",
+  "/protocols/tesamorelin",
+  "/protocols/cjc-1295-ipamorelin",
+  "/protocols/sermorelin",
+  "/protocols/epithalon",
+  "/protocols/ghk-cu",
+  "/protocols/bpc-157",
+  "/protocols/tb-500",
+  "/protocols/ss-31",
+  "/protocols/thymosin-alpha-1",
+  "/protocols/glutathione",
+  "/protocols/semax-selank",
+  "/protocols/dsip",
+  "/protocols/nad-plus",
+  "/protocols/pt-141",
+  "/protocols/gonadorelin",
 ];
 
-async function fetchWorker(path) {
+const root = pathModule.resolve(pathModule.dirname(fileURLToPath(import.meta.url)), "..");
+
+async function fetchWorker(routePath) {
   return worker.fetch(
-    new Request(`http://localhost${path}`),
-    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    new Request(`http://localhost${routePath}`),
+    { ASSETS: { fetch: async (request) => {
+      const assetPath = new URL(request.url).pathname.replace(/^\/+/, "");
+      try {
+        await access(pathModule.join(root, "public", assetPath));
+        return new Response("asset", { status: 200 });
+      } catch {
+        return new Response("Not found", { status: 404 });
+      }
+    } } },
     { waitUntil() {}, passThroughOnException() {} },
   );
 }
@@ -40,6 +78,8 @@ test("all canonical public routes render and invalid routes return 404", async (
 
   const invalid = await fetchWorker("/treatments/not-a-real-treatment");
   assert.equal(invalid.status, 404);
+  const invalidProtocol = await fetchWorker("/protocols/not-a-real-protocol");
+  assert.equal(invalidProtocol.status, 404);
 });
 
 test("public internal links resolve without broken routes or anchors", async () => {
