@@ -67,4 +67,6 @@
 .glance-card-v6:hover .glance-visual-zone .glance-product-vial{transform:translate(-50%,calc(-50% - 13px)) rotate(-1deg) scale(1.04);opacity:1}
 .glance-visual-zone .glance-number{position:absolute;right:10px;top:12px;z-index:2;display:grid;place-items:center;width:58px;height:58px;border:1px solid rgba(53,182,184,.55);border-radius:50%;color:#178f94;font-size:19px;font-weight:900;box-shadow:0 0 0 8px rgba(53,182,184,.06),0 0 20px rgba(53,182,184,.16)}
 .glance-card-v6 .glance-content{position:relative;z-index:3;display:flex;flex:1;flex-direction:column}.glance-card-v6 h3{margin:0 0 10px}.glance-card-v6 .glance-assessment-cta{margin-top:auto}
+.glance-visual-zone .glance-product-vial{width:135px;height:198px;top:55%}
+.glance-card-v6:hover .glance-visual-zone .glance-product-vial{transform:translate(-50%,calc(-50% - 13px)) rotate(-1deg) scale(1.04)}
 @media(max-width:680px){.glance-card-v6{min-height:620px}.glance-visual-zone{flex-basis:220px;min-height:220px}.glance-visual-zone .glance-product-vial{width:138px;height:205px}}

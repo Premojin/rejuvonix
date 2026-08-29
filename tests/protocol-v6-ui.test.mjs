@@ -42,7 +42,7 @@ test("protocol library and goal collections use horizontal shelves and compact t
 
 test("protocol detail hero uses floating bottle and goal orbit with lower related-goals row",()=>{
   assert.match(detail,/protocol-hero-product/);
-  assert.match(detail,/protocol-floating-goal/);
+  assert.match(detail,/ProtocolGoalOrbit/);
   assert.match(detail,/protocol-detail-lower/);
   assert.match(css,/protocolBottleFloat/);
 });
@@ -62,8 +62,9 @@ test("V7 GLP cards use the dedicated bottle assets and a dedicated visual zone",
 });
 
 test("V7 protocol detail uses a shared orbital halo track",()=>{
-  assert.match(detail,/protocol-goal-orbit-track/);
-  assert.match(css,/protocolNeckHalo/);
+  assert.match(detail,/ProtocolGoalOrbit/);
+  assert.match(css,/protocol-character-orbit--rear/);
+  assert.match(css,/protocol-character-orbit--front/);
 });
 
 test("V7 catalog count and protocol shelf controls are data-driven and accessible",()=>{
