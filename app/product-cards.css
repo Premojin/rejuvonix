@@ -68,9 +68,9 @@
 @media(max-width:760px){#treatments .branded-grid .treatment-card{min-height:420px;padding:15px}#treatments .branded-grid .product-stage{height:220px;margin:9px -3px 6px}#treatments .branded-grid .product-stage img{width:96%;height:96%}#treatments .branded-grid .card-content>a{margin-top:11px}}
 
 /* One consistent canvas for the approved neutral peptide vial. */
-.treatment-card:has(img[src$="glp1-vial-neutral-v2.png"]){background:linear-gradient(145deg,#f2fbfa 0%,#d8f0ef 58%,#bddfdf 100%)!important}
-.product-stage:has(img[src$="glp1-vial-neutral-v2.png"]){border:1px solid rgba(255,255,255,.78);background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.98) 0 18%,rgba(197,238,236,.96) 42%,rgba(104,194,193,.34) 68%,rgba(53,182,184,.1) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 18px 42px rgba(45,101,104,.11)}
-.product-stage:has(img[src$="glp1-vial-neutral-v2.png"]) img{width:65.8%!important;height:65.8%!important;mix-blend-mode:normal!important;filter:drop-shadow(0 22px 22px rgba(32,77,79,.18))}
+.treatment-card:has(img[src$="v6/compounded-medication-generic.png"]){background:linear-gradient(145deg,#f2fbfa 0%,#d8f0ef 58%,#bddfdf 100%)!important}
+.product-stage:has(img[src$="v6/compounded-medication-generic.png"]){border:1px solid rgba(255,255,255,.78);background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.98) 0 18%,rgba(197,238,236,.96) 42%,rgba(104,194,193,.34) 68%,rgba(53,182,184,.1) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 18px 42px rgba(45,101,104,.11)}
+.product-stage:has(img[src$="v6/compounded-medication-generic.png"]) img{width:65.8%!important;height:65.8%!important;mix-blend-mode:normal!important;filter:drop-shadow(0 22px 22px rgba(32,77,79,.18))}
 
 /* One measured product frame for all five GLP-1 cards. */
 #treatments .branded-grid .product-stage{
@@ -104,19 +104,19 @@
   background:linear-gradient(160deg,rgba(255,255,255,.88),rgba(224,242,240,.6));
   box-shadow:0 14px 35px rgba(39,87,89,.1);
 }
-#treatments .branded-grid .product-stage:has(img[src$="glp1-tablets.png"]){background:radial-gradient(circle at 50% 42%,#fff 0 18%,#edf4f4 42%,#c9dcde 70%,#aebfc3 100%)}
-#treatments .branded-grid .product-stage:has(img[src$="glp1-tablets.png"]):before{background:linear-gradient(160deg,rgba(255,255,255,.94),rgba(225,235,236,.74));border-color:rgba(255,255,255,.94)}
+#treatments .branded-grid .product-stage:has(img[src$="compounded-medication-generic.png"]){background:radial-gradient(circle at 50% 42%,#fff 0 18%,#edf4f4 42%,#c9dcde 70%,#aebfc3 100%)}
+#treatments .branded-grid .product-stage:has(img[src$="compounded-medication-generic.png"]):before{background:linear-gradient(160deg,rgba(255,255,255,.94),rgba(225,235,236,.74));border-color:rgba(255,255,255,.94)}
 #treatments .branded-grid .product-stage:has(img[src$="wegovy-pill.png"]){background:radial-gradient(circle at 50% 42%,#fff 0 18%,#f7f3eb 42%,#e5ded1 70%,#cbd9d7 100%)}
 #treatments .branded-grid .product-stage:has(img[src$="wegovy-pill.png"]):before{background:linear-gradient(160deg,rgba(255,255,255,.95),rgba(239,234,223,.75))}
 #treatments .branded-grid .product-stage:has(img[src$="wegovy-injection.png"]){background:radial-gradient(circle at 50% 42%,#faffff 0 18%,#dff3f3 42%,#9fcfd1 70%,#5e959a 100%)}
 #treatments .branded-grid .product-stage:has(img[src$="wegovy-injection.png"]):before{background:linear-gradient(160deg,rgba(255,255,255,.94),rgba(202,234,234,.7))}
 #treatments .branded-grid .product-stage:has(img[src$="zepbound-injection.png"]){background:radial-gradient(circle at 50% 42%,#fff 0 18%,#f2eef8 42%,#d7cee7 70%,#a9cece 100%)}
 #treatments .branded-grid .product-stage:has(img[src$="zepbound-injection.png"]):before{background:linear-gradient(160deg,rgba(255,255,255,.95),rgba(231,226,241,.72))}
-#treatments .branded-grid .product-stage img[src$="glp1-vial-neutral-v2.png"]{
+#treatments .branded-grid .product-stage img[src$="v6/compounded-medication-generic.png"]{
   width:56%!important;
   height:56%!important;
 }
 @media(max-width:760px){
   #treatments .branded-grid .product-stage img{width:76%!important;height:76%!important}
-  #treatments .branded-grid .product-stage img[src$="glp1-vial-neutral-v2.png"]{width:54%!important;height:54%!important}
+  #treatments .branded-grid .product-stage img[src$="v6/compounded-medication-generic.png"]{width:54%!important;height:54%!important}
 }

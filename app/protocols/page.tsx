@@ -8,18 +8,18 @@ export default function ProtocolsPage(){
     <SiteHeader/>
     <section className="protocol-hero">
       <div><p className="detail-kicker">Protocol library</p><h1>Explore the complete protocol catalog.</h1><p>Start with a goal or browse the full educational library. A protocol appearing here does not mean it is available or appropriate for you. Independent licensed providers make clinical decisions after review.</p></div>
-      <div className="protocol-hero-index" aria-label="Protocol library summary"><span>MASTER LIBRARY</span><strong>{String(protocols.length).padStart(2,"0")}</strong><small>protocol entries mapped across five Rejuvonix goals</small></div>
+      <div className="protocol-hero-index" aria-label="Protocol library summary"><img src="/v6/compounded-medication-generic.png" alt="" aria-hidden="true"/><span>MASTER LIBRARY</span><strong className="protocol-count-ring">{String(protocols.length).padStart(2,"0")}</strong><small>protocol entries mapped across five Rejuvonix goals</small></div>
     </section>
     <nav className="protocol-filter-bar" aria-label="Protocol categories">
       <Link className="active" href="/protocols">All Protocols</Link>
       {protocolGoals.map((goal)=><Link href={`/protocols/${goal.slug}`} key={goal.slug}>{goal.name}</Link>)}
     </nav>
+    <ProtocolTrustStrip/>
     <section className="protocol-library" id="all-protocols">
       <div className="protocol-library-heading"><div><p className="detail-kicker">All protocols</p><h2>One library. Clear pathways.</h2></div><p>Browse horizontally to compare protocols, then open the individual page for clinical context, provider review and supporting quality documentation.</p></div>
       <div className="protocol-scroll-shell" aria-label="All protocols horizontal list"><div className="protocol-scroll-track">
         {protocols.map((protocol,index)=><ProtocolCard protocol={protocol} index={index} key={protocol.slug}/>) }
       </div></div>
-      <ProtocolTrustStrip/>
     </section>
     <section className="protocol-clinical-note"><div><p className="detail-kicker">Clinical boundary</p><h2>Education first. Provider judgment always.</h2></div><p>Some catalog entries are investigational, compounded, not FDA approved for the goal shown, or may not be legally or clinically available. Rejuvonix will not convert a catalog entry into a treatment offer until the relevant provider, pharmacy, state and regulatory requirements are verified.</p></section>
     <SiteFooter/>

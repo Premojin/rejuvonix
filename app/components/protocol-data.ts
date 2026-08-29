@@ -74,8 +74,8 @@ const baseProtocols: BaseProtocolItem[] = [
 
 
 const protocolPresentation: Record<string, {priceLabel: string; image: string; imageAlt: string}> = {
-  semaglutide: {priceLabel: "Current pricing confirmed in assessment", image: "/v6/semaglutide-2.5mg-ml.png", imageAlt: "Compounded semaglutide medication vial"},
-  tirzepatide: {priceLabel: "Current pricing confirmed in assessment", image: "/v6/tirzepatide-5mg-0.5ml.png", imageAlt: "Compounded tirzepatide medication vial"},
+  semaglutide: {priceLabel: "Current pricing confirmed in assessment", image: "/v6/compounded-medication-generic.png", imageAlt: "Compounded medication vial"},
+  tirzepatide: {priceLabel: "Current pricing confirmed in assessment", image: "/v6/compounded-medication-generic.png", imageAlt: "Compounded medication vial"},
   "semax-selank": {priceLabel: "from $239/mo", image: "/v6/compounded-medication-generic.png", imageAlt: "Compounded medication vial"},
   dsip: {priceLabel: "from $199/mo", image: "/v6/compounded-medication-generic.png", imageAlt: "Compounded medication vial"},
   "nad-plus": {priceLabel: "from $159/mo", image: "/v6/compounded-medication-generic.png", imageAlt: "Compounded medication vial"},

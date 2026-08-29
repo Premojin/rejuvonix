@@ -4,8 +4,8 @@ import { SiteFooter, SiteHeader } from "../../components/SiteChrome";
 import { findGoal, goalGroups } from "../../components/service-data";
 
 const pathwaySilhouettes:Record<string,string>={
-  "glp-1-injections":"/glp1-vial-neutral-v2.png",
-  "glp-1-tablets":"/glp1-tablets.png",
+  "glp-1-injections":"/v6/compounded-medication-generic.png",
+  "glp-1-tablets":"/v6/compounded-medication-generic.png",
   "wegovy-pill":"/wegovy-pill.png",
   "wegovy-injection":"/wegovy-injection.png",
   "zepbound-injection":"/zepbound-injection.png",

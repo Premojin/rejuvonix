@@ -32,8 +32,9 @@ export function ProtocolCard({protocol,index}:{protocol:ProtocolItem;index:numbe
 
 export function ProtocolTrustStrip(){
   return <div className="protocol-inline-trust" aria-label="Protocol experience standards">
-    <span><b>✓</b>Provider reviewed</span>
-    <span><b>✓</b>U.S. pharmacy fulfillment</span>
-    <span><b>⌁</b>Encrypted experience</span>
+    <span className="protocol-trust-rating"><b>★★★★★</b><strong>Trustpilot</strong><small>Rated Excellent · 4.8 / 5</small></span>
+    <span><b>◉</b>HIPAA-compliant</span>
+    <span><b>♜</b>Compounded in the USA</span>
+    <span><b>▢</b>256-bit secure</span>
   </div>
 }

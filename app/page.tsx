@@ -4,8 +4,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { GoalMegaMenu } from "./components/SiteChrome";
 import { careJourney } from "./components/CareJourney";
-import { products } from "./components/product-data";
-import { TreatmentCard } from "./components/TreatmentCard";
 
 const legacyJourney = [
   ["01","Program selected","Choose the area where you want support."],
@@ -52,7 +50,7 @@ const heroPrograms: HeroProgram[] = [
   { title:"Sexual Health", href:"/eligibility/sexual-health", image:"/program-sexual-health-silhouette.webp", kind:"person women sexual" },
   { title:"Hair Restoration", href:"/eligibility/hair-restoration", image:"/program-hair-restoration-silhouette.webp", kind:"person hair" },
   { title:"Skin Regeneration", href:"/eligibility/skin-restoration", image:"/program-skin-rejuvenation-silhouette.webp", kind:"person skin" },
-  { title:"Compounded care", subtitle:"Patient-specific options", price:"$199", href:"/compounded", image:"/compounded-semaglutide-transparent.png", kind:"product semaglutide" },
+  { title:"Compounded care", subtitle:"Patient-specific options", price:"$199", href:"/compounded", image:"/v6/compounded-medication-generic.png", kind:"product semaglutide" },
 ];
 
 export default function Home() {
@@ -132,12 +130,6 @@ export default function Home() {
       <div className="wellness-tabs" role="tablist" aria-label="Wellness programs">{wellnessPrograms.map((program,index)=><button key={program.name} className={programActive===index?"active":""} onClick={()=>setProgramActive(index)} role="tab" aria-selected={programActive===index}><span>{program.number}</span><strong>{program.name}</strong><small>{program.kicker}</small><i><b></b></i></button>)}</div>
     </section>
 
-    <section className="section-shell" id="treatments">
-      <div className="section-heading"><div><p className="eyebrow">Treatment options</p><h2>Find out which option may be right for you.</h2></div><p>A provider reviews your health history, preferences and goals before recommending treatment.</p></div>
-      <div className="treatment-grid branded-grid">{products.map((product,index)=><TreatmentCard product={product} index={index} key={product.slug}/>)}</div>
-      <p className="section-disclaimer">Prescription products require an online consultation with an independent licensed healthcare provider who determines whether a prescription is appropriate. Compounded medications are not FDA approved.</p>
-    </section>
-
     <section className="bmi-section" aria-labelledby="bmi-title">
       <div className="bmi-intro"><p className="eyebrow">A useful starting point</p><h2 id="bmi-title">Check your BMI.</h2><p>Enter your height and weight for a quick estimate. A licensed provider considers your full health history, not BMI alone.</p></div>
       <div className="bmi-card">
@@ -174,9 +166,9 @@ export default function Home() {
     <section className="compounded-section compounded-section-v6" id="compounded">
       <div className="compounded-intro"><p className="eyebrow">Compounded medications</p><h2>Compare semaglutide, tirzepatide, and GLP-1 microdose.</h2><p>An independent provider may prescribe a compounded medication when it is legally available and appropriate for the patient. Compounded medications are not generic versions of branded drugs, and they are not FDA approved.</p></div>
       <div className="glance-grid glance-grid-v6">
-        <a className="glance-card semaglutide glance-card-v6" href="/eligibility/weight-loss"><img className="glance-product-vial" src="/v6/semaglutide-2.5mg-ml.png" alt="Compounded semaglutide medication vial"/><div className="glance-content"><div className="glance-number">01</div><p className="pill-label">Compounded option</p><h3>Semaglutide</h3><p className="glance-sub">Acts on the GLP-1 receptor.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
-        <a className="glance-card tirzepatide glance-card-v6" href="/eligibility/weight-loss"><img className="glance-product-vial" src="/v6/tirzepatide-5mg-0.5ml.png" alt="Compounded tirzepatide medication vial"/><div className="glance-content"><div className="glance-number">02</div><p className="pill-label">Compounded option</p><h3>Tirzepatide</h3><p className="glance-sub">Acts on the GIP and GLP-1 receptors.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
-        <a className="glance-card microdose glance-card-v6" href="/eligibility/weight-loss"><img className="glance-product-vial" src="/v6/glp1-microdose-500mcg-ml.png" alt="Compounded GLP-1 microdose medication vial"/><div className="glance-content"><div className="glance-number">03</div><p className="pill-label">Compounded option</p><h3>GLP-1 Microdose</h3><p className="glance-sub">Lower-dose GLP-1 pathway considered only after provider review.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
+        <a className="glance-card semaglutide glance-card-v6" href="/eligibility/weight-loss"><img className="glance-product-vial" src="/v6/compounded-medication-generic.png" alt="Compounded medication vial"/><div className="glance-content"><div className="glance-number">01</div><p className="pill-label">Compounded option</p><h3>Semaglutide</h3><p className="glance-sub">Acts on the GLP-1 receptor.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
+        <a className="glance-card tirzepatide glance-card-v6" href="/eligibility/weight-loss"><img className="glance-product-vial" src="/v6/compounded-medication-generic.png" alt="Compounded medication vial"/><div className="glance-content"><div className="glance-number">02</div><p className="pill-label">Compounded option</p><h3>Tirzepatide</h3><p className="glance-sub">Acts on the GIP and GLP-1 receptors.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
+        <a className="glance-card microdose glance-card-v6" href="/eligibility/weight-loss"><img className="glance-product-vial" src="/v6/compounded-medication-generic.png" alt="Compounded medication vial"/><div className="glance-content"><div className="glance-number">03</div><p className="pill-label">Compounded option</p><h3>GLP-1 Microdose</h3><p className="glance-sub">Lower-dose GLP-1 pathway considered only after provider review.</p><dl><div><dt>Typical format</dt><dd>Injection*</dd></div><div><dt>Schedule</dt><dd>Set by provider</dd></div><div><dt>Clinical review</dt><dd>Required</dd></div><div><dt>FDA status</dt><dd>Not FDA approved</dd></div></dl><span className="glance-assessment-cta">Start assessment <b>→</b></span></div></a>
       </div><p className="compounded-note">*Form, ingredients, concentration and availability vary by prescription and dispensing pharmacy. Compounded medications are prepared for an identified patient and are not reviewed by FDA for safety, effectiveness or quality before marketing.</p>
     </section>
 

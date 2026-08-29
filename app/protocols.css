@@ -63,3 +63,20 @@
 @media(max-width:1000px){.protocol-detail-hero-v6{grid-template-columns:1fr!important}.protocol-hero-product{min-height:420px}.protocol-detail-lower{grid-template-columns:1fr}.protocol-detail-lower aside{justify-content:flex-start}.protocol-detail-lower aside>div{justify-content:flex-start}}
 @media(max-width:680px){.protocol-scroll-track{gap:14px;padding:0 20px}.protocol-product-card{flex-basis:84vw;min-height:690px!important;border-radius:26px!important}.protocol-card-visual{height:245px}.protocol-card-body{padding:28px 24px}.protocol-detail-hero-v6{padding:58px 22px 48px!important}.protocol-detail-copy h1{font-size:58px!important}.protocol-hero-product{min-height:380px}.protocol-hero-product>img{height:350px;width:min(220px,68%)}.protocol-bottle-halo{width:280px;height:280px}.protocol-floating-goal{font-size:9px}.protocol-detail-lower aside{display:grid!important;gap:10px}.protocol-detail-lower aside>div{display:grid;gap:5px}.protocol-inline-trust{justify-content:flex-start;gap:14px;padding-inline:4px}}
 @media(prefers-reduced-motion:reduce){.protocol-hero-product>img,.protocol-bottle-halo,.protocol-floating-goal{animation:none!important}.protocol-product-card,.protocol-card-visual img,.protocol-card-visual:after{transition:none!important}}
+
+/* Current protocol-count refinement: keep the bottle translucent behind a breathing number ring. */
+.protocol-hero-index,.protocol-category-count{position:relative;isolation:isolate;overflow:hidden}
+.protocol-hero-index>img,.protocol-category-count>img{position:absolute;z-index:-1;width:58%;height:86%;left:21%;top:7%;object-fit:contain;opacity:.13;filter:drop-shadow(0 20px 24px rgba(8,38,37,.2));transform:rotate(7deg)}
+.protocol-count-ring{position:relative;z-index:1;width:126px;height:126px;margin:18px 0 8px;display:grid;place-items:center;border:1px solid #53c5c8;border-radius:50%;box-shadow:0 0 0 10px rgba(83,197,200,.08),0 0 32px rgba(83,197,200,.22);animation:protocolCountPulse 3.6s ease-in-out infinite}
+.protocol-count-ring:after{content:"";position:absolute;inset:-10px;border:1px solid rgba(83,197,200,.5);border-radius:50%;animation:protocolCountPulse 3.6s ease-in-out infinite reverse}
+.protocol-category-count .protocol-count-ring{margin:0 0 16px}
+@keyframes protocolCountPulse{0%,100%{transform:scale(.98);opacity:.82}50%{transform:scale(1.04);opacity:1}}
+.protocol-floating-goal{--goal-rotation:-16deg}
+.goal-orbit-1{right:4%;top:20%;--goal-rotation:-18deg}.goal-orbit-2{left:2%;bottom:24%;--goal-rotation:18deg}.goal-orbit-3{right:13%;bottom:13%;--goal-rotation:-12deg}
+@keyframes protocolGoalDrift{0%,100%{transform:translate3d(0,0,22px) rotate(var(--goal-rotation))}50%{transform:translate3d(8px,-9px,42px) rotate(calc(var(--goal-rotation) + 4deg))}}
+@media(prefers-reduced-motion:reduce){.protocol-count-ring,.protocol-count-ring:after{animation:none}.protocol-floating-goal{animation:none!important}}
+
+/* Trust message sits directly below the protocol navigation, matching the compact dark assurance strip. */
+.protocol-inline-trust{max-width:none;margin:0;padding:18px 5vw;background:#30383b;border:0;color:#d9e1e0;gap:34px;justify-content:center}
+.protocol-inline-trust span{font-size:12px}.protocol-inline-trust b{color:#d9e1e0}.protocol-inline-trust .protocol-trust-rating{display:grid;grid-template-columns:auto auto;column-gap:10px;row-gap:2px}.protocol-trust-rating>b{grid-row:1 / span 2;color:#16bd8b;letter-spacing:2px}.protocol-trust-rating strong{font-size:13px;color:#fff}.protocol-trust-rating small{color:#aab7b7;font-size:10px}
+@media(max-width:680px){.protocol-inline-trust{justify-content:flex-start;gap:16px;overflow-x:auto;white-space:nowrap}.protocol-inline-trust .protocol-trust-rating{white-space:normal}}

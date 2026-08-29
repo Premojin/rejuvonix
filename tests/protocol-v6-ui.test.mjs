@@ -48,12 +48,29 @@ test("protocol detail hero uses floating bottle and goal orbit with lower relate
 
 test("homepage and compounded page both include Semaglutide, Tirzepatide and GLP-1 Microdose",()=>{
   for(const source of [home,compounded]){
-    assert.match(source,/semaglutide-2\.5mg-ml\.png/);
-    assert.match(source,/tirzepatide-5mg-0\.5ml\.png/);
-    assert.match(source,/glp1-microdose-500mcg-ml\.png/);
+    assert.match(source,/v6\/compounded-medication-generic\.png/);
     assert.match(source,/GLP-1 Microdose/);
     assert.match(source,/assessment/i);
   }
+});
+
+test("current compounded presentation uses the supplied generic vial and removes the duplicate treatment-options section",()=>{
+  assert.match(home,/title:\"Compounded care\"[^\n]+v6\/compounded-medication-generic\.png/);
+  assert.doesNotMatch(home,/Treatment options/);
+  assert.match(compounded,/v6\/compounded-medication-generic\.png/);
+});
+
+test("numbered cards and protocol summaries retain the supplied bottle behind pulsing rings",()=>{
+  assert.match(home,/glance-number/);
+  assert.match(index,/protocol-count-ring/);
+  assert.match(css,/compoundedNumberPulse/);
+  assert.match(css,/protocolCountPulse/);
+});
+
+test("protocol assurance message follows the category navigation",()=>{
+  assert.match(index,/protocol-filter-bar[\s\S]*<\/nav>[\s\S]*ProtocolTrustStrip/);
+  assert.match(card,/Trustpilot/);
+  assert.match(card,/HIPAA-compliant/);
 });
 
 test("goal identities are text-led and navigation receives aqua glow underline",()=>{
