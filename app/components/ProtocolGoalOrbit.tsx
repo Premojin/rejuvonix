@@ -24,13 +24,15 @@ export function ProtocolGoalOrbit({goals}:{goals:string[]}){
     let frame=0;
     const started=performance.now();
     const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const getRadii=()=>window.innerWidth<=680?[96,31]:window.innerWidth<=1000?[112,36]:[132,43];
     const tick=(now:number)=>{
       const phase=((now-started)/15000)*Math.PI*2;
+      const [radiusX,radiusY]=getRadii();
       glyphs.forEach((glyph)=>{
         const angle=glyph.angle+phase;
         const depth=Math.sin(angle);
-        const x=Math.cos(angle)*178;
-        const y=Math.sin(angle)*78;
+        const x=Math.cos(angle)*radiusX;
+        const y=Math.sin(angle)*radiusY;
         const scale=.86+Math.max(depth,0)*.14;
         const opacity=.28+Math.max(depth,0)*.72;
         const transform=`translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), ${depth*34}px) rotate(0deg) scale(${scale})`;

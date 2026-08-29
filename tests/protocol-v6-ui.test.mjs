@@ -12,6 +12,7 @@ const data=await read("app/components/protocol-data.ts");
 const index=await read("app/protocols/page.tsx");
 const shelf=await read("app/components/ProtocolShelf.tsx");
 const detail=await read("app/protocols/[slug]/page.tsx");
+const orbit=await read("app/components/ProtocolGoalOrbit.tsx");
 const home=await read("app/page.tsx");
 const compounded=await read("app/compounded/page.tsx");
 const css=(await read("app/protocols.css"))+(await read("app/revamp.css"))+(await read("app/detail-pages.css"));
@@ -63,6 +64,10 @@ test("V7 GLP cards use the dedicated bottle assets and a dedicated visual zone",
 
 test("V7 protocol detail uses a shared orbital halo track",()=>{
   assert.match(detail,/ProtocolGoalOrbit/);
+  assert.match(orbit,/getRadii=\(\)=>/);
+  assert.match(orbit,/radiusX/);
+  assert.match(orbit,/rotate\(0deg\)/);
+  assert.match(orbit,/depth<0/);
   assert.match(css,/protocol-character-orbit--rear/);
   assert.match(css,/protocol-character-orbit--front/);
 });

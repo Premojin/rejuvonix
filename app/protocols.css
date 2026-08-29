@@ -114,9 +114,9 @@
 .protocol-vial-orbit{position:absolute;inset:0;z-index:auto;pointer-events:none;perspective:900px;transform-style:preserve-3d}
 .protocol-character-orbit{position:absolute;left:50%;top:29%;width:1px;height:1px;transform-style:preserve-3d}
 .protocol-character-orbit--rear{z-index:1}.protocol-character-orbit--front{z-index:4}
-.protocol-character-orbit span{position:absolute;left:0;top:0;display:block;color:#0d7d84;font-size:17px;font-weight:900;letter-spacing:.1em;text-shadow:0 8px 22px rgba(18,145,152,.3);transform-origin:center;will-change:transform,opacity}
+.protocol-character-orbit span{position:absolute;left:0;top:0;display:block;color:#0d7d84;font-size:19px;font-weight:900;letter-spacing:.1em;text-shadow:0 8px 22px rgba(18,145,152,.3);transform-origin:center;will-change:transform,opacity}
 .protocol-character-orbit--rear span{text-shadow:0 5px 12px rgba(18,145,152,.12)}
-@media(max-width:680px){.protocol-character-orbit{top:29%}.protocol-character-orbit span{font-size:13px;letter-spacing:.08em}}
+@media(max-width:680px){.protocol-character-orbit{top:29%}.protocol-character-orbit span{font-size:14px;letter-spacing:.08em}}
 @media(prefers-reduced-motion:reduce){.protocol-character-orbit span{transition:none}}
 
 /* Trust message sits directly below the protocol navigation, matching the compact dark assurance strip. */
