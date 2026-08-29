@@ -8,7 +8,7 @@ export default function ProtocolsPage(){
     <SiteHeader/>
     <section className="protocol-hero">
       <div><p className="detail-kicker">Protocol library</p><h1>Explore the complete protocol catalog.</h1><p>Start with a goal or browse the full educational library. A protocol appearing here does not mean it is available or appropriate for you. Independent licensed providers make clinical decisions after review.</p></div>
-      <div className="protocol-hero-index" aria-label="Protocol library summary"><img src="/v6/compounded-medication-generic.png" alt="" aria-hidden="true"/><span>MASTER LIBRARY</span><strong className="protocol-count-ring">{String(protocols.length).padStart(2,"0")}</strong><small>protocol entries mapped across five Rejuvonix goals</small></div>
+      <div className="protocol-hero-index" aria-label="Protocol library summary"><span>MASTER LIBRARY</span><div className="protocol-count-ring"><img src="/v6/compounded-medication-generic.png" alt="" aria-hidden="true"/><strong className="protocol-count-number">{String(protocols.length).padStart(2,"0")}</strong></div><small>protocol entries mapped across five Rejuvonix goals</small></div>
     </section>
     <nav className="protocol-filter-bar" aria-label="Protocol categories">
       <Link className="active" href="/protocols">All Protocols</Link>

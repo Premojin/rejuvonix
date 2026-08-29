@@ -46,3 +46,15 @@
 @keyframes compoundedNumberPulse{0%,100%{transform:scale(.98);opacity:.78}50%{transform:scale(1.04);opacity:1}}
 @media(max-width:680px){.glance-card-v6{min-height:540px}.glance-product-vial{width:210px;height:285px;left:50%;right:auto;top:40%}}
 @media(prefers-reduced-motion:reduce){.glance-number{animation:none}.glance-number:after{animation:none}}
+
+/* Latest visual pass: smaller centered vials, protocol-style assessment CTAs, and left-leaning hero art. */
+.glance-product-vial{width:158px;height:225px;top:42%;opacity:.2;transform:translate(-50%,-50%) rotate(0deg)}
+.glance-card-v6:hover .glance-product-vial{transform:translate(-50%,calc(-50% - 13px)) rotate(-3deg) scale(1.04)}
+.glance-number{right:auto;left:50%;top:20px;width:62px;height:62px;transform:translateX(-50%);font-size:23px;letter-spacing:-.06em}
+.glance-number:after{inset:-8px}
+.glance-assessment-cta{min-height:58px;margin-top:auto;border:0;border-radius:999px;background:linear-gradient(90deg,#565b60,#34383d);color:#fff;font-size:11px;letter-spacing:.13em;text-transform:uppercase;box-shadow:0 14px 28px rgba(36,42,47,.2);transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
+.glance-assessment-cta b{color:#76d9d7}
+.glance-card-v6:hover .glance-assessment-cta{background:linear-gradient(90deg,#33484c,#145d62);box-shadow:0 16px 34px rgba(20,107,113,.25);transform:translateY(-2px)}
+.program-card.product .program-card-visual img{transform:rotate(-12deg)}
+@media(max-width:680px){.glance-product-vial{width:158px;height:215px;top:40%}.glance-number{top:18px}.glance-card-v6:hover .glance-product-vial{transform:translate(-50%,calc(-50% - 10px)) rotate(-3deg) scale(1.03)}}
+@media(prefers-reduced-motion:reduce){.glance-card-v6:hover .glance-product-vial,.glance-card-v6:hover .glance-assessment-cta{transform:none}.glance-assessment-cta{transition:none}}
