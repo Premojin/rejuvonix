@@ -334,6 +334,11 @@
       }
     ]
   },
+  "glp-1-microdose": {
+    "status": "quality-documentation",
+    "label": "Quality documentation",
+    "batches": []
+  },
   "gonadorelin": {
     "status": "quality-documentation",
     "label": "Quality documentation",

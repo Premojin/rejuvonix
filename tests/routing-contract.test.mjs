@@ -16,7 +16,7 @@ test("production intake destinations are centralized", () => {
 });
 
 test("GLP and peptide protocols classify to their correct intake", () => {
-  assert.match(protocols, /protocol\.slug === "semaglutide" \|\| protocol\.slug === "tirzepatide" \? "glp" : "peptide"/);
+  assert.match(protocols, /\["semaglutide","tirzepatide","glp-1-microdose"\]\.includes\(protocol\.slug\)/);
   assert.match(detail, /intakeUrl\(protocol\.intakeType\)/);
 });
 

@@ -17,9 +17,10 @@ test("protocol catalog preserves five Rejuvonix goal filters",()=>{
   }
 });
 
-test("protocol catalog contains 19 unique entries",()=>{
-  assert.equal(slugs.length,19);
+test("protocol catalog contains 20 unique entries including the full GLP-1 Microdose record",()=>{
+  assert.equal(slugs.length,20);
   assert.equal(slugs.length,new Set(slugs).size);
+  assert.match(source,/slug:\"glp-1-microdose\"/);
 });
 
 test("FDA-approved finished products retain official primary documentation without requiring a COA",()=>{

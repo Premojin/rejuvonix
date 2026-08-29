@@ -84,6 +84,16 @@
 .goal-orbit-1{right:5%;top:20%;--goal-rotation:-17deg}.goal-orbit-2{left:3%;bottom:auto;top:18%;--goal-rotation:17deg}.goal-orbit-3{right:19%;bottom:auto;top:34%;--goal-rotation:-8deg}
 @media(max-width:680px){.protocol-count-ring{width:148px;height:148px}.protocol-count-ring img{width:94px;height:94px}.protocol-goal-orbit:before{width:260px;height:155px}.goal-orbit-1{right:0}.goal-orbit-2{left:0}.goal-orbit-3{right:8%}}
 
+/* V7: the labels travel with one restrained orbital halo centered on the vial neck. */
+.protocol-goal-orbit{position:absolute;inset:0;z-index:3;pointer-events:none;perspective:900px}
+.protocol-goal-orbit-track{position:absolute;left:50%;top:26%;width:min(360px,92%);height:168px;transform:translate(-50%,-50%) rotateX(58deg);transform-style:preserve-3d;border:1px solid rgba(53,182,184,.28);border-radius:50%;box-shadow:0 0 0 12px rgba(53,182,184,.035),0 0 30px rgba(53,182,184,.16);animation:protocolNeckHalo 20s linear infinite}
+.protocol-floating-goal{position:absolute;left:50%;top:50%;z-index:3;white-space:nowrap;color:#0d7d84;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 8px 22px rgba(18,145,152,.3);transform:translate(-50%,-50%) rotate(calc(var(--goal-index) * 360deg / var(--goal-count))) translateX(172px);transform-style:preserve-3d}
+.protocol-floating-goal i{display:block;font-style:normal;transform:rotate(calc(var(--goal-index) * -360deg / var(--goal-count)));animation:protocolHaloLabel 20s linear infinite reverse}
+@keyframes protocolNeckHalo{to{transform:translate(-50%,-50%) rotateX(58deg) rotateZ(360deg)}}
+@keyframes protocolHaloLabel{to{transform:rotate(-360deg)}}
+@media(max-width:680px){.protocol-goal-orbit-track{width:280px;height:140px;top:27%}.protocol-floating-goal{font-size:9px;transform:translate(-50%,-50%) rotate(calc(var(--goal-index) * 360deg / var(--goal-count))) translateX(130px)}}
+@media(prefers-reduced-motion:reduce){.protocol-goal-orbit-track,.protocol-floating-goal i{animation:none}.protocol-floating-goal{transform:translate(-50%,-50%) rotate(calc(var(--goal-index) * 360deg / var(--goal-count))) translateX(172px)}}
+
 /* Trust message sits directly below the protocol navigation, matching the compact dark assurance strip. */
 .protocol-inline-trust{max-width:none;margin:0;padding:18px 5vw;background:#30383b;border:0;color:#d9e1e0;gap:34px;justify-content:center}
 .protocol-inline-trust span{font-size:12px}.protocol-inline-trust b{color:#d9e1e0}.protocol-inline-trust .protocol-trust-rating{display:grid;grid-template-columns:auto auto;column-gap:10px;row-gap:2px}.protocol-trust-rating>b{grid-row:1 / span 2;color:#16bd8b;letter-spacing:2px}.protocol-trust-rating strong{font-size:13px;color:#fff}.protocol-trust-rating small{color:#aab7b7;font-size:10px}

@@ -48,10 +48,21 @@ test("protocol detail hero uses floating bottle and goal orbit with lower relate
 
 test("homepage and compounded page both include Semaglutide, Tirzepatide and GLP-1 Microdose",()=>{
   for(const source of [home,compounded]){
-    assert.match(source,/v6\/compounded-medication-generic\.png/);
     assert.match(source,/GLP-1 Microdose/);
     assert.match(source,/assessment/i);
   }
+});
+
+test("V7 GLP cards use the dedicated bottle assets and a dedicated visual zone",()=>{
+  const source=home;
+  for(const asset of ["semaglutide-2.5mg-ml.png","tirzepatide-5mg-0.5ml.png","glp1-microdose-500mcg-ml.png"]){assert.match(source,new RegExp(`/v6/${asset}`));}
+  assert.equal((source.match(/glance-visual-zone/g)??[]).length,3);
+  assert.equal((source.match(/glance-number/g)??[]).length,3);
+});
+
+test("V7 protocol detail uses a shared orbital halo track",()=>{
+  assert.match(detail,/protocol-goal-orbit-track/);
+  assert.match(css,/protocolNeckHalo/);
 });
 
 test("current compounded presentation uses the supplied generic vial and removes the duplicate treatment-options section",()=>{
