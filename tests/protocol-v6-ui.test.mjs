@@ -35,7 +35,7 @@ test("protocol cards include bottle, price, trust lines and named CTA",()=>{
 
 test("protocol library and goal collections use horizontal shelves and compact trust strip",()=>{
   assert.match(shelf,/protocol-scroll-track/);
-  assert.match(detail,/protocol-scroll-track/);
+  assert.match(detail,/ProtocolShelf protocols=\{items\}/);
   assert.match(index,/ProtocolTrustStrip/);
   assert.match(detail,/ProtocolTrustStrip/);
   assert.match(css,/scroll-snap-type:x/);
@@ -64,12 +64,20 @@ test("V7 GLP cards use the dedicated bottle assets and a dedicated visual zone",
 
 test("V7 protocol detail uses a shared orbital halo track",()=>{
   assert.match(detail,/ProtocolGoalOrbit/);
-  assert.match(orbit,/getRadii=\(\)=>/);
-  assert.match(orbit,/radiusX/);
-  assert.match(orbit,/rotate\(0deg\)/);
-  assert.match(orbit,/depth<0/);
-  assert.match(css,/protocol-character-orbit--rear/);
-  assert.match(css,/protocol-character-orbit--front/);
+  assert.match(orbit,/protocol-goal-orbit-ring/);
+  assert.match(css,/protocol-goal-orbits/);
+  assert.match(css,/protocolBaseOrbit/);
+  assert.match(css,/protocolBaseOrbitLabel/);
+});
+
+test("Protocol Library hero uses a standalone dynamic bottle visual",()=>{
+  assert.match(index,/protocol-library-hero-vial/);
+  assert.match(index,/{protocols\.length}/);
+  assert.doesNotMatch(index,/protocol-count-ring/);
+});
+
+test("category protocol shelves reuse accessible scroll controls",()=>{
+  assert.match(detail,/ProtocolShelf protocols=\{items\}/);
 });
 
 test("V7 catalog count and protocol shelf controls are data-driven and accessible",()=>{
@@ -88,8 +96,9 @@ test("current compounded presentation uses the supplied generic vial and removes
   assert.match(compounded,/v6\/compounded-medication-generic\.png/);
 });
 
-test("protocol summaries retain their supplied bottle behind pulsing rings",()=>{
-  assert.match(index,/protocol-count-ring/);
+test("protocol summaries retain their supplied standalone bottle visual",()=>{
+  assert.match(index,/protocol-library-hero-vial/);
+  assert.doesNotMatch(index,/protocol-count-ring/);
   assert.match(css,/protocolCountPulse/);
 });
 
