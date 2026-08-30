@@ -29,7 +29,7 @@ export function ProtocolGoalOrbit({goals}:{goals:string[]}){
     let frame=0;
     const started=performance.now();
     const animate=(now:number)=>{
-      setPhase(((now-started)%REVOLUTION_MS)/REVOLUTION_MS*Math.PI*2);
+      setPhase(-(((now-started)%REVOLUTION_MS)/REVOLUTION_MS*Math.PI*2));
       frame=requestAnimationFrame(animate);
     };
     frame=requestAnimationFrame(animate);
