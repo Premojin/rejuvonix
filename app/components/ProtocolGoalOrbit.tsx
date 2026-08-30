@@ -38,7 +38,7 @@ export function ProtocolGoalOrbit({goals}:{goals:string[]}){
 
   const glyphs=Array.from(ribbon);
   const renderPlane=(front:boolean)=>glyphs.map((character,index)=>{
-    const angle=phase+(index/glyphs.length)*Math.PI*2;
+    const angle=phase-(index/glyphs.length)*Math.PI*2;
     const depth=Math.sin(angle);
     const isFront=depth>=0;
     if(isFront!==front)return null;
