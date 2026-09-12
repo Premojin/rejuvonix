@@ -12,6 +12,9 @@ ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=build --chown=node:node /app/package*.json ./
 RUN npm ci --omit=dev --ignore-scripts \
+  && apt-get update \
+  && apt-get install --only-upgrade -y --no-install-recommends libpcre2-8-0 \
+  && rm -rf /var/lib/apt/lists/* \
   && rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
 COPY --from=build --chown=node:node /app/dist ./dist
 COPY --from=build --chown=node:node /app/public ./public
