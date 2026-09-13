@@ -1,14 +1,7 @@
-import { CognitoJwtVerifier } from "aws-jwt-verify";
+import { createRemoteJWKSet, jwtVerify } from "jose";
 import type { Role, Principal } from "./authorization";
 
-const roleNames = new Set<Role>([
-  "Patient",
-  "Clinician",
-  "Administrator",
-  "Operations",
-  "Support",
-  "Service",
-]);
+const roleNames = new Set<Role>(["Patient", "Clinician", "Administrator", "Operations", "Support", "Service"]);
 
 export interface CognitoIdentity {
   subject: string;
@@ -18,34 +11,42 @@ export interface CognitoIdentity {
   tenantId: string;
 }
 
-let verifier: ReturnType<typeof CognitoJwtVerifier.create> | undefined;
+let jwks: ReturnType<typeof createRemoteJWKSet> | undefined;
+let jwksIssuer: string | undefined;
 
-function getVerifier() {
+function getVerifierConfig() {
   const userPoolId = process.env.COGNITO_USER_POOL_ID;
   const clientId = process.env.AUTH_CLIENT_ID;
-  if (!userPoolId || !clientId) {
-    throw new Error("Cognito configuration is required for authenticated clinical APIs");
+  const region = process.env.COGNITO_REGION ?? "us-east-1";
+  const issuer = process.env.AUTH_ISSUER_URL ?? `https://cognito-idp.${region}.amazonaws.com/${userPoolId}`;
+  if (!userPoolId || !clientId) throw new Error("Cognito configuration is required for authenticated clinical APIs");
+  return { clientId, issuer };
+}
+
+function getJwks(issuer: string) {
+  if (!jwks || jwksIssuer !== issuer) {
+    jwks = createRemoteJWKSet(new URL(`${issuer}/.well-known/jwks.json`));
+    jwksIssuer = issuer;
   }
-  verifier ??= CognitoJwtVerifier.create({
-    userPoolId,
-    tokenUse: "access",
-    clientId,
-  });
-  return verifier;
+  return jwks;
 }
 
 export async function authenticateCognitoIdentity(token: string): Promise<CognitoIdentity> {
   if (!token || token.split(".").length !== 3) throw new Error("Invalid bearer token");
-  const claims = await getVerifier().verify(token);
-  const roles = (claims["cognito:groups"] ?? []).filter((group): group is Role => roleNames.has(group as Role));
+  const { clientId, issuer } = getVerifierConfig();
+  const { payload } = await jwtVerify(token, getJwks(issuer), { issuer });
+  if (payload.token_use !== "access") throw new Error("Cognito access token required");
+  if (payload.client_id !== clientId) throw new Error("Cognito client mismatch");
+  if (typeof payload.sub !== "string" || payload.sub.length === 0) throw new Error("Cognito subject required");
+  const groups = Array.isArray(payload["cognito:groups"])
+    ? payload["cognito:groups"].filter((group): group is Role => typeof group === "string" && roleNames.has(group as Role))
+    : [];
   return {
-    subject: claims.sub,
-    email: typeof claims.email === "string" ? claims.email : undefined,
-    username: typeof claims.username === "string" ? claims.username : undefined,
-    groups: roles,
-    tenantId: typeof claims["custom:tenant_id"] === "string"
-      ? claims["custom:tenant_id"]
-      : process.env.APP_ENV ?? "local",
+    subject: payload.sub,
+    email: typeof payload.email === "string" ? payload.email : undefined,
+    username: typeof payload.username === "string" ? payload.username : undefined,
+    groups,
+    tenantId: typeof payload["custom:tenant_id"] === "string" ? payload["custom:tenant_id"] : process.env.APP_ENV ?? "local",
   };
 }
 
