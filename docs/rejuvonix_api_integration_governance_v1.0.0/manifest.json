@@ -1,0 +1,28 @@
+{
+  "package": "Rejuvonix API, Events & Integration Governance Pack",
+  "version": "1.0.0",
+  "effective_date": "2026-08-24",
+  "root_index": "INTEGRATION_GOVERNANCE_INDEX.md",
+  "files": [
+    "INTEGRATION_GOVERNANCE_INDEX.md",
+    "docs/api/API_DESIGN_STANDARD.md",
+    "docs/api/API_VERSIONING_AND_COMPATIBILITY.md",
+    "docs/architecture/PLATFORM_INTEGRATION_ARCHITECTURE.md",
+    "docs/events/DOMAIN_EVENT_CONTRACT.md",
+    "docs/events/EVENTBRIDGE_AND_QUEUE_USAGE_STANDARD.md",
+    "docs/events/EVENT_TAXONOMY.md",
+    "docs/events/TRANSACTIONAL_OUTBOX_STANDARD.md",
+    "docs/integrations/AI_TOOL_CONTRACT_STANDARD.md",
+    "docs/integrations/CHANGELOG.md",
+    "docs/integrations/CODEX_INTEGRATION_BUILD_CHECKLIST.md",
+    "docs/integrations/EXTERNAL_EVENT_PERSISTENCE_STANDARD.md",
+    "docs/integrations/INTEGRATION_ADAPTER_CONTRACT.md",
+    "docs/integrations/NOTIFICATION_INTEGRATION_STANDARD.md",
+    "docs/integrations/OUTBOUND_WEBHOOK_STANDARD.md",
+    "docs/integrations/WEBHOOK_INGRESS_STANDARD.md",
+    "docs/operations/CORRELATION_AUDIT_AND_OBSERVABILITY_STANDARD.md",
+    "docs/operations/INTEGRATION_RELEASE_AND_CHANGE_CONTROL.md",
+    "docs/security/API_AND_WEBHOOK_SECURITY_STANDARD.md",
+    "docs/testing/INTEGRATION_TESTING_STANDARD.md"
+  ]
+}

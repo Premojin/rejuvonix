@@ -1,0 +1,23 @@
+{
+  "package": "Rejuvonix AI Governance Pack",
+  "version": "1.0.0",
+  "effective_date": "2026-08-24",
+  "files": [
+    "AI_GOVERNANCE_INDEX.md",
+    "docs/ai/AGENT_EXPERIENCE_AND_ROLE_CONTRACT.md",
+    "docs/ai/AI_AUDITABILITY_AND_PROVENANCE_STANDARD.md",
+    "docs/ai/AI_BUILD_CHECKLIST_FOR_CODEX.md",
+    "docs/ai/AI_CLINICAL_SAFETY_AND_HUMAN_OVERSIGHT.md",
+    "docs/ai/AI_KNOWLEDGE_GOVERNANCE_STANDARD.md",
+    "docs/ai/AI_SOURCE_HIERARCHY_AND_GROUNDING_POLICY.md",
+    "docs/ai/CHANGELOG.md",
+    "docs/ai/PREMOJIN_KNOWLEDGE_INGESTION_STANDARD.md",
+    "docs/architecture/AI_MODEL_PROVIDER_ABSTRACTION.md",
+    "docs/architecture/REJUVONIX_INTELLIGENCE_LAYER_ARCHITECTURE.md",
+    "docs/operations/AI_INCIDENT_RESPONSE_RUNBOOK.md",
+    "docs/operations/AI_RELEASE_AND_CHANGE_CONTROL.md",
+    "docs/security/AI_DATA_PRIVACY_AND_PHI_HANDLING.md",
+    "docs/security/AI_IDENTITY_RBAC_AND_TOOL_AUTHORIZATION.md",
+    "docs/testing/AI_EVALUATION_AND_CLINICAL_BENCHMARK_STANDARD.md"
+  ]
+}

@@ -1,0 +1,3 @@
+# Intentional staging boundary exceptions; ECS tasks and RDS remain private.
+AWS-0053 exp:2027-08-22
+AWS-0104 exp:2027-08-22

@@ -1,0 +1,3 @@
+/* Keep every carousel's visible progress synchronized to its five-second rotation. */
+.assessment-progress span{animation-duration:5s!important}
+.journey-story-rail button.active>i em{animation-duration:5s!important}

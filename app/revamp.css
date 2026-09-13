@@ -29,3 +29,37 @@
   filter:saturate(.95) brightness(1.22) contrast(1.02);
   mix-blend-mode:normal;
 }
+
+/* Surgery v6: three-option compounded comparison with supplied floating bottle assets. */
+.glance-grid-v6{max-width:1480px;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.glance-card-v6{display:block;min-height:690px;padding:38px 32px 30px;color:inherit;text-decoration:none;border-radius:30px!important;transition:transform .35s ease,box-shadow .35s ease}.glance-card-v6:hover{transform:translateY(-7px);box-shadow:0 32px 70px rgba(32,70,70,.15)}.glance-card-v6.microdose{background:linear-gradient(145deg,#f7ffff 0%,#dff6f3 58%,#c9e7e5 100%)}.glance-product-vial{position:absolute;z-index:0;width:160px;height:275px;right:18px;top:22px;object-fit:contain;opacity:.34;filter:drop-shadow(0 22px 24px rgba(17,61,64,.2));transform:rotate(7deg);transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .35s ease}.glance-card-v6:hover .glance-product-vial{transform:translateY(-13px) rotate(2deg) scale(1.04);opacity:.55}.glance-card-v6:after{z-index:1}.glance-card-v6 .glance-content{z-index:2}.glance-card-v6 h3{font-size:38px;margin-top:54px}.glance-assessment-cta{display:flex;min-height:54px;align-items:center;justify-content:center;gap:12px;margin-top:18px;border:1px solid currentColor;border-radius:16px;font-size:12px;font-weight:900;letter-spacing:.02em}.glance-assessment-cta b{color:var(--aqua)}.glance-card-v6:hover .glance-assessment-cta{box-shadow:0 0 0 1px rgba(53,182,184,.16),0 0 20px rgba(53,182,184,.18)}
+@media(max-width:1050px){.glance-grid-v6{grid-template-columns:1fr 1fr}.glance-card-v6.microdose{grid-column:1/-1}}
+@media(max-width:680px){.glance-grid-v6{grid-template-columns:1fr}.glance-card-v6.microdose{grid-column:auto}.glance-card-v6{min-height:620px}.glance-product-vial{width:130px;height:235px;right:4px;top:18px}}
+
+/* Current compounded-card refinement: compact tiles, centered translucent bottle, and numbered pulse rings. */
+.glance-card-v6{min-height:565px;display:flex;flex-direction:column}
+.glance-card-v6 .glance-content{display:flex;flex:1;flex-direction:column}
+.glance-product-vial{width:210px;height:300px;left:50%;right:auto;top:42%;transform:translate(-50%,-50%) rotate(7deg);opacity:.28}
+.glance-card-v6:hover .glance-product-vial{transform:translate(-50%,calc(-50% - 13px)) rotate(2deg) scale(1.04)}
+.glance-assessment-cta{margin-top:auto}
+@media(max-width:680px){.glance-card-v6{min-height:540px}.glance-product-vial{width:210px;height:285px;left:50%;right:auto;top:40%}}
+
+/* Latest visual pass: smaller centered vials, protocol-style assessment CTAs, and left-leaning hero art. */
+.glance-product-vial{width:158px;height:225px;top:42%;opacity:.2;transform:translate(-50%,-50%) rotate(0deg)}
+.glance-card-v6:hover .glance-product-vial{transform:translate(-50%,calc(-50% - 13px)) rotate(-3deg) scale(1.04)}
+.glance-assessment-cta{min-height:58px;margin-top:auto;border:0;border-radius:999px;background:linear-gradient(90deg,#565b60,#34383d);color:#fff;font-size:11px;letter-spacing:.13em;text-transform:uppercase;box-shadow:0 14px 28px rgba(36,42,47,.2);transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
+.glance-assessment-cta b{color:#76d9d7}
+.glance-card-v6:hover .glance-assessment-cta{background:linear-gradient(90deg,#33484c,#145d62);box-shadow:0 16px 34px rgba(20,107,113,.25);transform:translateY(-2px)}
+.program-card.product .program-card-visual img{transform:rotate(-12deg)}
+@media(max-width:680px){.glance-product-vial{width:158px;height:215px;top:40%}.glance-card-v6:hover .glance-product-vial{transform:translate(-50%,calc(-50% - 10px)) rotate(-3deg) scale(1.03)}}
+@media(prefers-reduced-motion:reduce){.glance-card-v6:hover .glance-product-vial,.glance-card-v6:hover .glance-assessment-cta{transform:none}.glance-assessment-cta{transition:none}}
+
+/* V7: keep the product and number in a dedicated visual zone. */
+.glance-card-v6{display:flex;flex-direction:column;min-height:690px;position:relative;overflow:hidden}
+.glance-card-v6>.pill-label{position:relative;z-index:3;margin:0 0 0;font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#147f83}
+.glance-visual-zone{position:relative;flex:0 0 246px;min-height:246px;z-index:2}
+.glance-visual-zone .glance-product-vial{position:absolute;left:50%;right:auto;top:50%;width:150px;height:220px;opacity:.9;transform:translate(-50%,-50%) rotate(3deg);z-index:1}
+.glance-card-v6:hover .glance-visual-zone .glance-product-vial{transform:translate(-50%,calc(-50% - 13px)) rotate(-1deg) scale(1.04);opacity:1}
+.glance-card-v6 .glance-content{position:relative;z-index:3;display:flex;flex:1;flex-direction:column}.glance-card-v6 h3{margin:0 0 10px}.glance-card-v6 .glance-assessment-cta{margin-top:auto}
+.glance-visual-zone .glance-product-vial{width:135px;height:198px;top:55%}
+.glance-card-v6:hover .glance-visual-zone .glance-product-vial{transform:translate(-50%,calc(-50% - 13px)) rotate(-1deg) scale(1.04)}
+@media(max-width:680px){.glance-card-v6{min-height:620px}.glance-visual-zone{flex-basis:220px;min-height:220px}.glance-visual-zone .glance-product-vial{width:138px;height:205px}}

@@ -1,0 +1,74 @@
+/* Site-wide editorial rhythm: protect large type from collisions and give
+   supporting copy a consistent, readable handoff from every headline. */
+h1,
+h2,
+.wegovy-hero h1,
+.meet-panel h2,
+.product-experience .product-hero-copy h1,
+.product-experience .product-meet-copy h2,
+.pill-hero h1,
+.pill-intro h2,
+.pill-benefits-heading h2,
+.goal-hero h1,
+.service-hero h1,
+.collection-hero h1,
+.info-hero h1,
+.auth-photo h1,
+.start-visual h1 {
+  line-height: 1.02 !important;
+}
+
+h1,
+h2 {
+  text-wrap: balance;
+}
+
+h1 + p,
+.hero-content h1 + .hero-copy,
+.wegovy-hero h1 + .dynamic-lead,
+.product-hero-copy h1 + p,
+.collection-hero h1 + p,
+.info-hero h1 + p,
+.goal-hero h1 + p,
+.service-hero h1 + p,
+.meet-panel h2 + p,
+.product-meet-copy h2 + p,
+.pill-hero h1 + p,
+.pill-intro h2 + p {
+  margin-top: clamp(20px, 1.8vw, 28px) !important;
+}
+
+@media (max-width: 680px) {
+  h1,
+  h2,
+  .wegovy-hero h1,
+  .meet-panel h2,
+  .product-experience .product-hero-copy h1,
+  .product-experience .product-meet-copy h2,
+  .pill-hero h1,
+  .pill-intro h2,
+  .pill-benefits-heading h2,
+  .goal-hero h1,
+  .service-hero h1,
+  .collection-hero h1,
+  .info-hero h1,
+  .auth-photo h1,
+  .start-visual h1 {
+    line-height: 1.06 !important;
+  }
+
+  h1 + p,
+  .hero-content h1 + .hero-copy,
+  .wegovy-hero h1 + .dynamic-lead,
+  .product-hero-copy h1 + p,
+  .collection-hero h1 + p,
+  .info-hero h1 + p,
+  .goal-hero h1 + p,
+  .service-hero h1 + p,
+  .meet-panel h2 + p,
+  .product-meet-copy h2 + p,
+  .pill-hero h1 + p,
+  .pill-intro h2 + p {
+    margin-top: 22px !important;
+  }
+}

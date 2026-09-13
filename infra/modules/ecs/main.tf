@@ -1,0 +1,199 @@
+locals { common_tags = merge(var.tags, { Environment = var.name }) }
+
+resource "aws_ecr_repository" "app" {
+  name                 = var.name
+  image_tag_mutability = "IMMUTABLE"
+  image_scanning_configuration { scan_on_push = true }
+  encryption_configuration { encryption_type = "KMS" }
+  tags = local.common_tags
+}
+
+resource "aws_ecr_lifecycle_policy" "app" {
+  repository = aws_ecr_repository.app.name
+  policy = jsonencode({
+    rules = [{
+      rulePriority = 1
+      description  = "Retain the ten newest staging images"
+      selection = {
+        tagStatus   = "any"
+        countType   = "imageCountMoreThan"
+        countNumber = 10
+      }
+      action = { type = "expire" }
+    }]
+  })
+}
+
+resource "aws_cloudwatch_log_group" "app" {
+  name              = "/rejuvonix/${var.name}/application"
+  retention_in_days = 30
+  tags              = local.common_tags
+}
+
+data "aws_iam_policy_document" "ecs_assume" {
+  statement {
+    actions = ["sts:AssumeRole"]
+    principals {
+      type        = "Service"
+      identifiers = ["ecs-tasks.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "execution" {
+  name               = "${var.name}-ecs-execution"
+  assume_role_policy = data.aws_iam_policy_document.ecs_assume.json
+  tags               = local.common_tags
+}
+
+resource "aws_iam_role_policy_attachment" "execution" {
+  role       = aws_iam_role.execution.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
+data "aws_iam_policy_document" "execution_secrets" {
+  count = var.db_secret_arn == null ? 0 : 1
+  statement {
+    actions   = ["secretsmanager:GetSecretValue"]
+    resources = [var.db_secret_arn]
+  }
+  dynamic "statement" {
+    for_each = var.kms_key_arn == null ? [] : [var.kms_key_arn]
+    content {
+      actions   = ["kms:Decrypt"]
+      resources = [statement.value]
+    }
+  }
+}
+
+resource "aws_iam_role_policy" "execution_secrets" {
+  count  = var.db_secret_arn == null ? 0 : 1
+  name   = "${var.name}-ecs-secrets"
+  role   = aws_iam_role.execution.id
+  policy = data.aws_iam_policy_document.execution_secrets[0].json
+}
+
+resource "aws_iam_role" "task" {
+  name               = "${var.name}-ecs-task"
+  assume_role_policy = data.aws_iam_policy_document.ecs_assume.json
+  tags               = local.common_tags
+}
+
+resource "aws_ecs_cluster" "this" {
+  name = var.name
+  setting {
+    name  = "containerInsights"
+    value = "enabled"
+  }
+  tags = local.common_tags
+}
+
+resource "aws_ecs_task_definition" "app" {
+  family                   = var.name
+  cpu                      = var.cpu
+  memory                   = var.memory
+  network_mode             = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  execution_role_arn       = aws_iam_role.execution.arn
+  task_role_arn            = aws_iam_role.task.arn
+  container_definitions = jsonencode([{
+    name      = "rejuvonix"
+    image     = "${aws_ecr_repository.app.repository_url}:${var.image_tag}"
+    essential = true
+    portMappings = [{
+      containerPort = 3000
+      hostPort      = 3000
+      protocol      = "tcp"
+    }]
+    environment = [{
+      name  = "APP_ENV"
+      value = "staging"
+      }, {
+      name  = "DATABASE_SSL"
+      value = "true"
+      }, {
+      name  = "DB_HOST"
+      value = coalesce(var.db_host, "")
+      }, {
+      name  = "DB_PORT"
+      value = var.db_port == null ? "" : tostring(var.db_port)
+      }, {
+      name  = "DB_NAME"
+      value = var.db_name
+      }, {
+      name  = "COGNITO_USER_POOL_ID"
+      value = coalesce(var.cognito_user_pool_id, "")
+      }, {
+      name  = "AUTH_CLIENT_ID"
+      value = coalesce(var.auth_client_id, "")
+      }, {
+      name  = "COGNITO_DOMAIN"
+      value = coalesce(var.cognito_domain, "")
+    }]
+    secrets = var.db_secret_arn == null ? [] : [
+      { name = "DB_USER", valueFrom = "${var.db_secret_arn}:username::" },
+      { name = "DB_PASSWORD", valueFrom = "${var.db_secret_arn}:password::" }
+    ]
+    logConfiguration = {
+      logDriver = "awslogs"
+      options = {
+        awslogs-group         = aws_cloudwatch_log_group.app.name
+        awslogs-region        = data.aws_region.current.name
+        awslogs-stream-prefix = "app"
+      }
+    }
+    healthCheck = { command = ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""], interval = 30, timeout = 5, retries = 3, startPeriod = 20 }
+  }])
+  tags = local.common_tags
+}
+
+data "aws_region" "current" {}
+
+resource "aws_ecs_service" "app" {
+  count = var.create_service ? 1 : 0
+
+  name                   = var.name
+  cluster                = aws_ecs_cluster.this.id
+  task_definition        = aws_ecs_task_definition.app.arn
+  desired_count          = var.desired_count
+  launch_type            = "FARGATE"
+  enable_execute_command = false
+  network_configuration {
+    subnets          = var.subnet_ids
+    security_groups  = [var.security_group_id]
+    assign_public_ip = false
+  }
+  load_balancer {
+    target_group_arn = var.target_group_arn
+    container_name   = "rejuvonix"
+    container_port   = 3000
+  }
+  depends_on = [aws_iam_role_policy_attachment.execution]
+  tags       = local.common_tags
+}
+
+resource "aws_appautoscaling_target" "ecs" {
+  count              = var.create_service ? 1 : 0
+  max_capacity       = var.max_tasks
+  min_capacity       = var.desired_count
+  resource_id        = "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.app[0].name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+}
+
+resource "aws_appautoscaling_policy" "cpu" {
+  count              = var.create_service ? 1 : 0
+  name               = "${var.name}-cpu-target"
+  policy_type        = "TargetTrackingScaling"
+  resource_id        = aws_appautoscaling_target.ecs[0].resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs[0].scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs[0].service_namespace
+  target_tracking_scaling_policy_configuration {
+    target_value = 60
+    predefined_metric_specification {
+      predefined_metric_type = "ECSServiceAverageCPUUtilization"
+    }
+    scale_in_cooldown  = 300
+    scale_out_cooldown = 60
+  }
+}

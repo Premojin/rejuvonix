@@ -1,0 +1,13 @@
+.git
+.github
+node_modules
+.next
+dist
+.sites-runtime
+.wrangler
+.env
+.env.*
+!.env.example
+*.tfstate
+*.tfvars
+coverage

@@ -1,0 +1,27 @@
+/* One product-card system shared by homepage, collection, and comparison pages. */
+.unified-treatment-section .treatment-grid.branded-grid{max-width:1560px;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.unified-treatment-section .branded-grid .treatment-card{min-width:0;min-height:370px;padding:13px}
+.unified-treatment-section .branded-grid .product-stage{height:190px;margin:10px -4px 6px}
+.unified-treatment-section .branded-grid .product-stage img{width:78%!important;height:78%!important;transform:none!important;object-fit:contain;mix-blend-mode:normal!important}
+.unified-treatment-section .branded-grid .card-content p{margin-bottom:3px}
+.unified-treatment-section .branded-grid .card-content h3{font-size:clamp(16px,1.35vw,20px);line-height:1.08;margin-bottom:5px}
+.unified-treatment-section .branded-grid .card-content>a{margin-top:10px;padding-bottom:5px}
+.related-treatment-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;max-width:1050px!important}
+
+/* Long homepage program names remain on one horizontal line. */
+.program-card.skin .program-card-copy,
+.program-card.product .program-card-copy{width:auto;max-width:calc(100% - 32px)}
+.program-card.skin .program-card-copy strong,
+.program-card.product .program-card-copy strong{white-space:nowrap;font-size:clamp(17px,1.35vw,24px)}
+
+@media(max-width:1050px) and (min-width:761px){
+  .unified-treatment-section .branded-grid .treatment-card{min-height:355px;padding:11px}
+  .unified-treatment-section .branded-grid .product-stage{height:175px;margin-top:8px}
+}
+@media(max-width:760px){
+  .unified-treatment-section .treatment-grid.branded-grid{display:flex;grid-template-columns:none;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 18px}
+  .unified-treatment-section .branded-grid .treatment-card{flex:0 0 min(82vw,320px);width:min(82vw,320px);min-height:420px;padding:15px;scroll-snap-align:start}
+  .unified-treatment-section .branded-grid .product-stage{height:220px;margin:9px -3px 6px}
+  .related-treatment-grid{max-width:none!important}
+  .program-card.skin .program-card-copy strong,.program-card.product .program-card-copy strong{font-size:21px}
+}
