@@ -17,11 +17,10 @@ const timestamps = {
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
   externalSubject: text("external_subject").notNull(),
-  email: text("email").notNull(),
   status: text("status").notNull().default("active"),
   tenantId: text("tenant_id").notNull().default("staging"),
   ...timestamps,
-}, (table) => [uniqueIndex("users_external_subject_uq").on(table.externalSubject), uniqueIndex("users_email_uq").on(table.email)]);
+}, (table) => [uniqueIndex("users_external_subject_uq").on(table.externalSubject)]);
 
 export const roles = pgTable("roles", {
   id: uuid("id").defaultRandom().primaryKey(),

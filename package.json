@@ -22,8 +22,8 @@
     "protocols:import-coa": "node scripts/import-coa.mjs"
   },
   "dependencies": {
-    "aws-jwt-verify": "^5.2.1",
     "drizzle-orm": "0.45.2",
+    "jose": "^6.2.12",
     "next": "16.3.3",
     "pg": "^8.16.3",
     "react": "19.2.8",
