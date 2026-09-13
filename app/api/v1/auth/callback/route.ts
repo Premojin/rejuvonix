@@ -1,5 +1,6 @@
 import { timingSafeEqual } from "node:crypto";
 import { errorResponse, json, readCookie, readJson, ApiError } from "../../_lib/http";
+import { getAuthRedirectUri } from "../../../../clinical/auth-redirect.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +15,7 @@ export async function POST(request: Request): Promise<Response> {
     if (suppliedState.length !== storedState.length || !timingSafeEqual(suppliedState, storedState)) throw new ApiError(401, "AUTHENTICATION_FAILED", "Authentication could not be completed.");
     const domain = process.env.COGNITO_DOMAIN;
     const clientId = process.env.AUTH_CLIENT_ID;
-    const redirectUri = process.env.AUTH_REDIRECT_URI ?? "https://staging.rejuvonix.com/auth/callback";
+    const redirectUri = getAuthRedirectUri(request);
     if (!domain || !clientId) throw new ApiError(503, "AUTH_NOT_CONFIGURED", "Authentication is not configured for this environment.");
     const tokenResponse = await fetch(`https://${domain}/oauth2/token`, { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ grant_type: "authorization_code", client_id: clientId, code: body.code, redirect_uri: redirectUri }) });
     if (!tokenResponse.ok) throw new ApiError(401, "AUTHENTICATION_FAILED", "Authentication could not be completed.");
