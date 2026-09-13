@@ -3,7 +3,6 @@ import "./globals.css";
 import "./eligibility.css";
 import "./eligibility-programs.css";
 import "./clinical-draft.css";
-import "./demo-account.css";
 import "./jin-connected-health.css";
 import "./jin-account.css";
 import "./mobile-optimization.css";

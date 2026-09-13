@@ -12,7 +12,7 @@ const detail = fs.readFileSync("app/protocols/[slug]/page.tsx", "utf8");
 test("production intake destinations are centralized", () => {
   assert.match(routing, /MAIN_GLP_INTAKE_URL\s*=\s*"https:\/\/rejuvonix\.com\/eligibility"/);
   assert.match(routing, /PEPTIDE_INTAKE_URL\s*=\s*"https:\/\/rejuvonix\.com\/peptides\/eligibility"/);
-  assert.match(routing, /PATIENT_PORTAL_URL\s*=\s*"https:\/\/rejuvonix\.com\/patients\/login"/);
+  assert.match(routing, /PATIENT_PORTAL_URL\s*=\s*"\/patients\/login"/);
 });
 
 test("GLP and peptide protocols classify to their correct intake", () => {
