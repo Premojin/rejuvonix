@@ -23,7 +23,7 @@ export async function mapIdentityToPrincipal(identity: CognitoIdentity, correlat
   return {
     id: first.user.id,
     identitySubject: identity.subject,
-    identityLabel: identity.email ?? identity.username,
+    identityLabel: identity.givenName ?? identity.email,
     roles: [...new Set(mappedRoles)],
     scopes: [...new Set(scopes)],
     permissions: [],

@@ -5,6 +5,7 @@ const roleNames = new Set<Role>(["Patient", "Clinician", "Administrator", "Opera
 
 export interface CognitoIdentity {
   subject: string;
+  givenName?: string;
   email?: string;
   username?: string;
   groups: readonly Role[];
@@ -41,8 +42,21 @@ export async function authenticateCognitoIdentity(token: string): Promise<Cognit
   const groups = Array.isArray(payload["cognito:groups"])
     ? payload["cognito:groups"].filter((group): group is Role => typeof group === "string" && roleNames.has(group as Role))
     : [];
+  let givenName = typeof payload.given_name === "string" ? payload.given_name.trim() : undefined;
+  if (!givenName && process.env.COGNITO_DOMAIN) {
+    try {
+      const profileResponse = await fetch(`https://${process.env.COGNITO_DOMAIN}/oauth2/userInfo`, { headers: { authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(1500) });
+      if (profileResponse.ok) {
+        const profile = await profileResponse.json() as { given_name?: unknown };
+        givenName = typeof profile.given_name === "string" ? profile.given_name.trim() : undefined;
+      }
+    } catch {
+      // Profile display metadata is optional; token authentication remains authoritative.
+    }
+  }
   return {
     subject: payload.sub,
+    givenName: givenName || undefined,
     email: typeof payload.email === "string" ? payload.email : undefined,
     username: typeof payload.username === "string" ? payload.username : undefined,
     groups,
