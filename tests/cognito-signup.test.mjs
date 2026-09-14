@@ -3,8 +3,8 @@ import fs from "node:fs";
 import test from "node:test";
 
 const signup = fs.readFileSync("app/sign-up/page.tsx", "utf8");
-const authEntry = fs.readFileSync("app/components/CognitoAuthEntry.tsx", "utf8");
-const config = fs.readFileSync("app/api/v1/auth/config/route.ts", "utf8");
+const signupForm = fs.readFileSync("app/components/PatientSignupForm.tsx", "utf8");
+const signupApi = fs.readFileSync("app/api/v1/auth/signup/route.ts", "utf8");
 const account = fs.readFileSync("app/account/page.tsx", "utf8");
 const eligibility = fs.readFileSync("app/components/EligibilityFlow.tsx", "utf8");
 const selector = fs.readFileSync("app/components/EligibilityProgramSelector.tsx", "utf8");
@@ -15,12 +15,18 @@ const authProvider = fs.readFileSync("app/components/AuthProvider.tsx", "utf8");
 const authNav = fs.readFileSync("app/components/AuthNav.tsx", "utf8");
 
 test("signup uses the existing Cognito boundary", () => {
-  assert.match(signup, /CognitoAuthEntry/);
-  assert.match(authEntry, /signupEndpoint/);
-  assert.match(authEntry, /\/api\/v1\/auth\/config/);
-  assert.match(authEntry, /response_type: "code"/);
+  assert.match(signup, /PatientSignupForm/);
+  for (const field of ["First Name", "Last Name", "Email Address", "Mobile Phone Number", "Password", "Confirm Password", "Terms of Use", "Privacy Policy"]) assert.match(signupForm, new RegExp(field));
+  assert.match(signupForm, /given-name/);
+  assert.match(signupForm, /family-name/);
+  assert.match(signupForm, /Create Account/);
+  assert.match(signupApi, /AWSCognitoIdentityProviderService.SignUp/);
+  assert.match(signupApi, /given_name/);
+  assert.match(signupApi, /family_name/);
+  assert.match(signupApi, /phone_number/);
   assert.doesNotMatch(signup, /SimulatedAccountFlow|demo account|sessionStorage/i);
-  assert.match(config, /signupEndpoint: `https:\/\/\$\{domain\}\/signup`/);
+  assert.doesNotMatch(signupForm, /role|clinician|administrator|medical history|symptom|diagnos|medication/i);
+  assert.doesNotMatch(signupApi, /console\.(log|error)/i);
 });
 
 test("patient authentication UX uses verified session state", () => {
