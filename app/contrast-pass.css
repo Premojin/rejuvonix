@@ -1,0 +1,12 @@
+/* Keep eyebrow/kicker labels legible on dark and photographic panels. */
+:is(.how-section,.detail-how,.detail-footer,.future-banner>div,.membership-film>div,.membership-hero-copy,.membership-closing>div,.support-photo-row,.protocol-closing,.protocol-review-grid,.card-4) :is(.eyebrow,.detail-kicker,.dynamic-kicker,.pill-kicker,.eligibility-kicker){color:#9bf0eb!important;text-shadow:0 2px 12px rgba(0,0,0,.48)}
+:is(.future-banner>div,.membership-film>div,.membership-hero-copy,.membership-closing>div) :is(.eyebrow,.detail-kicker,.dynamic-kicker,.pill-kicker,.eligibility-kicker){padding:5px 8px;border-radius:5px;background:rgba(17,42,45,.42);width:max-content;max-width:100%}
+
+/* Keep Your Goals in the same simple vertical rhythm as the other menus. */
+.goals-menu>.mega-menu{left:50%;width:290px!important;max-width:calc(100vw - 32px)!important;padding:10px!important;grid-template-columns:1fr!important;gap:4px!important}
+.goals-menu>.mega-menu .mega-column{width:100%}
+.goals-menu>.mega-menu .mega-column+.mega-column{border-top:1px solid #e4ecea;padding-top:4px}
+.goals-menu>.mega-menu .mega-title,.goals-menu>.mega-menu .mega-existing b{margin-bottom:2px;padding:8px 10px;border-bottom:1px solid #dce8e5}
+.goals-menu>.mega-menu .mega-column>a:not(.mega-title){padding:8px 10px}
+.goals-menu>.mega-menu .mega-existing{padding:8px;margin-top:4px}
+@media(max-width:1050px){.program-header .nav-links.open .goals-menu>.mega-menu{width:100%!important;max-width:none!important;grid-template-columns:1fr!important;gap:4px!important}}

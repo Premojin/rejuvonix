@@ -1,5 +1,5 @@
-export const MAIN_GLP_INTAKE_URL = "https://rejuvonix.com/eligibility";
-export const PEPTIDE_INTAKE_URL = "https://rejuvonix.com/peptides/eligibility";
+export const MAIN_GLP_INTAKE_URL = "/eligibility/weight-loss";
+export const PEPTIDE_INTAKE_URL = "/peptides/eligibility";
 export const PATIENT_PORTAL_URL = "/patients/login";
 
 export type IntakeType = "glp" | "peptide";

@@ -22,6 +22,8 @@ const publicRoutes = [
   "/how-it-works",
   "/safety",
   "/sign-in",
+  "/sign-up",
+  "/forgot-password",
   "/support",
   "/treatments",
   "/treatments/glp-1-injections",

@@ -2,7 +2,10 @@
 .detail-footer-grid .footer-brand img{width:150px!important;height:auto}
 .detail-footer .footer-brand{font-size:23px;gap:15px;flex-wrap:wrap}
 .footer-email{font-size:13px;color:#fff;text-decoration:underline;text-underline-offset:4px}
-.legitscript-reserved{display:none}
+.detail-footer .footer-brand img,.footer-main .brand img{filter:drop-shadow(0 0 8px rgba(53,182,184,.62)) drop-shadow(0 0 24px rgba(53,182,184,.28))}
+.protocol-trust-mark-legitscript img{width:54px;height:54px;object-fit:contain;flex:0 0 54px;border-radius:8px;background:#fff}
+.protocol-trust-mark-legitscript{background:rgba(255,255,255,.04)}
+.brand span{display:none}
 
 .jin-health-page{--jin-ink:#434b4e;--jin-deep:#434b4e;--jin-aqua:#35b6b8;--jin-bright:#35b6b8;--jin-ivory:#fff;--jin-champagne:#bdc3c3;--jin-coral:#35b6b8;color:#434b4e;background:#fff}
 .jin-health-page .jin-hero{background:radial-gradient(circle at 8% 10%,rgba(53,182,184,.2),transparent 30%),linear-gradient(135deg,#fff,#eef8f8 55%,#eef0f0)}

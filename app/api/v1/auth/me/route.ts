@@ -12,6 +12,6 @@ export async function GET(request: Request): Promise<Response> {
     const db = getPostgresDb();
     const [user] = await db.select({ id: users.id, status: users.status, tenantId: users.tenantId }).from(users).where(eq(users.id, principal.id));
     if (!user) throw new ApiError(404, "RESOURCE_NOT_FOUND", "The requested resource was not found.");
-    return json({ data: { id: user.id, status: user.status, roles: principal.roles, scopes: principal.scopes ?? [], tenantId: user.tenantId } }, 200, correlationId);
+    return json({ data: { id: user.id, status: user.status, roles: principal.roles, scopes: principal.scopes ?? [], tenantId: user.tenantId, accountLabel: principal.identityLabel } }, 200, correlationId);
   } catch (error) { return errorResponse(error, id); }
 }
