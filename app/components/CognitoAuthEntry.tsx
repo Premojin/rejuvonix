@@ -1,15 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { rememberReturnPath } from "./auth-navigation";
 
 type AuthMode = "sign-in" | "sign-up";
 type AuthConfig = { authorizationEndpoint: string; signupEndpoint: string; clientId: string; redirectUri: string; state: string };
 
 export default function CognitoAuthEntry({ mode }: { mode: AuthMode }) {
-  const [message, setMessage] = useState(() => typeof window !== "undefined" && new URLSearchParams(window.location.search).get("authError") ? "We couldn't verify your session. Please sign in again." : mode === "sign-up" ? "Create your secure Rejuvonix patient account through Cognito." : "Use the secure Rejuvonix sign-in to continue.");
+  const [message, setMessage] = useState(mode === "sign-up" ? "Create your secure Rejuvonix patient account through Cognito." : "Use the secure Rejuvonix sign-in to continue.");
   const [busy, setBusy] = useState(false);
+  useEffect(() => {
+    if (!new URLSearchParams(window.location.search).get("authError")) return;
+    const task = window.setTimeout(() => setMessage("We couldn't verify your session. Please sign in again."), 0);
+    return () => window.clearTimeout(task);
+  }, []);
 
   async function begin() {
     setBusy(true);
