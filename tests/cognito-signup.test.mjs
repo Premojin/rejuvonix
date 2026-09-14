@@ -45,7 +45,9 @@ test("patient authentication UX uses verified session state", () => {
   assert.doesNotMatch(callback, /authenticated=1/);
   assert.match(authProvider, /api\/v1\/auth\/me/);
   assert.match(authProvider, /INVALID_AUTHENTICATION/);
+  assert.match(authProvider, /accountLabel/);
   assert.match(authNav, /Signed in/);
+  assert.match(authNav, /auth-avatar/);
   assert.match(authNav, /Sign out/);
 });
 

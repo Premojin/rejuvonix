@@ -30,6 +30,7 @@ export type ResourceType =
 export interface Principal {
   id: string;
   identitySubject?: string;
+  identityLabel?: string;
   roles: readonly Role[];
   permissions?: readonly string[];
   scopes?: readonly Scope[];

@@ -4,7 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import type { ReactNode } from "react";
 
 export type AuthState = "loading" | "anonymous" | "authenticated" | "auth-error" | "session-expired";
-type Principal = { status: string; roles: string[]; scopes: string[] };
+type Principal = { status: string; roles: string[]; scopes: string[]; accountLabel?: string };
 type AuthContextValue = { state: AuthState; principal?: Principal; message?: string; refresh: () => Promise<void>; signOut: () => Promise<string | undefined> };
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
@@ -14,8 +14,8 @@ async function readSession(): Promise<{ principal?: Principal; state: AuthState;
   try {
     const response = await fetch("/api/v1/auth/me", { credentials: "same-origin", headers: { accept: "application/json" } });
     if (response.ok) {
-      const payload = await response.json() as { data?: { status?: string; roles?: string[]; scopes?: string[] } };
-      return payload.data ? { state: "authenticated", principal: { status: payload.data.status ?? "active", roles: payload.data.roles ?? [], scopes: payload.data.scopes ?? [] } } : { state: "auth-error", message: "We couldn't verify your session. Please sign in again." };
+      const payload = await response.json() as { data?: { status?: string; roles?: string[]; scopes?: string[]; accountLabel?: string } };
+      return payload.data ? { state: "authenticated", principal: { status: payload.data.status ?? "active", roles: payload.data.roles ?? [], scopes: payload.data.scopes ?? [], accountLabel: payload.data.accountLabel } } : { state: "auth-error", message: "We couldn't verify your session. Please sign in again." };
     }
     if (response.status === 401) {
       const payload = await response.json().catch(() => ({})) as { error?: { code?: string } };
