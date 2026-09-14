@@ -10,8 +10,8 @@ const compounded = fs.readFileSync("app/compounded/page.tsx", "utf8");
 const detail = fs.readFileSync("app/protocols/[slug]/page.tsx", "utf8");
 
 test("production intake destinations are centralized", () => {
-  assert.match(routing, /MAIN_GLP_INTAKE_URL\s*=\s*"https:\/\/rejuvonix\.com\/eligibility"/);
-  assert.match(routing, /PEPTIDE_INTAKE_URL\s*=\s*"https:\/\/rejuvonix\.com\/peptides\/eligibility"/);
+  assert.match(routing, /MAIN_GLP_INTAKE_URL\s*=\s*"\/eligibility\/weight-loss"/);
+  assert.match(routing, /PEPTIDE_INTAKE_URL\s*=\s*"\/peptides\/eligibility"/);
   assert.match(routing, /PATIENT_PORTAL_URL\s*=\s*"\/patients\/login"/);
 });
 
