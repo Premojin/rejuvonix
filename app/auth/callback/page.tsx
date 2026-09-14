@@ -16,7 +16,7 @@ export default function AuthCallbackPage() {
       if (!response.ok) throw new Error("Authentication could not be completed.");
       const verification = await fetch("/api/v1/auth/me", { credentials: "same-origin", headers: { accept: "application/json" } });
       if (!verification.ok) throw new Error("We couldn't verify your session. Please sign in again.");
-      router.replace(consumeReturnPath() ?? "/account");
+      router.replace(consumeReturnPath() ?? "/");
     }).catch(() => router.replace("/sign-in?authError=session"));
   }, [router]);
   return <main className="detail-page auth-page"><section className="auth-shell"><div className="auth-form"><p className="detail-kicker">Rejuvonix secure sign-in</p><h1>{message}</h1><Link className="detail-primary" href="/sign-in">Return to sign in</Link></div></section></main>;
