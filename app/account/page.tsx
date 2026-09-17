@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useAuth } from "../components/AuthProvider";
 import { SiteHeader } from "../components/SiteChrome";
+import { PATIENT_PORTAL_URL } from "../components/routing";
 
 export default function AccountPage() {
   const { state, message, signOut } = useAuth();
@@ -12,7 +13,7 @@ export default function AccountPage() {
     <p className="detail-kicker">Patient account</p>
     {state === "loading" && <><h1>Checking your secure session.</h1><p>Rejuvonix is verifying your patient account.</p></>}
     {state === "authenticated" && <><h1>Your secure account is ready.</h1><p>Your identity is authenticated. Patient account features will appear as each approved service is activated.</p><button type="button" className="detail-primary" onClick={handleSignOut}>Sign out securely</button></>}
-    {state === "anonymous" && <><h1>Sign in to continue.</h1><p>Your secure patient session is not active.</p><Link className="detail-primary" href="/patients/login">Go to patient sign in</Link></>}
+    {state === "anonymous" && <><h1>Sign in to continue.</h1><p>Your secure patient session is not active.</p><a className="detail-primary" href={PATIENT_PORTAL_URL}>Go to patient sign in</a></>}
     {(state === "auth-error" || state === "session-expired") && <><h1>Account access needs attention.</h1><p>{message ?? "We couldn't verify your session. Please sign in again."}</p><Link className="detail-primary" href="/sign-in">Sign in again</Link></>}
   </div></section></main>;
 }

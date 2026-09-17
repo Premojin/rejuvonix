@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { rememberReturnPath } from "./auth-navigation";
+import { PATIENT_PORTAL_URL } from "./routing";
 
 type AuthMode = "sign-in" | "sign-up";
 type AuthConfig = { authorizationEndpoint: string; signupEndpoint: string; clientId: string; redirectUri: string; state: string };
@@ -35,7 +36,7 @@ export default function CognitoAuthEntry({ mode }: { mode: AuthMode }) {
     <h2>{mode === "sign-up" ? "Create your secure account." : "Access your account."}</h2>
     <p className="auth-notice" role="status">{message}</p>
     <button type="button" className="detail-primary" onClick={begin} disabled={busy} aria-busy={busy}>{busy ? "Connecting securely…" : mode === "sign-up" ? "Create account" : "Sign in"}</button>
-    <p>{mode === "sign-up" ? <>Already have an account? <Link href="/patients/login">Sign in</Link></> : <>New to Rejuvonix? <Link href="/sign-up">Create your secure account</Link></>}</p>
+    <p>{mode === "sign-up" ? <>Already have an account? <a href={PATIENT_PORTAL_URL}>Sign in</a></> : <>New to Rejuvonix? <Link href="/sign-up">Create your secure account</Link></>}</p>
     <small>Passwords and verification are handled by Cognito. Rejuvonix does not store your password.</small>
   </div>;
 }

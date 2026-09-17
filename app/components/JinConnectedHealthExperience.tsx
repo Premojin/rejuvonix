@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { MAIN_GLP_INTAKE_URL } from "./routing";
 
 type LogState = "Due" | "Taken" | "Skipped" | "Delayed";
 
@@ -103,6 +104,6 @@ export function JinConnectedHealthExperience(){
       <div className="jin-system-rule"><strong>Nonnegotiable rule</strong><p>Jin can automate workflow. It cannot silently become the prescriber, diagnose a condition or change a provider assigned dose.</p></div>
     </section>
 
-    <section className="jin-closing"><p className="jin-kicker"><span/>Connected care, made useful</p><h2>Your health devices collect the data. Rejuvonix helps you know what to do next.</h2><p>Start with provider guided care, then connect the signals that make follow through easier to see and support.</p><div><Link className="jin-primary" href="/eligibility">Explore care options <span>→</span></Link><Link className="jin-secondary" href="/membership">View membership</Link></div><small>Connecting a device does not guarantee treatment eligibility or a prescription.</small></section>
+    <section className="jin-closing"><p className="jin-kicker"><span/>Connected care, made useful</p><h2>Your health devices collect the data. Rejuvonix helps you know what to do next.</h2><p>Start with provider guided care, then connect the signals that make follow through easier to see and support.</p><div><Link className="jin-primary" href={MAIN_GLP_INTAKE_URL}>Explore care options <span>→</span></Link><Link className="jin-secondary" href="/membership">View membership</Link></div><small>Connecting a device does not guarantee treatment eligibility or a prescription.</small></section>
   </>;
 }
