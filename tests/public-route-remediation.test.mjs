@@ -10,8 +10,8 @@ test("public route files and centralized URLs are aligned", () => {
   assert.match(fs.readFileSync("app/eligibility/page.tsx", "utf8"), /EligibilityProgramSelector/);
   assert.match(patientPage, /\.\.\/\.\.\/sign-in\/page/);
   assert.match(peptidePage, /EligibilityFlow/);
-  assert.match(routing, /PATIENT_PORTAL_URL\s*=\s*"\/patients\/login"/);
-  assert.match(routing, /PEPTIDE_INTAKE_URL\s*=\s*"\/peptides\/eligibility"/);
+  assert.match(routing, /PATIENT_PORTAL_URL\s*=\s*"https:\/\/patients\.rejuvonix\.com\/patients\/login"/);
+  assert.match(routing, /PEPTIDE_INTAKE_URL\s*=\s*"https:\/\/patients\.rejuvonix\.com\/eligibility"/);
 });
 
 test("patient login reuses the existing patient Cognito boundary", () => {

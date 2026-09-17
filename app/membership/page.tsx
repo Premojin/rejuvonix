@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
+import { MAIN_GLP_INTAKE_URL } from "../components/routing";
 
 export const metadata: Metadata = {title:"Why Membership | Rejuvonix",description:"See how Rejuvonix membership keeps guidance, follow-up and next steps connected around your care journey."};
 
@@ -24,7 +25,7 @@ const comparison=[
 ];
 
 export default function MembershipPage(){return <main className="membership-page membership-page-v3"><SiteHeader/>
-  <section className="membership-hero membership-hero-v3"><img src="/membership-latino-couple-hero.png" alt="A happy Latino couple walking with their children on a bright morning"/><div className="membership-veil"/><div className="membership-hero-copy"><p className="eyebrow">The Rejuvonix membership experience</p><h1>A prescription can start a plan. Membership keeps care connected.</h1><p>Your guidance, progress and next steps, organized around the life you are living.</p><Link className="membership-button" href="/eligibility">Explore your options <span>→</span></Link><small>Treatment and membership are not guaranteed. Independent providers make all clinical decisions.</small></div></section>
+  <section className="membership-hero membership-hero-v3"><img src="/membership-latino-couple-hero.png" alt="A happy Latino couple walking with their children on a bright morning"/><div className="membership-veil"/><div className="membership-hero-copy"><p className="eyebrow">The Rejuvonix membership experience</p><h1>A prescription can start a plan. Membership keeps care connected.</h1><p>Your guidance, progress and next steps, organized around the life you are living.</p><Link className="membership-button" href={MAIN_GLP_INTAKE_URL}>Explore your options <span>→</span></Link><small>Treatment and membership are not guaranteed. Independent providers make all clinical decisions.</small></div></section>
 
   <section className="membership-intro"><p className="eyebrow">The space between appointments</p><h2>Care should keep moving when life does.</h2><p>Questions do not always arrive during a visit. Rejuvonix is designed to keep your information, provider-directed next steps and follow-up experience connected over time.</p><div className="membership-pillars">{betweenVisitCare.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
 
@@ -38,8 +39,8 @@ export default function MembershipPage(){return <main className="membership-page
 
   <section className="membership-mosaic"><article className="membership-mosaic-lead"><img src="/membership-phone-v2.webp" alt="A member viewing care information on a phone"/><div><p className="eyebrow">One connected view</p><h2>Know where you are and what comes next.</h2></div></article><article><img src="/membership-followup-v2.webp" alt="A member reviewing follow-up information"/><strong>Follow the next step.</strong></article><article><img src="/membership-movement-v2.webp" alt="A woman moving confidently outdoors"/><strong>Keep building momentum.</strong></article></section>
 
-  <section className="membership-access"><div><p className="eyebrow">Straightforward by design</p><h2>Membership details without the guesswork.</h2></div><div><p>Final membership inclusions and pricing are under review. Until the clinical platform and approved terms are active, this page does not accept enrollment, payment, health information or clinical submissions.</p><Link className="membership-button dark" href="/eligibility">Preview the experience <span>→</span></Link></div></section>
+  <section className="membership-access"><div><p className="eyebrow">Straightforward by design</p><h2>Membership details without the guesswork.</h2></div><div><p>Final membership inclusions and pricing are under review. Until the clinical platform and approved terms are active, this page does not accept enrollment, payment, health information or clinical submissions.</p><Link className="membership-button dark" href={MAIN_GLP_INTAKE_URL}>Preview the experience <span>→</span></Link></div></section>
 
-  <section className="membership-closing"><img src="/membership-closing-v2.webp" alt="A diverse group of adults enjoying an active day together"/><div><p className="eyebrow">Start where you are</p><h2>Care built for today and what comes next.</h2><p>Explore Rejuvonix programs and see how a connected membership experience can support your journey.</p><Link className="membership-button" href="/eligibility">Begin the experience <span>→</span></Link></div></section>
+  <section className="membership-closing"><img src="/membership-closing-v2.webp" alt="A diverse group of adults enjoying an active day together"/><div><p className="eyebrow">Start where you are</p><h2>Care built for today and what comes next.</h2><p>Explore Rejuvonix programs and see how a connected membership experience can support your journey.</p><Link className="membership-button" href={MAIN_GLP_INTAKE_URL}>Begin the experience <span>→</span></Link></div></section>
   <SiteFooter/>
 </main>}
