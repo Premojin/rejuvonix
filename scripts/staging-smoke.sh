@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-base_url="${STAGING_BASE_URL:-https://staging.rejuvonix.com}"
+base_url="${BASE_URL:-https://rejuvonix.com}"
 base_url="${base_url%/}"
 
 home_status="$(curl --fail --silent --show-error --max-time 30 --output /dev/null --write-out '%{http_code}' "${base_url}/")"
@@ -16,4 +16,4 @@ if [[ "${base_url}" == https://* ]]; then
   [[ "${redirect}" == https://* ]] || { echo "HTTP did not redirect to HTTPS" >&2; exit 1; }
 fi
 
-echo "staging smoke passed: homepage=${home_status} health=${health}"
+echo "production smoke passed: homepage=${home_status} health=${health}"

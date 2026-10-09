@@ -49,8 +49,14 @@ module "cognito" {
   source        = "../../modules/cognito"
   name          = "${var.name}-identity"
   domain_prefix = "rejuvonix-staging-identity"
-  callback_urls = ["https://${var.staging_domain}/auth/callback"]
-  logout_urls   = ["https://${var.staging_domain}/"]
+  callback_urls = [
+    "http://localhost:5173/auth/callback",
+    "https://rejuvonix.com/auth/callback",
+  ]
+  logout_urls = [
+    "http://localhost:5173/",
+    "https://rejuvonix.com/",
+  ]
   tags          = var.tags
 }
 

@@ -1,6 +1,5 @@
 const AUTH_HOSTS = new Map([
   ["rejuvonix.com", "https://rejuvonix.com"],
-  ["staging.rejuvonix.com", "https://staging.rejuvonix.com"],
   ["localhost:5173", "http://localhost:5173"],
 ]);
 

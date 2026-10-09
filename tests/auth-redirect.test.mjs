@@ -9,10 +9,10 @@ test("resolves production auth URLs from the production host", () => {
   assert.equal(getAuthLogoutUri(request), "https://rejuvonix.com/");
 });
 
-test("retains staging auth URLs on the staging host", () => {
+test("rejects the retired staging host", () => {
   const request = new Request("https://staging.rejuvonix.com/api/v1/auth/config");
-  assert.equal(getAuthRedirectUri(request), "https://staging.rejuvonix.com/auth/callback");
-  assert.equal(getAuthLogoutUri(request), "https://staging.rejuvonix.com/");
+  assert.throws(() => getAuthRedirectUri(request), /Authentication host is not configured/);
+  assert.throws(() => getAuthLogoutUri(request), /Authentication host is not configured/);
 });
 
 test("retains localhost auth URLs during local development", () => {
